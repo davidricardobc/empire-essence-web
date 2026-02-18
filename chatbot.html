@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empire Essence - Chat</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #c9a94e;
+  --gold-light: #e8d48b;
+  --gold-dark: #a07c2a;
+  --dark: #0a0a0a;
+  --dark-card: #141414;
+  --dark-input: #1a1a1a;
+  --dark-border: #2a2a2a;
+  --text: #f0ece2;
+  --text-muted: #8a8578;
+}
+
+/* Reset for widget */
+#ee-chatbot * { margin:0; padding:0; box-sizing:border-box; }
+
+/* Bubble */
+#ee-chat-bubble {
+  position: fixed; bottom: 24px; right: 24px; z-index: 99999;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  box-shadow: 0 4px 24px rgba(201,169,78,0.4);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: ee-pulse 2s infinite;
+}
+#ee-chat-bubble:hover { transform: scale(1.1); box-shadow: 0 6px 32px rgba(201,169,78,0.6); }
+#ee-chat-bubble svg { width: 28px; height: 28px; fill: var(--dark); }
+@keyframes ee-pulse {
+  0%,100% { box-shadow: 0 4px 24px rgba(201,169,78,0.4); }
+  50% { box-shadow: 0 4px 32px rgba(201,169,78,0.7); }
+}
+
+/* Badge */
+#ee-chat-badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #e74c3c; color: #fff; font-size: 11px;
+  font-family: 'Montserrat', sans-serif; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Chat Window */
+#ee-chat-window {
+  position: fixed; bottom: 100px; right: 24px; z-index: 99999;
+  width: 380px; max-width: calc(100vw - 32px); height: 560px; max-height: calc(100vh - 120px);
+  background: var(--dark); border: 1px solid var(--gold-dark);
+  border-radius: 16px; overflow: hidden;
+  display: none; flex-direction: column;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,169,78,0.2);
+  font-family: 'Montserrat', sans-serif;
+}
+#ee-chat-window.open { display: flex; animation: ee-slideUp 0.3s ease; }
+@keyframes ee-slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+/* Header */
+#ee-chat-header {
+  background: linear-gradient(135deg, var(--dark-card), #1a1a1a);
+  border-bottom: 1px solid var(--gold-dark);
+  padding: 16px; display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+#ee-chat-header .ee-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+#ee-chat-header .ee-info { flex: 1; }
+#ee-chat-header .ee-name {
+  font-family: 'Playfair Display', serif; color: var(--gold);
+  font-size: 15px; font-weight: 700;
+}
+#ee-chat-header .ee-status { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+#ee-chat-header .ee-status::before {
+  content: ''; display: inline-block; width: 7px; height: 7px;
+  border-radius: 50%; background: #2ecc71; margin-right: 5px; vertical-align: middle;
+}
+#ee-chat-close {
+  background: none; border: none; color: var(--text-muted); cursor: pointer;
+  font-size: 20px; padding: 4px 8px; line-height: 1;
+}
+#ee-chat-close:hover { color: var(--gold); }
+
+/* Messages */
+#ee-chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+  scrollbar-width: thin; scrollbar-color: var(--gold-dark) transparent;
+}
+#ee-chat-messages::-webkit-scrollbar { width: 4px; }
+#ee-chat-messages::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+
+.ee-msg {
+  max-width: 85%; padding: 10px 14px; border-radius: 16px;
+  font-size: 13.5px; line-height: 1.5; color: var(--text);
+  animation: ee-fadeIn 0.3s ease;
+}
+@keyframes ee-fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+.ee-msg.bot {
+  background: var(--dark-card); border: 1px solid var(--dark-border);
+  border-bottom-left-radius: 4px; align-self: flex-start;
+}
+.ee-msg.user {
+  background: linear-gradient(135deg, var(--gold-dark), rgba(201,169,78,0.3));
+  border-bottom-right-radius: 4px; align-self: flex-end;
+}
+.ee-msg .ee-fragrance-name { color: var(--gold); font-weight: 600; }
+.ee-msg .ee-price { color: var(--gold-light); font-weight: 500; }
+
+/* Quick replies */
+.ee-quick-replies {
+  display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 8px;
+  flex-shrink: 0;
+}
+.ee-quick-btn {
+  background: var(--dark-card); border: 1px solid var(--gold-dark);
+  color: var(--gold); padding: 7px 14px; border-radius: 20px;
+  font-size: 12.5px; font-family: 'Montserrat', sans-serif;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.ee-quick-btn:hover {
+  background: var(--gold-dark); color: var(--dark);
+  box-shadow: 0 2px 12px rgba(201,169,78,0.3);
+}
+
+/* Input */
+#ee-chat-input-area {
+  padding: 12px 16px; border-top: 1px solid var(--dark-border);
+  display: flex; gap: 8px; flex-shrink: 0;
+  background: var(--dark-card);
+}
+#ee-chat-input {
+  flex: 1; background: var(--dark-input); border: 1px solid var(--dark-border);
+  border-radius: 24px; padding: 10px 16px; color: var(--text);
+  font-size: 13px; font-family: 'Montserrat', sans-serif;
+  outline: none; transition: border-color 0.2s;
+}
+#ee-chat-input:focus { border-color: var(--gold-dark); }
+#ee-chat-input::placeholder { color: var(--text-muted); }
+#ee-chat-send {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s;
+}
+#ee-chat-send:hover { transform: scale(1.1); }
+#ee-chat-send svg { width: 18px; height: 18px; fill: var(--dark); }
+
+/* Typing indicator */
+.ee-typing { display: flex; gap: 4px; padding: 10px 14px; align-self: flex-start; }
+.ee-typing span {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--gold-dark);
+  animation: ee-bounce 1.4s infinite;
+}
+.ee-typing span:nth-child(2) { animation-delay: 0.2s; }
+.ee-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes ee-bounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+
+/* Product card inside messages */
+.ee-product-card {
+  background: var(--dark-input); border: 1px solid var(--dark-border);
+  border-radius: 12px; padding: 12px; margin-top: 8px;
+}
+.ee-product-card h4 { color: var(--gold); font-size: 14px; margin-bottom: 4px; }
+.ee-product-card .ee-inspired { color: var(--text-muted); font-size: 11px; margin-bottom: 6px; font-style: italic; }
+.ee-product-card .ee-notes { color: var(--text); font-size: 12px; line-height: 1.5; }
+.ee-product-card .ee-note-label { color: var(--gold-dark); font-weight: 500; }
+</style>
+</head>
+<body>
+<div id="ee-chatbot">
+  <!-- Bubble -->
+  <div id="ee-chat-bubble" onclick="EEChat.toggle()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>
+    <div id="ee-chat-badge" style="display:none">1</div>
+  </div>
+
+  <!-- Window -->
+  <div id="ee-chat-window">
+    <div id="ee-chat-header">
+      <div class="ee-avatar">👑</div>
+      <div class="ee-info">
+        <div class="ee-name">Empire Essence</div>
+        <div class="ee-status">En línea</div>
+      </div>
+      <button id="ee-chat-close" onclick="EEChat.toggle()">✕</button>
+    </div>
+    <div id="ee-chat-messages"></div>
+    <div class="ee-quick-replies" id="ee-quick-replies"></div>
+    <div id="ee-chat-input-area">
+      <input id="ee-chat-input" type="text" placeholder="Escribe tu mensaje..." autocomplete="off">
+      <button id="ee-chat-send" onclick="EEChat.sendUserInput()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const EEChat = (() => {
+// ── Catálogo ──
+const catalog = [
+  {id:1,name:"Aventus",inspired:"Creed Aventus",cat:"masculina",top:["piña","grosella negra","manzana","bergamota"],heart:["abedul","pachulí","rosa","jazmín"],base:["musgo de roble","almizcle","ámbar gris","vainilla"],desc:"Frutal y audaz con un corazón ahumado de abedul. Icónico aroma de poder y sofisticación.",tags:["frutal","amaderado","elegante","poder","oficina","cita"]},
+  {id:2,name:"Sauvage",inspired:"Dior Sauvage",cat:"masculina",top:["bergamota","pimienta"],heart:["lavanda","vetiver","pachulí","geranio"],base:["ambroxan","cedro","ládano"],desc:"Fresco y salvaje con bergamota vibrante y fondo amaderado potente.",tags:["fresco","amaderado","versátil","diario","casual","cita"]},
+  {id:3,name:"One Million",inspired:"Paco Rabanne One Million",cat:"masculina",top:["mandarina","pomelo","menta"],heart:["canela","especiadas","rosa"],base:["ámbar","cuero","pachulí"],desc:"Dulce, especiado y magnético. Canela y ámbar que irradian confianza.",tags:["dulce","especiado","noche","fiesta","seductor"]},
+  {id:4,name:"Invictus",inspired:"Paco Rabanne Invictus",cat:"masculina",top:["notas marinas","pomelo","mandarina"],heart:["laurel","jazmín"],base:["ámbar gris","guayaco","musgo de roble"],desc:"Acuático y fresco con toque atlético. Energía y frescura.",tags:["fresco","acuático","deportivo","diario","joven"]},
+  {id:5,name:"Bleu",inspired:"Bleu de Chanel",cat:"masculina",top:["limón","bergamota","menta"],heart:["lavanda","geranio"],base:["sándalo","cedro","ámbar","haba tonka"],desc:"Elegante y versátil con cítricos frescos y maderas cálidas.",tags:["elegante","versátil","oficina","cita","amaderado","cítrico"]},
+  {id:6,name:"Le Male",inspired:"JPG Le Male",cat:"masculina",top:["lavanda","menta","cardamomo"],heart:["canela","flor de naranjo"],base:["vainilla","haba tonka","sándalo"],desc:"Clásico con lavanda fresca y vainilla cálida. Seductor y reconfortante.",tags:["dulce","clásico","seductor","noche","cita"]},
+  {id:7,name:"212 VIP Men",inspired:"CH 212 VIP Men",cat:"masculina",top:["maracuyá","lima","pimienta"],heart:["vodka","ginebra","menta"],base:["ámbar","cuero"],desc:"Vibrante y festivo con frutas tropicales y toque licoroso.",tags:["fiesta","nocturno","frutal","joven","tropical"]},
+  {id:8,name:"Bad Boy",inspired:"CH Bad Boy",cat:"masculina",top:["pimienta blanca","bergamota"],heart:["cedro","salvia"],base:["haba tonka","cacao"],desc:"Especiado y oscuro. Pimienta vibrante y cacao adictivo.",tags:["especiado","oscuro","nocturno","rebelde","dulce"]},
+  {id:9,name:"Eros",inspired:"Versace Eros",cat:"masculina",top:["menta","manzana verde","limón"],heart:["haba tonka","ambroxan"],base:["vainilla","cedro","vetiver"],desc:"Fresco y dulce con menta y vainilla envolvente. Poderoso y seductor.",tags:["dulce","fresco","seductor","fiesta","cita","joven"]},
+  {id:10,name:"Fahrenheit",inspired:"Dior Fahrenheit",cat:"masculina",top:["nuez moscada","lavanda","cedro"],heart:["violeta","sándalo"],base:["cuero","ámbar","vetiver"],desc:"Icónico y atemporal. Cuero y violeta. Masculinidad cruda y sofisticada.",tags:["cuero","amaderado","maduro","oficina","clásico"]},
+  {id:11,name:"Good Girl",inspired:"CH Good Girl",cat:"femenina",top:["almendra","café","bergamota"],heart:["tuberosa","jazmín","rosa"],base:["haba tonka","cacao","vainilla","sándalo"],desc:"Dualidad irresistible: flores luminosas y fondo oscuro de café y cacao.",tags:["dulce","nocturno","sensual","cita","elegante","café"]},
+  {id:12,name:"212 VIP Rosé",inspired:"CH 212 VIP Rosé",cat:"femenina",top:["champán rosado","pimienta rosa"],heart:["durazno","rosa"],base:["almizcle blanco"],desc:"Burbujeante y femenina. Fresca y coqueta como una noche de celebración.",tags:["fresco","fiesta","coqueto","joven","frutal"]},
+  {id:13,name:"La Vie Est Belle",inspired:"Lancôme La Vie Est Belle",cat:"femenina",top:["grosella negra","pera"],heart:["iris","jazmín"],base:["praliné","vainilla","pachulí"],desc:"Dulce y radiante con iris gourmand y praliné. Un abrazo de felicidad.",tags:["dulce","gourmand","elegante","versátil","diario","romántico"]},
+  {id:14,name:"J'adore",inspired:"Dior J'adore",cat:"femenina",top:["pera","magnolia","durazno"],heart:["jazmín","tuberosa","rosa"],base:["almizcle","vainilla","cedro"],desc:"Bouquet floral lujoso. La quintaesencia de la feminidad elegante.",tags:["floral","elegante","clásico","romántico","oficina"]},
+  {id:15,name:"CH",inspired:"Carolina Herrera CH",cat:"femenina",top:["bergamota","pomelo"],heart:["praliné","canela","jazmín","rosa"],base:["gamuza","pachulí","sándalo"],desc:"Sofisticada y cálida con praliné especiado y cuero suave.",tags:["cálido","elegante","oficina","sofisticado","especiado"]},
+  {id:16,name:"Black Opium",inspired:"YSL Black Opium",cat:"femenina",top:["pera","pimienta rosa"],heart:["café","jazmín","almendra"],base:["vainilla","pachulí","cedro"],desc:"Adictiva y nocturna. Café intenso y vainilla dulce. Rock and roll.",tags:["dulce","nocturno","café","adictivo","sensual","fiesta"]},
+  {id:17,name:"Chance",inspired:"Chanel Chance",cat:"femenina",top:["pimienta rosa","piña"],heart:["jazmín","rosa"],base:["pachulí","almizcle","vainilla"],desc:"Fresca y vivaz. Espontaneidad y feminidad moderna.",tags:["fresco","versátil","joven","diario","espontáneo"]},
+  {id:18,name:"Bright Crystal",inspired:"Versace Bright Crystal",cat:"femenina",top:["granada","yuzu"],heart:["peonía","magnolia","loto"],base:["almizcle","ámbar","caoba"],desc:"Cristalina y luminosa con flores delicadas y granada fresca.",tags:["fresco","floral","delicado","diario","sutil","romántico"]},
+  {id:19,name:"Amor Amor",inspired:"Cacharel Amor Amor",cat:"femenina",top:["grosella negra","naranja","mandarina"],heart:["rosa","albaricoque","jazmín"],base:["vainilla","haba tonka","ámbar"],desc:"Frutal, apasionada y juvenil. Frutas rojas y rosa con vainilla cálida.",tags:["frutal","juvenil","dulce","romántico","casual"]},
+  {id:20,name:"Flowerbomb",inspired:"Viktor & Rolf Flowerbomb",cat:"femenina",top:["té","bergamota"],heart:["orquídea","jazmín","rosa"],base:["pachulí","almizcle","vainilla"],desc:"Explosión floral adictiva. Orquídea y rosa en pachulí y vainilla.",tags:["floral","dulce","sensual","elegante","cita"]},
+  {id:21,name:"Baccarat Rouge",inspired:"MFK Baccarat Rouge 540",cat:"unisex",top:["azafrán","jazmín"],heart:["ámbar","ambroxan"],base:["resina de abeto","cedro","azúcar"],desc:"Luminoso y etéreo. Azafrán cristalino y ámbar dulce. Mágico e hipnotizante.",tags:["dulce","único","elegante","cita","nocturno","lujoso"]},
+  {id:22,name:"Oud Wood",inspired:"Tom Ford Oud Wood",cat:"unisex",top:["palo de rosa","cardamomo"],heart:["oud","sándalo","vetiver"],base:["haba tonka","vainilla","ámbar"],desc:"Sofisticado y misterioso. Oud suave y maderas exóticas. Lujo silencioso.",tags:["amaderado","sofisticado","elegante","oficina","maduro","lujoso"]},
+  {id:23,name:"Erba Pura",inspired:"Xerjoff Erba Pura",cat:"unisex",top:["naranja","bergamota","limón"],heart:["frutas"],base:["almizcle blanco","vainilla","ámbar"],desc:"Cítricos vibrantes y frutas jugosas sobre vainilla cremosa. Pura alegría.",tags:["frutal","fresco","alegre","versátil","diario","cítrico"]},
+  {id:24,name:"Tobacco Vanille",inspired:"Tom Ford Tobacco Vanille",cat:"unisex",top:["tabaco","especiadas"],heart:["vainilla","cacao","haba tonka"],base:["frutas secas","amaderado"],desc:"Cálido y opulento. Tabaco dulce y vainilla rica. Lujo junto a la chimenea.",tags:["cálido","dulce","nocturno","maduro","lujoso","especiado"]},
+  {id:25,name:"Kirke",inspired:"Tiziana Terenzi Kirke",cat:"unisex",top:["maracuyá","durazno","pera","frambuesa"],heart:["lirio de los valles"],base:["almizcle","sándalo","vainilla","pachulí"],desc:"Frutal y luminoso con corazón floral y base cremosa. Elegancia natural.",tags:["frutal","fresco","elegante","versátil","diario","romántico"]},
+  {id:26,name:"Arabian Tonka",inspired:"Montale Arabians Tonka",cat:"unisex",top:["azafrán","bergamota"],heart:["oud","rosa búlgara"],base:["haba tonka","ámbar","almizcle blanco"],desc:"Oriental y envolvente. Azafrán dorado, rosa y tonka dulce. Noches árabes.",tags:["oriental","dulce","nocturno","elegante","lujoso","cálido"]}
+];
+
+const PRICES = {s30:'$30.000',s50:'$46.000',s100:'$70.000'};
+const PROMO = '3 frascos de 30ml por $80.000';
+const WA = '573156753404';
+
+let isOpen = false;
+let state = 'welcome'; // welcome, ask_who, ask_vibe, recommend, chosen, objection, closing
+let context = { who: null, vibe: null, occasion: null, chosen: null, recommendations: [] };
+
+const $ = id => document.getElementById(id);
+const msgs = () => $('ee-chat-messages');
+const qr = () => $('ee-quick-replies');
+
+function toggle() {
+  isOpen = !isOpen;
+  $('ee-chat-window').classList.toggle('open', isOpen);
+  if (isOpen) {
+    $('ee-chat-badge').style.display = 'none';
+    if (state === 'welcome') { setTimeout(greet, 400); }
+  }
+}
+
+function addMsg(text, sender='bot') {
+  const d = document.createElement('div');
+  d.className = 'ee-msg ' + sender;
+  d.innerHTML = text;
+  msgs().appendChild(d);
+  msgs().scrollTop = msgs().scrollHeight;
+}
+
+function showTyping() {
+  const d = document.createElement('div');
+  d.className = 'ee-typing';
+  d.id = 'ee-typing';
+  d.innerHTML = '<span></span><span></span><span></span>';
+  msgs().appendChild(d);
+  msgs().scrollTop = msgs().scrollHeight;
+}
+function hideTyping() { const t = $('ee-typing'); if(t) t.remove(); }
+
+function botSay(text, delay=600) {
+  return new Promise(r => {
+    showTyping();
+    setTimeout(() => { hideTyping(); addMsg(text); r(); }, delay);
+  });
+}
+
+function setQuickReplies(options) {
+  const c = qr();
+  c.innerHTML = '';
+  options.forEach(o => {
+    const b = document.createElement('button');
+    b.className = 'ee-quick-btn';
+    b.textContent = o.label;
+    b.onclick = () => { handleQuick(o); };
+    c.appendChild(b);
+  });
+}
+function clearQuick() { qr().innerHTML = ''; }
+
+// ── Greeting ──
+async function greet() {
+  state = 'ask_who';
+  await botSay('¡Hola! 👋 Bienvenido/a a <span class="ee-fragrance-name">Empire Essence</span> ✨');
+  await botSay('Soy tu asesor de fragancias. Tenemos perfumes inspirados en las mejores marcas del mundo, con una calidad y duración increíbles. 🌟');
+  await botSay('Cuéntame, ¿para quién estás buscando la fragancia?');
+  setQuickReplies([
+    {label:'Para mí (hombre)', value:'masculina', action:'who'},
+    {label:'Para mí (mujer)', value:'femenina', action:'who'},
+    {label:'Para regalar', value:'regalo', action:'who'},
+    {label:'Algo unisex', value:'unisex', action:'who'}
+  ]);
+}
+
+function handleQuick(o) {
+  clearQuick();
+  addMsg(o.label, 'user');
+  route(o.action, o.value, o.label);
+}
+
+async function route(action, value, label) {
+  switch(action) {
+    case 'who': await handleWho(value); break;
+    case 'who_gift': await handleWhoGift(value); break;
+    case 'vibe': await handleVibe(value); break;
+    case 'pick': await handlePick(value); break;
+    case 'size': await handleSize(value); break;
+    case 'objection': await handleObjection(value); break;
+    case 'more': await showMore(); break;
+    case 'whatsapp': await goWhatsApp(); break;
+    case 'restart': await restart(); break;
+    case 'promo': await showPromo(); break;
+  }
+}
+
+// ── Flow ──
+async function handleWho(v) {
+  if (v === 'regalo') {
+    state = 'ask_who';
+    await botSay('¡Qué lindo detalle! 🎁 ¿Para quién es el regalo?');
+    setQuickReplies([
+      {label:'Hombre', value:'masculina', action:'who_gift'},
+      {label:'Mujer', value:'femenina', action:'who_gift'},
+      {label:'No sé, algo unisex', value:'unisex', action:'who_gift'}
+    ]);
+    return;
+  }
+  context.who = v;
+  state = 'ask_vibe';
+  await askVibe();
+}
+
+async function handleWhoGift(v) {
+  context.who = v;
+  state = 'ask_vibe';
+  await askVibe();
+}
+
+async function askVibe() {
+  await botSay('¡Perfecto! Ahora cuéntame, ¿qué tipo de aroma te llama más la atención?');
+  setQuickReplies([
+    {label:'🍋 Fresco/Cítrico', value:'fresco', action:'vibe'},
+    {label:'🌸 Floral/Romántico', value:'floral', action:'vibe'},
+    {label:'🍫 Dulce/Gourmand', value:'dulce', action:'vibe'},
+    {label:'🪵 Amaderado/Elegante', value:'amaderado', action:'vibe'},
+    {label:'🌙 Nocturno/Sensual', value:'nocturno', action:'vibe'},
+    {label:'🎉 Para fiesta', value:'fiesta', action:'vibe'},
+    {label:'💼 Para oficina', value:'oficina', action:'vibe'},
+    {label:'No sé, recomiéndame', value:'versátil', action:'vibe'}
+  ]);
+}
+
+async function handleVibe(v) {
+  context.vibe = v;
+  state = 'recommend';
+  await recommend();
+}
+
+async function recommend() {
+  const who = context.who;
+  const vibe = context.vibe;
+
+  let pool = catalog.filter(f => f.cat === who || f.cat === 'unisex');
+  if (who === 'unisex') pool = catalog.filter(f => f.cat === 'unisex');
+
+  // Score by tag matching
+  let scored = pool.map(f => {
+    let score = 0;
+    if (f.tags.includes(vibe)) score += 3;
+    // secondary matches
+    const related = {
+      'fresco':['cítrico','acuático','deportivo','diario','versátil'],
+      'floral':['romántico','delicado','elegante'],
+      'dulce':['gourmand','cálido','adictivo'],
+      'amaderado':['elegante','sofisticado','maduro','cuero'],
+      'nocturno':['sensual','oscuro','adictivo','seductor'],
+      'fiesta':['joven','festivo','tropical','nocturno'],
+      'oficina':['elegante','versátil','clásico','sofisticado'],
+      'versátil':['diario','fresco','elegante']
+    };
+    (related[vibe]||[]).forEach(r => { if(f.tags.includes(r)) score += 1; });
+    return {...f, score};
+  });
+
+  scored.sort((a,b) => b.score - a.score);
+  const recs = scored.slice(0,3);
+  context.recommendations = recs;
+
+  await botSay(`¡Excelente elección! Basándome en lo que me cuentas, te recomiendo estas fragancias 🔥`);
+
+  for (let i = 0; i < recs.length; i++) {
+    const f = recs[i];
+    const allNotes = [...f.top, ...f.heart, ...f.base.slice(0,2)].join(', ');
+    await botSay(
+      `<div class="ee-product-card">
+        <h4>${i+1}. ${f.name}</h4>
+        <div class="ee-inspired">Inspirado en ${f.inspired}</div>
+        <div class="ee-notes">
+          <span class="ee-note-label">Notas:</span> ${allNotes}<br>
+          ${f.desc}
+        </div>
+      </div>`, 500
+    );
+  }
+
+  await botSay('¿Cuál te llama más la atención? 😊');
+  setQuickReplies([
+    ...recs.map((f,i) => ({label: f.name, value: f.id, action:'pick'})),
+    {label:'🔄 Ver otras opciones', value:null, action:'more'},
+    {label:'💬 Cuéntame más', value:null, action:'objection', label:'¿Son buenos?'}
+  ]);
+}
+
+async function handlePick(id) {
+  const f = catalog.find(p => p.id === id);
+  context.chosen = f;
+  state = 'chosen';
+
+  await botSay(`¡Excelente gusto! <span class="ee-fragrance-name">${f.name}</span> es una fragancia espectacular 🌟`);
+  await botSay(
+    `Estos son los tamaños disponibles:<br><br>
+    💧 <b>30ml</b> — <span class="ee-price">${PRICES.s30}</span> COP <i>(ideal para probar)</i><br>
+    💧 <b>50ml</b> — <span class="ee-price">${PRICES.s50}</span> COP <i>(tamaño perfecto)</i><br>
+    💧 <b>100ml</b> — <span class="ee-price">${PRICES.s100}</span> COP <i>(máximo rendimiento)</i><br><br>
+    🔥 <b>PROMO:</b> ${PROMO}`
+  );
+  await botSay('¿Qué tamaño te gustaría?');
+  setQuickReplies([
+    {label:'30ml - $30.000', value:'30ml', action:'size'},
+    {label:'50ml - $46.000', value:'50ml', action:'size'},
+    {label:'100ml - $70.000', value:'100ml', action:'size'},
+    {label:'🔥 Promo 3×30ml', value:'promo', action:'promo'},
+    {label:'¿Cuánto dura?', value:'durabilidad', action:'objection'},
+    {label:'¿Es original?', value:'calidad', action:'objection'}
+  ]);
+}
+
+async function handleSize(size) {
+  context.size = size;
+  state = 'closing';
+  const f = context.chosen;
+  const price = size === '30ml' ? PRICES.s30 : size === '50ml' ? PRICES.s50 : PRICES.s100;
+
+  await botSay(
+    `¡Listo! Tu pedido sería:<br><br>
+    ✅ <span class="ee-fragrance-name">${f.name}</span> — ${size}<br>
+    💰 <b>${price} COP</b><br>
+    🚚 Envío a todo Colombia<br>
+    💳 Todos los métodos de pago<br><br>
+    ¿Te lo confirmo por WhatsApp? 📲`
+  );
+  setQuickReplies([
+    {label:'✅ Sí, pedir por WhatsApp', value:null, action:'whatsapp'},
+    {label:'Agregar otra fragancia', value:null, action:'restart'},
+    {label:'Quiero otro tamaño', value:context.chosen.id, action:'pick'}
+  ]);
+}
+
+async function showPromo() {
+  context.size = 'promo';
+  state = 'closing';
+  await botSay(
+    `¡La promo es increíble! 🔥<br><br>
+    ✅ <b>3 frascos de 30ml por ${PRICES.s30.replace('$30.000','$80.000')}</b><br>
+    Puedes elegir 3 fragancias diferentes 😍<br><br>
+    Te ahorras $10.000 y puedes variar entre aromas. ¿Quieres continuar por WhatsApp para elegir tus 3 fragancias?`
+  );
+  setQuickReplies([
+    {label:'✅ Sí, armar mi combo', value:null, action:'whatsapp'},
+    {label:'Ver más fragancias', value:null, action:'restart'}
+  ]);
+}
+
+async function handleObjection(type) {
+  if (type === 'durabilidad') {
+    await botSay(
+      `¡Gran pregunta! Nuestras fragancias tienen una <b>duración de 6 a 10 horas</b> dependiendo del perfume y tu piel. 💪<br><br>
+      Usamos concentraciones de alta calidad tipo <b>Eau de Parfum</b>. Además, te recomiendo aplicar en puntos de pulso (muñecas, cuello, detrás de las orejas) para maximizar la duración. 🎯`
+    );
+  } else if (type === 'calidad') {
+    await botSay(
+      `Excelente pregunta 👏 Nuestros perfumes son <b>fragancias inspiradas</b> en las grandes marcas. No son copias ni falsificaciones.<br><br>
+      Usamos <b>esencias de alta calidad</b> importadas que replican los acordes olfativos de las fragancias originales. La diferencia principal es que no pagas por la marca, el marketing ni el frasco lujoso — pagas por el <b>aroma</b>. ✨<br><br>
+      ¡Por eso ofrecemos calidad premium a precios accesibles!`
+    );
+  } else if (type === 'precio') {
+    await botSay(
+      `Entiendo tu inquietud 🤝 Mira, un perfume original como ${context.chosen ? context.chosen.inspired : 'estos'} puede costar entre $300.000 y $1.200.000 COP.<br><br>
+      Con nosotros obtienes <b>el mismo tipo de aroma</b> desde <span class="ee-price">${PRICES.s30}</span>. ¡Y con la promo de ${PROMO}, es aún mejor! 🔥`
+    );
+  }
+
+  if (context.chosen) {
+    setQuickReplies([
+      {label:'30ml - $30.000', value:'30ml', action:'size'},
+      {label:'50ml - $46.000', value:'50ml', action:'size'},
+      {label:'100ml - $70.000', value:'100ml', action:'size'},
+      {label:'🔥 Promo 3×30ml', value:'promo', action:'promo'}
+    ]);
+  } else {
+    setQuickReplies([
+      {label:'¡Convencido! Recomiéndame', value:'versátil', action:'vibe'},
+      {label:'Ver catálogo', value:null, action:'restart'}
+    ]);
+  }
+}
+
+async function showMore() {
+  // Show next 3 from pool
+  const shown = new Set(context.recommendations.map(r=>r.id));
+  const who = context.who;
+  let pool = catalog.filter(f => (f.cat === who || f.cat === 'unisex') && !shown.has(f.id));
+  if (pool.length === 0) {
+    pool = catalog.filter(f => !shown.has(f.id)).slice(0,3);
+  }
+  const recs = pool.slice(0,3);
+  if (recs.length === 0) {
+    await botSay('¡Ya te mostré todas las opciones! ¿Te gustó alguna de las anteriores? 😊');
+    setQuickReplies([
+      ...context.recommendations.map(f => ({label:f.name, value:f.id, action:'pick'})),
+      {label:'🔄 Empezar de nuevo', value:null, action:'restart'}
+    ]);
+    return;
+  }
+  context.recommendations = [...context.recommendations, ...recs];
+
+  for (const f of recs) {
+    const allNotes = [...f.top, ...f.heart, ...f.base.slice(0,2)].join(', ');
+    await botSay(
+      `<div class="ee-product-card">
+        <h4>${f.name}</h4>
+        <div class="ee-inspired">Inspirado en ${f.inspired}</div>
+        <div class="ee-notes">
+          <span class="ee-note-label">Notas:</span> ${allNotes}<br>
+          ${f.desc}
+        </div>
+      </div>`, 400
+    );
+  }
+
+  setQuickReplies([
+    ...recs.map(f => ({label:f.name, value:f.id, action:'pick'})),
+    {label:'🔄 Ver más', value:null, action:'more'},
+    {label:'Empezar de nuevo', value:null, action:'restart'}
+  ]);
+}
+
+async function goWhatsApp() {
+  const f = context.chosen;
+  let msg = '¡Hola Empire Essence! 👑 ';
+  if (f && context.size && context.size !== 'promo') {
+    msg += `Quiero pedir: ${f.name} (${f.inspired}) en ${context.size}. `;
+  } else if (context.size === 'promo') {
+    msg += 'Quiero la promo de 3×30ml por $80.000. ';
+  } else {
+    msg += 'Quiero más información sobre sus fragancias. ';
+  }
+  msg += '¿Me ayudan?';
+
+  const url = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+
+  await botSay(
+    `¡Perfecto! 🎉 Te redirijo a nuestro WhatsApp para confirmar tu pedido.<br><br>
+    <a href="${url}" target="_blank" style="
+      display:inline-block; background:linear-gradient(135deg,#25d366,#128c7e);
+      color:#fff; padding:10px 20px; border-radius:24px; text-decoration:none;
+      font-weight:600; font-size:14px;
+    ">📲 Abrir WhatsApp</a><br><br>
+    ¡Gracias por elegir Empire Essence! ✨👑`
+  );
+  setQuickReplies([
+    {label:'📲 Abrir WhatsApp', value:null, action:'whatsapp'},
+    {label:'Ver más fragancias', value:null, action:'restart'}
+  ]);
+}
+
+async function restart() {
+  context = { who:null, vibe:null, occasion:null, chosen:null, recommendations:[] };
+  state = 'ask_who';
+  await botSay('¡Claro! Empecemos de nuevo 😊 ¿Para quién buscas la fragancia?');
+  setQuickReplies([
+    {label:'Para mí (hombre)', value:'masculina', action:'who'},
+    {label:'Para mí (mujer)', value:'femenina', action:'who'},
+    {label:'Para regalar', value:'regalo', action:'who'},
+    {label:'Algo unisex', value:'unisex', action:'who'}
+  ]);
+}
+
+// ── Free text handling ──
+function handleFreeText(text) {
+  const t = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+
+  // Check for specific fragrance name
+  const match = catalog.find(f => t.includes(f.name.toLowerCase()));
+  if (match) {
+    clearQuick();
+    addMsg(text, 'user');
+    handlePick(match.id);
+    return;
+  }
+
+  // Keyword mapping
+  const keywords = {
+    'fresc':['fresco','vibe'], 'citric':['fresco','vibe'], 'acuatic':['fresco','vibe'],
+    'floral':['floral','vibe'], 'romantic':['floral','vibe'], 'rosa':['floral','vibe'],
+    'dulce':['dulce','vibe'], 'vaini':['dulce','vibe'], 'gourmand':['dulce','vibe'],
+    'mader':['amaderado','vibe'], 'elegan':['amaderado','vibe'], 'cuero':['amaderado','vibe'],
+    'noche':['nocturno','vibe'], 'sensual':['nocturno','vibe'], 'seduc':['nocturno','vibe'],
+    'fiesta':['fiesta','vibe'], 'party':['fiesta','vibe'], 'rumba':['fiesta','vibe'],
+    'oficina':['oficina','vibe'], 'trabajo':['oficina','vibe'], 'formal':['oficina','vibe'],
+    'hombre':['masculina','who'], 'mascul':['masculina','who'], 'novio':['masculina','who'], 'papa':['masculina','who'], 'esposo':['masculina','who'],
+    'mujer':['femenina','who'], 'femeni':['femenina','who'], 'novia':['femenina','who'], 'mama':['femenina','who'], 'esposa':['femenina','who'],
+    'unisex':['unisex','who'],
+    'regalo':['regalo','who'],
+    'precio':['precio','objection'], 'caro':['precio','objection'], 'costoso':['precio','objection'],
+    'original':['calidad','objection'], 'calidad':['calidad','objection'], 'copia':['calidad','objection'],
+    'dura':['durabilidad','objection'], 'duracion':['durabilidad','objection'],
+    'whatsapp':['wa','special'], 'pedir':['wa','special'], 'comprar':['wa','special'],
+    'promo':['promo','special'], 'descuento':['promo','special'], 'oferta':['promo','special'],
+    'hola':['hi','special'], 'buenas':['hi','special'], 'buenos':['hi','special'],
+    'catalogo':['cat','special'], 'todo':['cat','special']
+  };
+
+  for (const [kw, [val, act]] of Object.entries(keywords)) {
+    if (t.includes(kw)) {
+      clearQuick();
+      addMsg(text, 'user');
+      if (act === 'special') {
+        if (val === 'wa') goWhatsApp();
+        else if (val === 'promo') showPromo();
+        else if (val === 'hi') {
+          if (state === 'welcome') greet();
+          else botSay('¡Hola de nuevo! 😊 ¿En qué te puedo ayudar?');
+        }
+        else if (val === 'cat') restart();
+      } else {
+        route(act, val, text);
+      }
+      return;
+    }
+  }
+
+  // Fallback
+  clearQuick();
+  addMsg(text, 'user');
+  botSay('¡Entiendo! 😊 Déjame ayudarte mejor. ¿Qué tipo de fragancia te interesa?').then(() => {
+    setQuickReplies([
+      {label:'🍋 Fresco', value:'fresco', action:'vibe'},
+      {label:'🌸 Floral', value:'floral', action:'vibe'},
+      {label:'🍫 Dulce', value:'dulce', action:'vibe'},
+      {label:'🪵 Amaderado', value:'amaderado', action:'vibe'},
+      {label:'🌙 Nocturno', value:'nocturno', action:'vibe'},
+      {label:'Ver todo el catálogo', value:null, action:'restart'}
+    ]);
+  });
+}
+
+function sendUserInput() {
+  const input = $('ee-chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  handleFreeText(text);
+}
+
+// Enter key
+document.addEventListener('DOMContentLoaded', () => {
+  $('ee-chat-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); sendUserInput(); }
+  });
+
+  // Show badge after 3s if not opened
+  setTimeout(() => {
+    if (!isOpen) $('ee-chat-badge').style.display = 'flex';
+  }, 3000);
+});
+
+return { toggle, sendUserInput };
+})();
+</script>
+</body>
+</html>

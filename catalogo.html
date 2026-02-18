@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap');
+
+@page { size: A4; margin: 0; }
+body {
+    margin: 0; padding: 0;
+    background: #0D0D0D;
+    color: #C9A84C;
+    font-family: 'Inter', sans-serif;
+    width: 210mm; min-height: 297mm;
+}
+.page {
+    width: 210mm; min-height: 297mm;
+    padding: 40mm 30mm;
+    display: flex; flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.border {
+    position: absolute;
+    top: 15mm; bottom: 15mm; left: 15mm; right: 15mm;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 4px;
+}
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 36pt;
+    letter-spacing: 8px;
+    color: #C9A84C;
+    margin-bottom: 5mm;
+    font-weight: 700;
+}
+.subtitle {
+    font-size: 10pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 15mm;
+}
+.divider {
+    width: 60mm; height: 1px;
+    background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+    margin-bottom: 12mm;
+}
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14pt;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 6mm;
+    color: #E8D5A3;
+}
+.line-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10mm 0;
+    text-align: center;
+}
+.line-list li {
+    font-size: 11pt;
+    letter-spacing: 2px;
+    margin-bottom: 3mm;
+    color: #C9A84C;
+    font-weight: 300;
+}
+.small-divider {
+    width: 30mm; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+    margin: 0 auto 10mm auto;
+}
+.footer {
+    position: absolute;
+    bottom: 20mm;
+    font-size: 8pt;
+    color: #666;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+<div class="page">
+    <div class="border"></div>
+    
+    <div class="logo">EMPIRE ESSENCE</div>
+    <div class="subtitle">Catálogo de Fragancias</div>
+    <div class="divider"></div>
+
+    <div class="section-title">👔 Línea Masculina</div>
+    <ul class="line-list">
+        <li>Aventus</li>
+        <li>Sauvage</li>
+        <li>One Million</li>
+        <li>Invictus</li>
+        <li>Bleu</li>
+        <li>Le Male</li>
+        <li>212 VIP Men</li>
+        <li>Bad Boy</li>
+        <li>Eros</li>
+        <li>Fahrenheit</li>
+    </ul>
+
+    <div class="small-divider"></div>
+
+    <div class="section-title">👗 Línea Femenina</div>
+    <ul class="line-list">
+        <li>Good Girl</li>
+        <li>212 VIP Rosé</li>
+        <li>La Vie Est Belle</li>
+        <li>J'adore</li>
+        <li>Carolina Herrera</li>
+        <li>Black Opium</li>
+        <li>Chanel Chance</li>
+        <li>Bright Crystal</li>
+        <li>Amor Amor</li>
+        <li>Flowerbomb</li>
+    </ul>
+
+    <div class="small-divider"></div>
+
+    <div class="section-title">✨ Línea Unisex / Especiales</div>
+    <ul class="line-list">
+        <li>Baccarat Rouge</li>
+        <li>Oud Wood</li>
+        <li>Erba Pura</li>
+        <li>Tobacco Vanille</li>
+        <li>Kirke</li>
+        <li>Arabian Tonka</li>
+    </ul>
+
+    <div class="footer">Empire Essence · Perfumes Inspirados · 2026</div>
+</div>
+</body>
+</html>

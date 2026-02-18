@@ -1,0 +1,264 @@
+{
+  "fragrances": [
+    {
+      "id": 1,
+      "name": "Aventus",
+      "inspired": "Creed Aventus",
+      "category": "masculina",
+      "topNotes": ["piña", "grosella negra", "manzana", "bergamota"],
+      "heartNotes": ["abedul", "pachulí", "rosa", "jazmín marroquí"],
+      "baseNotes": ["musgo de roble", "almizcle", "ámbar gris", "vainilla"],
+      "description": "Frutal y audaz con un corazón ahumado de abedul. Icónico aroma de poder y sofisticación masculina."
+    },
+    {
+      "id": 2,
+      "name": "Sauvage",
+      "inspired": "Dior Sauvage",
+      "category": "masculina",
+      "topNotes": ["bergamota calabresa", "pimienta"],
+      "heartNotes": ["pimienta de Sichuan", "lavanda", "pimienta rosa", "vetiver", "pachulí", "geranio"],
+      "baseNotes": ["ambroxan", "cedro", "ládano"],
+      "description": "Fresco y salvaje con bergamota vibrante y un fondo amaderado potente. Masculinidad moderna."
+    },
+    {
+      "id": 3,
+      "name": "One Million",
+      "inspired": "Paco Rabanne One Million",
+      "category": "masculina",
+      "topNotes": ["mandarina roja", "pomelo", "menta"],
+      "heartNotes": ["canela", "notas especiadas", "rosa"],
+      "baseNotes": ["ámbar", "cuero", "notas amaderadas", "pachulí indio"],
+      "description": "Dulce, especiado y magnético. Una fragancia audaz con canela y ámbar que irradia confianza."
+    },
+    {
+      "id": 4,
+      "name": "Invictus",
+      "inspired": "Paco Rabanne Invictus",
+      "category": "masculina",
+      "topNotes": ["notas marinas", "pomelo", "mandarina"],
+      "heartNotes": ["hoja de laurel", "jazmín"],
+      "baseNotes": ["ámbar gris", "madera de guayaco", "musgo de roble", "pachulí"],
+      "description": "Acuático y fresco con un toque atlético. Energía y frescura que conquista."
+    },
+    {
+      "id": 5,
+      "name": "Bleu",
+      "inspired": "Bleu de Chanel",
+      "category": "masculina",
+      "topNotes": ["ralladura de limón", "bergamota", "menta", "artemisa"],
+      "heartNotes": ["lavanda", "piña", "geranio", "notas verdes"],
+      "baseNotes": ["sándalo", "cedro", "ámbar", "Iso E Super", "haba tonka"],
+      "description": "Elegante y versátil con cítricos frescos y maderas cálidas. El perfume del hombre sofisticado."
+    },
+    {
+      "id": 6,
+      "name": "Le Male",
+      "inspired": "Jean Paul Gaultier Le Male",
+      "category": "masculina",
+      "topNotes": ["lavanda", "menta", "cardamomo", "bergamota", "artemisa"],
+      "heartNotes": ["canela", "flor de naranjo", "alcaravea"],
+      "baseNotes": ["vainilla", "haba tonka", "ámbar", "sándalo", "cedro"],
+      "description": "Clásico masculino con lavanda fresca y vainilla cálida. Seductor y reconfortante a la vez."
+    },
+    {
+      "id": 7,
+      "name": "212 VIP Men",
+      "inspired": "Carolina Herrera 212 VIP Men",
+      "category": "masculina",
+      "topNotes": ["maracuyá", "lima", "pimienta", "jengibre"],
+      "heartNotes": ["vodka", "ginebra", "menta", "especias"],
+      "baseNotes": ["ámbar", "cuero", "notas amaderadas"],
+      "description": "Vibrante y festivo con frutas tropicales y un toque licoroso. Perfume de fiesta y noche."
+    },
+    {
+      "id": 8,
+      "name": "Bad Boy",
+      "inspired": "Carolina Herrera Bad Boy",
+      "category": "masculina",
+      "topNotes": ["pimienta blanca", "bergamota", "pimienta rosa"],
+      "heartNotes": ["cedro", "salvia esclarea"],
+      "baseNotes": ["haba tonka", "cacao"],
+      "description": "Especiado y oscuro con contraste entre pimienta vibrante y cacao adictivo. Rebelde con estilo."
+    },
+    {
+      "id": 9,
+      "name": "Eros",
+      "inspired": "Versace Eros",
+      "category": "masculina",
+      "topNotes": ["menta", "manzana verde", "limón"],
+      "heartNotes": ["haba tonka", "ambroxan", "geranio"],
+      "baseNotes": ["vainilla de Madagascar", "cedro de Virginia", "cedro del Atlas", "vetiver", "musgo de roble"],
+      "description": "Fresco y dulce con menta y vainilla envolvente. Poderoso y seductor como el dios griego."
+    },
+    {
+      "id": 10,
+      "name": "Fahrenheit",
+      "inspired": "Dior Fahrenheit",
+      "category": "masculina",
+      "topNotes": ["nuez moscada", "lavanda", "cedro", "mandarina", "manzanilla", "bergamota"],
+      "heartNotes": ["hoja de violeta", "nuez moscada", "cedro", "sándalo", "clavel", "jazmín"],
+      "baseNotes": ["cuero", "ámbar", "pachulí", "musgo de roble", "vetiver"],
+      "description": "Icónico y atemporal con notas de cuero, gasolina y violeta. Masculinidad cruda y sofisticada."
+    },
+    {
+      "id": 11,
+      "name": "Good Girl",
+      "inspired": "Carolina Herrera Good Girl",
+      "category": "femenina",
+      "topNotes": ["almendra", "café", "bergamota", "limón"],
+      "heartNotes": ["tuberosa", "jazmín sambac", "flor de naranjo", "rosa búlgara", "iris"],
+      "baseNotes": ["haba tonka", "cacao", "vainilla", "sándalo", "almizcle", "ámbar", "pachulí"],
+      "description": "Dualidad irresistible entre flores luminosas y un fondo oscuro de café y cacao. Femenina y poderosa."
+    },
+    {
+      "id": 12,
+      "name": "212 VIP Rosé",
+      "inspired": "Carolina Herrera 212 VIP Rosé",
+      "category": "femenina",
+      "topNotes": ["champán rosado", "pimienta rosa"],
+      "heartNotes": ["flor de durazno", "rosa"],
+      "baseNotes": ["almizcle blanco", "notas amaderadas"],
+      "description": "Burbujeante y femenina con champán y rosa. Fresca y coqueta como una noche de celebración."
+    },
+    {
+      "id": 13,
+      "name": "La Vie Est Belle",
+      "inspired": "Lancôme La Vie Est Belle",
+      "category": "femenina",
+      "topNotes": ["grosella negra", "pera"],
+      "heartNotes": ["iris", "jazmín", "flor de naranjo"],
+      "baseNotes": ["praliné", "vainilla", "pachulí", "haba tonka"],
+      "description": "Dulce y radiante con iris gourmand y praliné. Un abrazo de felicidad en cada aplicación."
+    },
+    {
+      "id": 14,
+      "name": "J'adore",
+      "inspired": "Dior J'adore",
+      "category": "femenina",
+      "topNotes": ["pera", "melón", "magnolia", "durazno", "mandarina", "bergamota"],
+      "heartNotes": ["jazmín", "lirio de los valles", "tuberosa", "fresia", "rosa", "orquídea", "violeta", "ciruela"],
+      "baseNotes": ["almizcle", "vainilla", "cedro", "mora"],
+      "description": "Bouquet floral lujoso con jazmín y rosa. La quintaesencia de la feminidad elegante."
+    },
+    {
+      "id": 15,
+      "name": "CH",
+      "inspired": "Carolina Herrera CH",
+      "category": "femenina",
+      "topNotes": ["frutas tropicales", "bergamota", "pomelo", "limón", "notas acuáticas"],
+      "heartNotes": ["praliné", "canela", "flor de naranjo africana", "jazmín", "rosa"],
+      "baseNotes": ["gamuza", "pachulí", "madera de cachemira", "sándalo", "almizcle"],
+      "description": "Sofisticada y cálida con praliné especiado y cuero suave. Elegancia neoyorquina con alma latina."
+    },
+    {
+      "id": 16,
+      "name": "Black Opium",
+      "inspired": "YSL Black Opium",
+      "category": "femenina",
+      "topNotes": ["pera", "pimienta rosa", "flor de naranjo"],
+      "heartNotes": ["café", "jazmín", "almendra amarga", "regaliz"],
+      "baseNotes": ["vainilla", "pachulí", "madera de cachemira", "cedro"],
+      "description": "Adictiva y nocturna con café intenso y vainilla dulce. Rock and roll en forma de perfume."
+    },
+    {
+      "id": 17,
+      "name": "Chance",
+      "inspired": "Chanel Chance",
+      "category": "femenina",
+      "topNotes": ["pachulí", "pimienta rosa", "piña", "jacinto", "iris"],
+      "heartNotes": ["limón", "jazmín", "rosa"],
+      "baseNotes": ["pachulí", "almizcle", "vetiver", "vainilla"],
+      "description": "Fresca y vivaz con un giro inesperado. Espontaneidad y feminidad moderna de Chanel."
+    },
+    {
+      "id": 18,
+      "name": "Bright Crystal",
+      "inspired": "Versace Bright Crystal",
+      "category": "femenina",
+      "topNotes": ["granada", "yuzu", "acorde helado"],
+      "heartNotes": ["peonía", "magnolia", "loto"],
+      "baseNotes": ["almizcle", "ámbar", "caoba"],
+      "description": "Cristalina y luminosa con flores delicadas y granada fresca. Sensual y etérea a la vez."
+    },
+    {
+      "id": 19,
+      "name": "Amor Amor",
+      "inspired": "Cacharel Amor Amor",
+      "category": "femenina",
+      "topNotes": ["grosella negra", "naranja", "mandarina", "pomelo", "casia", "bergamota"],
+      "heartNotes": ["rosa", "albaricoque", "jazmín", "lirio", "lirio de los valles"],
+      "baseNotes": ["vainilla", "haba tonka", "almizcle", "ámbar", "cedro de Virginia"],
+      "description": "Frutal, apasionada y juvenil. Explosión de frutas rojas y rosa con base de vainilla cálida."
+    },
+    {
+      "id": 20,
+      "name": "Flowerbomb",
+      "inspired": "Viktor & Rolf Flowerbomb",
+      "category": "femenina",
+      "topNotes": ["té", "bergamota", "osmanto"],
+      "heartNotes": ["orquídea", "jazmín", "rosa", "fresia", "flor de naranjo africana"],
+      "baseNotes": ["pachulí", "almizcle", "vainilla"],
+      "description": "Explosión floral adictiva con orquídea y rosa envueltas en pachulí y vainilla. Un bouquet sensual."
+    },
+    {
+      "id": 21,
+      "name": "Baccarat Rouge",
+      "inspired": "MFK Baccarat Rouge 540",
+      "category": "unisex",
+      "topNotes": ["azafrán", "jazmín"],
+      "heartNotes": ["madera de ámbar", "ámbar gris", "hediona"],
+      "baseNotes": ["resina de abeto", "cedro", "azúcar", "ambroxan", "musgo de roble"],
+      "description": "Luminoso y etéreo con azafrán cristalino y ámbar dulce. Una fragancia casi mágica que hipnotiza."
+    },
+    {
+      "id": 22,
+      "name": "Oud Wood",
+      "inspired": "Tom Ford Oud Wood",
+      "category": "unisex",
+      "topNotes": ["palo de rosa", "cardamomo", "pimienta china"],
+      "heartNotes": ["oud (madera de agar)", "sándalo", "vetiver"],
+      "baseNotes": ["haba tonka", "vainilla", "ámbar"],
+      "description": "Sofisticado y misterioso con oud suave y maderas exóticas. Lujo silencioso en cada nota."
+    },
+    {
+      "id": 23,
+      "name": "Erba Pura",
+      "inspired": "Xerjoff Erba Pura",
+      "category": "unisex",
+      "topNotes": ["naranja siciliana", "bergamota calabresa", "limón siciliano"],
+      "heartNotes": ["frutas"],
+      "baseNotes": ["almizcle blanco", "vainilla de Madagascar", "ámbar"],
+      "description": "Cítricos vibrantes y frutas jugosas sobre una base cremosa de vainilla y almizcle. Pura alegría."
+    },
+    {
+      "id": 24,
+      "name": "Tobacco Vanille",
+      "inspired": "Tom Ford Tobacco Vanille",
+      "category": "unisex",
+      "topNotes": ["hoja de tabaco", "notas especiadas"],
+      "heartNotes": ["vainilla", "cacao", "haba tonka", "flor de tabaco"],
+      "baseNotes": ["frutas secas", "notas amaderadas"],
+      "description": "Cálido y opulento con tabaco dulce y vainilla rica. Como un salón de lujo junto a la chimenea."
+    },
+    {
+      "id": 25,
+      "name": "Kirke",
+      "inspired": "Tiziana Terenzi Kirke",
+      "category": "unisex",
+      "topNotes": ["maracuyá", "durazno", "pera", "frambuesa", "casis", "arena"],
+      "heartNotes": ["lirio de los valles"],
+      "baseNotes": ["almizcle", "sándalo", "vainilla", "pachulí", "heliotropo"],
+      "description": "Frutal y luminoso con un corazón floral delicado y base cremosa. Elegancia natural y envolvente."
+    },
+    {
+      "id": 26,
+      "name": "Arabian Tonka",
+      "inspired": "Montale Arabians Tonka",
+      "category": "unisex",
+      "topNotes": ["azafrán", "bergamota"],
+      "heartNotes": ["oud (madera de agar)", "rosa búlgara"],
+      "baseNotes": ["haba tonka", "caña de azúcar", "ámbar", "almizcle blanco", "musgo de roble"],
+      "description": "Oriental y envolvente con azafrán dorado, rosa y tonka dulce. Noches árabes en cada gota."
+    }
+  ]
+}

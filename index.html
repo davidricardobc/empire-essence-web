@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empire Essence — Perfumería a Domicilio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #B8976A;
+            --gold-light: #D4C4A8;
+            --dark: #1A1A1A;
+            --darker: #0D0D0D;
+            --white: #FAFAFA;
+            --gray: #888;
+            --bg: #111;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(17,17,17,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(184,151,106,0.2);
+            padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Cormorant', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; }
+        .nav-links a { color: var(--white); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { width: 25px; height: 2px; background: var(--gold); transition: 0.3s; }
+
+        /* SCROLL OFFSET for fixed nav */
+        [id] { scroll-margin-top: 80px; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(135deg, var(--darker) 0%, #1a1510 50%, var(--darker) 100%);
+            padding: 2rem; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(184,151,106,0.12) 0%, rgba(184,151,106,0.04) 40%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(184,151,106,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(184,151,106,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(184,151,106,0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero h1 { font-family: 'Cormorant', serif; font-size: 4rem; font-weight: 700; color: var(--gold); letter-spacing: 8px; margin-bottom: 0.5rem; position: relative; z-index: 1; text-transform: uppercase; }
+        .hero .tagline { font-size: 1.1rem; color: var(--gray); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 2rem; position: relative; z-index: 1; }
+        .hero .cta {
+            display: inline-block; padding: 1rem 3rem; border: 2px solid var(--gold);
+            color: var(--gold); text-decoration: none; text-transform: uppercase;
+            letter-spacing: 3px; font-size: 0.85rem; transition: all 0.3s; position: relative; z-index: 1;
+        }
+        .hero .cta:hover { background: var(--gold); color: var(--dark); }
+        .hero-ornament {
+            position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            z-index: 1;
+        }
+
+        /* SECTIONS */
+        section { padding: 5rem 2rem; }
+        .section-title { font-family: 'Cormorant', serif; font-size: 2.5rem; text-align: center; color: var(--gold); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 4px; }
+        .section-sub { text-align: center; color: var(--gray); margin-bottom: 3rem; font-size: 0.95rem; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* SEARCH */
+        .search-bar {
+            max-width: 500px; margin: 0 auto 2.5rem; position: relative;
+        }
+        .search-bar input {
+            width: 100%; padding: 0.9rem 1.2rem 0.9rem 3rem;
+            background: var(--dark); border: 1px solid rgba(184,151,106,0.3);
+            border-radius: 30px; color: var(--white); font-size: 0.95rem;
+            outline: none; transition: border-color 0.3s;
+        }
+        .search-bar input:focus { border-color: var(--gold); }
+        .search-bar input::placeholder { color: var(--gray); }
+        .search-bar .search-icon {
+            position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+            color: var(--gray); display: flex; align-items: center;
+        }
+        .search-bar .search-icon svg { width: 18px; height: 18px; stroke: var(--gray); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* PRODUCTS GRID */
+        .products-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+        }
+        .product-card {
+            background: var(--dark); border: 1px solid rgba(184,151,106,0.15);
+            border-radius: 12px; padding: 1.5rem; text-align: center;
+            cursor: pointer; transition: transform 0.3s, border-color 0.3s;
+        }
+        .product-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+        .product-card .frag-icon {
+            width: 48px; height: 48px; margin: 0 auto 0.8rem; display: flex;
+            align-items: center; justify-content: center;
+        }
+        .product-card .frag-icon svg { width: 36px; height: 36px; }
+        .product-card h3 { font-family: 'Cormorant', serif; font-size: 1.15rem; margin-bottom: 0.3rem; }
+        .product-card .inspired-by { color: var(--gold-light); font-size: 0.78rem; font-style: italic; opacity: 0.7; }
+        .product-card .price-from { color: var(--gray); font-size: 0.82rem; margin-top: 0.6rem; }
+        .product-card .price-from span { color: var(--gold); font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; }
+        .product-card .notes-preview { margin-top: 0.6rem; font-size: 0.72rem; color: var(--gray); line-height: 1.5; }
+        .product-card .notes-preview .note-label { color: var(--gold); opacity: 0.6; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.65rem; }
+        .product-card .category-badge {
+            display: inline-block; font-size: 0.6rem; text-transform: uppercase;
+            letter-spacing: 1.5px; padding: 0.15rem 0.6rem; border-radius: 20px;
+            border: 1px solid rgba(184,151,106,0.25); color: var(--gold-light);
+            margin-bottom: 0.5rem; opacity: 0.6;
+        }
+
+        /* NOTES IN MODAL */
+        .modal-notes {
+            margin-bottom: 1.5rem; padding: 1rem 1.2rem;
+            background: rgba(184,151,106,0.04); border: 1px solid rgba(184,151,106,0.12);
+            border-radius: 10px;
+        }
+        .modal-notes .notes-title {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--gold); margin-bottom: 0.8rem; font-weight: 600;
+        }
+        .modal-notes .note-row {
+            display: flex; align-items: flex-start; gap: 0.6rem;
+            margin-bottom: 0.5rem; font-size: 0.85rem;
+        }
+        .modal-notes .note-row:last-child { margin-bottom: 0; }
+        .modal-notes .note-icon { font-size: 0.9rem; flex-shrink: 0; width: 1.2rem; text-align: center; }
+        .modal-notes .note-type {
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--gold); min-width: 50px; padding-top: 0.15rem; font-weight: 600;
+        }
+        .modal-notes .note-list { color: var(--gold-light); opacity: 0.85; }
+        .modal-description {
+            font-size: 0.85rem; color: var(--gray); font-style: italic;
+            margin-bottom: 1.5rem; line-height: 1.6; padding-left: 0.5rem;
+            border-left: 2px solid rgba(184,151,106,0.2);
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 300; display: none;
+            justify-content: center; align-items: center; padding: 1rem;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: var(--dark); border: 1px solid rgba(184,151,106,0.3);
+            border-radius: 16px; max-width: 600px; width: 100%;
+            max-height: 90vh; overflow-y: auto; padding: 2rem; position: relative;
+        }
+        .modal-close {
+            position: absolute; top: 1rem; right: 1rem;
+            background: none; border: none; color: var(--white);
+            font-size: 1.5rem; cursor: pointer;
+        }
+        .modal h2 { font-family: 'Cormorant', serif; color: var(--gold); margin-bottom: 0.3rem; }
+        .modal .modal-inspired { color: var(--gold-light); font-size: 0.85rem; font-style: italic; opacity: 0.7; margin-bottom: 1.5rem; }
+
+        /* STEPS */
+        .step-label {
+            color: var(--gold); font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 0.8rem; font-weight: 600;
+        }
+        .step-label .step-num {
+            display: inline-block; width: 22px; height: 22px; border-radius: 50%;
+            background: var(--gold); color: var(--dark); text-align: center;
+            line-height: 22px; font-size: 0.7rem; margin-right: 0.5rem;
+        }
+
+        /* SIZE PILLS */
+        .size-options { display: flex; gap: 0.8rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
+        .size-pill {
+            flex: 1; min-width: 100px; padding: 1rem; background: rgba(184,151,106,0.05);
+            border: 1.5px solid rgba(184,151,106,0.2); border-radius: 10px;
+            cursor: pointer; text-align: center; transition: all 0.3s;
+        }
+        .size-pill:hover, .size-pill.active { border-color: var(--gold); background: rgba(184,151,106,0.1); }
+        .size-pill .sz { font-size: 1.3rem; font-weight: 700; color: var(--white); }
+        .size-pill .sz-price {
+            color: var(--gold); font-size: 1rem; font-weight: 600; margin-top: 0.2rem;
+            font-family: 'Cormorant', serif; letter-spacing: 0.5px;
+        }
+
+        /* BOTTLE GRID */
+        .bottle-section { display: none; margin-bottom: 1.5rem; }
+        .bottle-section.visible { display: block; }
+        .bottles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.8rem; }
+        .bottle-opt {
+            border: 2px solid rgba(184,151,106,0.15); border-radius: 10px;
+            overflow: hidden; cursor: pointer; transition: all 0.3s;
+            aspect-ratio: 1; position: relative;
+        }
+        .bottle-opt:hover, .bottle-opt.active { border-color: var(--gold); box-shadow: 0 0 15px rgba(184,151,106,0.2); }
+        .bottle-opt img { width: 100%; height: 100%; object-fit: contain; }
+        .bottle-opt .check {
+            position: absolute; top: 5px; right: 5px; width: 22px; height: 22px;
+            background: var(--gold); border-radius: 50%; display: none;
+            align-items: center; justify-content: center; color: var(--dark);
+        }
+        .bottle-opt .check svg { width: 14px; height: 14px; stroke: var(--dark); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+        .bottle-opt.active .check { display: flex; }
+        .bottle-name { text-align: center; font-size: 0.7rem; color: var(--gray); margin-top: 0.3rem; }
+
+        /* ADD BTN */
+        .btn-add-cart {
+            display: none; width: 100%; padding: 1rem; background: var(--gold);
+            color: var(--dark); border: none; border-radius: 10px; font-size: 1rem;
+            font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            cursor: pointer; transition: opacity 0.3s; margin-top: 0.5rem;
+        }
+        .btn-add-cart.visible { display: block; }
+        .btn-add-cart:hover { opacity: 0.9; }
+
+        /* PROMO BANNER */
+        .promo-banner {
+            max-width: 600px; margin: 3rem auto 0; padding: 2rem 2.5rem;
+            border: 1px solid rgba(184,151,106,0.25); border-radius: 12px;
+            background: linear-gradient(135deg, rgba(184,151,106,0.04) 0%, rgba(184,151,106,0.08) 100%);
+            text-align: center; position: relative;
+        }
+        .promo-banner .promo-label {
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px;
+            color: var(--gold); margin-bottom: 0.5rem; opacity: 0.7;
+        }
+        .promo-banner h3 { color: var(--gold); margin-bottom: 0.3rem; font-family: 'Cormorant', serif; font-size: 1.4rem; }
+        .promo-banner .promo-detail { color: var(--gray); font-size: 0.85rem; margin-bottom: 0.3rem; }
+        .promo-banner .promo-saving { color: var(--gold-light); font-size: 0.78rem; opacity: 0.6; margin-bottom: 1.2rem; font-style: italic; }
+        .promo-banner .btn-order {
+            display: inline-block; padding: 0.7rem 2rem;
+            background: transparent; border: 1.5px solid var(--gold);
+            color: var(--gold); font-size: 0.85rem; letter-spacing: 2px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+            border-radius: 6px; text-decoration: none;
+        }
+        .promo-banner .btn-order:hover { background: var(--gold); color: var(--dark); }
+
+        /* DELIVERY */
+        .delivery { background: var(--dark); }
+        .delivery-features {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; max-width: 900px; margin: 0 auto; text-align: center;
+        }
+        .delivery-feature { padding: 2rem; }
+        .delivery-feature .icon { margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; }
+        .delivery-feature .icon svg { width: 40px; height: 40px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .delivery-feature h4 { color: var(--gold); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .delivery-feature p { color: var(--gray); font-size: 0.9rem; }
+
+        /* TESTIMONIALS */
+        .testimonials { background: var(--bg); }
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; max-width: 900px; margin: 0 auto;
+        }
+        .testimonial-card {
+            background: var(--dark); border: 1px solid rgba(184,151,106,0.12);
+            border-radius: 12px; padding: 2rem; position: relative;
+        }
+        .testimonial-card::before {
+            content: '\201C'; position: absolute; top: 0.8rem; left: 1.2rem;
+            font-family: 'Cormorant', serif; font-size: 3rem;
+            color: var(--gold); opacity: 0.15; line-height: 1;
+        }
+        .testimonial-text { color: var(--gold-light); font-size: 0.9rem; font-style: italic; margin-bottom: 1.2rem; line-height: 1.7; opacity: 0.85; }
+        .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+        .testimonial-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), rgba(184,151,106,0.4));
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant', serif; font-size: 0.85rem; color: var(--dark); font-weight: 700;
+        }
+        .testimonial-info .testimonial-name { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+        .testimonial-info .testimonial-city { font-size: 0.75rem; color: var(--gray); }
+        .testimonial-stars { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 0.8rem; }
+
+        /* CART FLOATING */
+        .cart-icon {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 60px; height: 60px; background: var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 4px 20px rgba(184,151,106,0.4);
+            z-index: 90; transition: transform 0.3s;
+        }
+        .cart-icon svg { width: 26px; height: 26px; stroke: var(--dark); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .cart-icon:hover { transform: scale(1.1); }
+        .cart-count {
+            position: absolute; top: -5px; right: -5px; background: #e74c3c;
+            color: white; font-size: 0.75rem; width: 22px; height: 22px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;
+        }
+
+        /* WHATSAPP FLOATING */
+        /* WA float removed — contact via Nosotros/Mayoristas/Cart */
+
+        /* CART PANEL */
+        .cart-panel {
+            position: fixed; top: 0; right: -420px; width: 400px; max-width: 90vw;
+            height: 100vh; background: var(--dark);
+            border-left: 1px solid rgba(184,151,106,0.2);
+            z-index: 200; transition: right 0.3s; display: flex; flex-direction: column; padding: 2rem;
+        }
+        .cart-panel.open { right: 0; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 199; display: none; }
+        .cart-overlay.open { display: block; }
+        .cart-panel h2 { font-family: 'Cormorant', serif; color: var(--gold); margin-bottom: 1.5rem; }
+        .cart-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+        .cart-items { flex: 1; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .cart-item-info h4 { font-size: 0.95rem; }
+        .cart-item-info p { color: var(--gray); font-size: 0.85rem; }
+        .cart-item-remove { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 1.2rem; }
+        .cart-total {
+            padding: 1.5rem 0; border-top: 1px solid rgba(184,151,106,0.3);
+            font-size: 1.3rem; color: var(--gold); font-weight: 600;
+            font-family: 'Cormorant', serif;
+        }
+        .btn-checkout {
+            display: flex; width: 100%; padding: 1rem; background: #25D366; color: white;
+            border: none; font-size: 1rem; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; cursor: pointer; transition: opacity 0.3s;
+            border-radius: 8px; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .btn-checkout:hover { opacity: 0.9; }
+        .btn-checkout:disabled { opacity: 0.4; cursor: default; }
+        .btn-checkout svg { width: 22px; height: 22px; fill: white; }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(184,151,106,0.1); color: var(--gray); font-size: 0.85rem; }
+        footer .logo { margin-bottom: 1rem; display: block; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; letter-spacing: 3px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(17,17,17,0.98); padding: 1rem 2rem; }
+            .nav-links.open a { margin: 0.5rem 0; }
+            .section-title { font-size: 2rem; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+            .product-card { padding: 1rem; }
+            .bottles-grid { grid-template-columns: repeat(3, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 6rem; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--gold); color: var(--dark); padding: 0.8rem 1.5rem;
+            border-radius: 8px; font-weight: 600; font-size: 0.9rem; z-index: 400;
+            opacity: 0; transition: all 0.4s; pointer-events: none;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .toast svg { width: 18px; height: 18px; stroke: var(--dark); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo" style="display:flex;align-items:center;gap:0.7rem;">
+        <svg viewBox="0 0 60 60" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="28" stroke="var(--gold)" stroke-width="1.5"/><text x="16" y="40" font-family="'Cormorant',serif" font-size="28" font-weight="600" fill="var(--gold)" letter-spacing="-4">EE</text></svg>
+        EMPIRE ESSENCE
+    </div>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+        <a href="#productos">Fragancias</a>
+        <a href="#envio">Envío</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#mayoristas">Mayoristas</a>
+        <a href="#nosotros">Nosotros</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <svg viewBox="0 0 120 120" width="90" height="90" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;margin-bottom:1.5rem;"><circle cx="60" cy="60" r="56" stroke="var(--gold)" stroke-width="1.2"/><circle cx="60" cy="60" r="50" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/><text x="28" y="78" font-family="'Cormorant',serif" font-size="56" font-weight="600" fill="var(--gold)" letter-spacing="-6">EE</text></svg>
+    <h1>EMPIRE ESSENCE</h1>
+    <p class="tagline">Tu esencia, tu imperio</p>
+    <a href="#productos" class="cta" onclick="event.preventDefault();document.getElementById('productos').scrollIntoView({behavior:'smooth'})">Ver Fragancias</a>
+    <div class="hero-ornament"></div>
+</section>
+
+<div style="background:rgba(184,151,106,0.04);border-bottom:1px solid rgba(184,151,106,0.12);padding:0.8rem 2rem;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;">
+    <span style="color:var(--gold);font-family:'Cormorant',serif;font-size:0.85rem;letter-spacing:2px;">COMBOS 30ml</span>
+    <span style="color:var(--gray);font-size:0.8rem;">3 × $80.000</span>
+    <span style="color:rgba(184,151,106,0.3);">|</span>
+    <span style="color:var(--gray);font-size:0.8rem;">5 × $128.000</span>
+    <span style="color:rgba(184,151,106,0.3);">|</span>
+    <span style="color:var(--gray);font-size:0.8rem;">10 × $240.000</span>
+</div>
+
+<section id="productos">
+    <h2 class="section-title">Nuestras Fragancias</h2>
+    <p class="section-sub">Elige tu fragancia favorita · Todos los perfumes disponibles en 30, 50 y 100 ml</p>
+
+    <div class="search-bar">
+        <span class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <input type="text" id="searchInput" placeholder="Buscar fragancia..." oninput="filterProducts()">
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+
+    </div>
+</section>
+
+<section class="delivery" id="envio">
+    <h2 class="section-title">Envío a Domicilio</h2>
+    <p class="section-sub">Tu fragancia llega a tu puerta</p>
+    <div class="delivery-features">
+        <div class="delivery-feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <h4>Envío Rápido</h4>
+            <p>Recibe tu pedido en la puerta de tu casa</p>
+        </div>
+        <div class="delivery-feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M20 12v10H4V12"/><polyline points="2 7 12 2 22 7"/><path d="M12 22V7"/><path d="M2 7l10 5 10-5"/></svg></div>
+            <h4>Empaque Premium</h4>
+            <p>Cada fragancia empacada con cuidado y elegancia</p>
+        </div>
+        <div class="delivery-feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg></div>
+            <h4>Pago Seguro</h4>
+            <p>Nequi, Bancolombia, Bre-B, Banco Bogotá o contra entrega</p>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials" id="testimonios">
+    <h2 class="section-title">Nuestros Clientes</h2>
+    <p class="section-sub">Experiencias que hablan por sí solas</p>
+    <div class="testimonials-grid">
+        <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+            <p class="testimonial-text">Pedí el Aventus y quedé impresionado. La duración es increíble y el aroma es prácticamente idéntico al original. Ya voy por mi tercera compra.</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">A</div>
+                <div class="testimonial-info">
+                    <div class="testimonial-name">Andrés M.</div>
+                    <div class="testimonial-city">Bogotá</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+            <p class="testimonial-text">El Good Girl es mi favorito. Me llegan siempre bien empacados y el envío fue más rápido de lo que esperaba. Totalmente recomendado.</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">V</div>
+                <div class="testimonial-info">
+                    <div class="testimonial-name">Valentina R.</div>
+                    <div class="testimonial-city">Medellín</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+            <p class="testimonial-text">Compré la colección de 3 por 80 mil y cada fragancia huele espectacular. Los frascos se ven elegantes. Excelente relación calidad-precio.</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">C</div>
+                <div class="testimonial-info">
+                    <div class="testimonial-name">Carlos G.</div>
+                    <div class="testimonial-city">Cali</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="nosotros" style="max-width:800px;margin:0 auto;">
+    <h2 class="section-title">Quiénes Somos</h2>
+    <p class="section-sub">Nuestra historia</p>
+    <div style="color:var(--gold-light);font-size:0.95rem;line-height:1.9;text-align:center;opacity:0.85;margin-bottom:2.5rem;">
+        Empire Essence nació de la pasión por las fragancias y la creencia de que el lujo debe ser accesible. Seleccionamos las mejores esencias inspiradas en los perfumes más icónicos del mundo y las entregamos directamente a tu puerta.<br><br>
+        Cada fragancia es elaborada con ingredientes de alta calidad para ofrecer una experiencia olfativa que rivaliza con las marcas originales — a una fracción del precio.<br><br>
+        <strong style="color:var(--gold);">Nuestro compromiso:</strong> calidad, elegancia y un servicio que supera expectativas.
+    </div>
+    <div style="text-align:center;margin-bottom:2rem;">
+        <p style="color:var(--gray);font-size:0.8rem;text-transform:uppercase;letter-spacing:3px;margin-bottom:1rem;">Métodos de pago</p>
+        <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;color:var(--gold-light);font-size:0.9rem;">
+            <span>Nequi</span><span>Bancolombia</span><span>Bre-B</span><span>Banco Bogotá</span><span>Contra entrega</span>
+        </div>
+    </div>
+    <div style="text-align:center;">
+        <a href="https://wa.me/573156753404?text=Hola%20Empire%20Essence%2C%20quiero%20información" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--gold);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:400;opacity:0.6;transition:opacity 0.3s;">
+            Contacto directo
+        </a>
+    </div>
+</section>
+
+<section id="mayoristas" style="background:var(--dark);">
+    <h2 class="section-title">Mayoristas</h2>
+    <p class="section-sub">Lleva Empire Essence a tu negocio</p>
+    <div style="max-width:700px;margin:0 auto;text-align:center;">
+        <p style="color:var(--gold-light);font-size:0.95rem;line-height:1.9;opacity:0.85;margin-bottom:2.5rem;">
+            Ofrecemos esencias al por mayor y frascos para emprendedores y negocios. Precios especiales por volumen. Contáctanos para recibir nuestro catálogo mayorista.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-bottom:2.5rem;">
+            <div style="padding:1.5rem;border:1px solid rgba(184,151,106,0.2);border-radius:12px;text-align:center;">
+                <div style="color:var(--gold);font-size:1.5rem;margin-bottom:0.5rem;">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                </div>
+                <h4 style="color:var(--gold);font-size:0.95rem;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:2px;">Esencias Concentradas</h4>
+                <p style="color:var(--gray);font-size:0.85rem;">Por litro</p>
+            </div>
+            <div style="padding:1.5rem;border:1px solid rgba(184,151,106,0.2);border-radius:12px;text-align:center;">
+                <div style="color:var(--gold);font-size:1.5rem;margin-bottom:0.5rem;">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="10" width="10" height="12" rx="2"/><rect x="9" y="7" width="6" height="3" rx="1"/><line x1="10" y1="7" x2="10" y2="5"/><line x1="14" y1="7" x2="14" y2="5"/><rect x="10" y="4" width="4" height="1" rx="0.5"/></svg>
+                </div>
+                <h4 style="color:var(--gold);font-size:0.95rem;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:2px;">Frascos Vacíos</h4>
+                <p style="color:var(--gray);font-size:0.85rem;">Todos los tamaños</p>
+            </div>
+            <div style="padding:1.5rem;border:1px solid rgba(184,151,106,0.2);border-radius:12px;text-align:center;">
+                <div style="color:var(--gold);font-size:1.5rem;margin-bottom:0.5rem;">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><polyline points="2 7 12 2 22 7"/><path d="M12 22V7"/><path d="M2 7l10 5 10-5"/></svg>
+                </div>
+                <h4 style="color:var(--gold);font-size:0.95rem;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:2px;">Kits de Inicio</h4>
+                <p style="color:var(--gray);font-size:0.85rem;">Para emprendedores</p>
+            </div>
+        </div>
+        <a href="https://wa.me/573156753404?text=Hola%20Empire%20Essence%2C%20quiero%20información%20sobre%20el%20catálogo%20mayorista" target="_blank" style="display:inline-block;padding:0.9rem 2.5rem;border:1px solid var(--gold);color:var(--gold);border-radius:0;font-size:0.8rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:all 0.3s;font-family:'Montserrat',sans-serif;">
+            Solicitar Catálogo
+        </a>
+    </div>
+</section>
+
+<!-- Cart Icon -->
+<div class="cart-icon" onclick="toggleCart()">
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<!-- Cart Panel -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+    <button class="cart-close" onclick="toggleCart()">&#10005;</button>
+    <h2>Tu Carrito</h2>
+    <div class="cart-items" id="cartItems">
+        <p style="color: var(--gray); text-align:center; margin-top:3rem;">Tu carrito está vacío</p>
+    </div>
+    <div class="cart-total" id="cartTotal"></div>
+    <button class="btn-checkout" id="btnCheckout" onclick="checkout()" disabled>
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir por WhatsApp
+    </button>
+</div>
+
+<!-- Product Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal" id="modal">
+        <button class="modal-close" onclick="closeModal()">&#10005;</button>
+        <h2 id="modalName"></h2>
+        <p class="modal-inspired" id="modalInspired"></p>
+
+        <p class="modal-description" id="modalDesc"></p>
+
+        <div class="modal-notes" id="modalNotes">
+            <div class="notes-title">Pirámide Olfativa</div>
+            <div class="note-row"><span class="note-icon">&#9652;</span><span class="note-type">Salida</span><span class="note-list" id="notesTop"></span></div>
+            <div class="note-row"><span class="note-icon">&#9670;</span><span class="note-type">Corazón</span><span class="note-list" id="notesHeart"></span></div>
+            <div class="note-row"><span class="note-icon">&#9662;</span><span class="note-type">Fondo</span><span class="note-list" id="notesBase"></span></div>
+        </div>
+
+        <div class="step-label"><span class="step-num">1</span> Elige tu tamaño</div>
+        <div class="size-options" id="sizeOptions"></div>
+
+        <div class="bottle-section" id="bottleSection">
+            <div class="step-label"><span class="step-num">2</span> Elige tu frasco</div>
+            <div class="bottles-grid" id="bottlesGrid"></div>
+        </div>
+
+        <button class="btn-add-cart" id="btnAddCart" onclick="addFromModal()">
+            Agregar al Carrito
+        </button>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span id="toastText">Agregado al carrito</span></div>
+
+<footer>
+    <span class="logo">EMPIRE ESSENCE</span>
+    <p>&copy; 2026 Empire Essence · Perfumería a Domicilio · Colombia</p>
+</footer>
+
+<script>
+const WHATSAPP = "573156753404";
+
+const PRODUCTS = [
+    { id:1, name:"Aventus", inspired:"Creed Aventus", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["piña","grosella negra","manzana","bergamota"], heart:["abedul","pachulí","rosa","jazmín marroquí"], base:["musgo de roble","almizcle","ámbar gris","vainilla"], desc:"Frutal y audaz con un corazón ahumado de abedul. Icónico aroma de poder y sofisticación." },
+    { id:2, name:"Sauvage", inspired:"Dior Sauvage", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["bergamota calabresa","pimienta"], heart:["pimienta de Sichuan","lavanda","pimienta rosa","vetiver","pachulí","geranio"], base:["ambroxan","cedro","ládano"], desc:"Fresco y salvaje con bergamota vibrante y un fondo amaderado potente." },
+    { id:3, name:"One Million", inspired:"Paco Rabanne One Million", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["mandarina roja","pomelo","menta"], heart:["canela","notas especiadas","rosa"], base:["ámbar","cuero","notas amaderadas","pachulí indio"], desc:"Dulce, especiado y magnético con canela y ámbar que irradia confianza." },
+    { id:4, name:"Invictus", inspired:"Paco Rabanne Invictus", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["notas marinas","pomelo","mandarina"], heart:["hoja de laurel","jazmín"], base:["ámbar gris","madera de guayaco","musgo de roble","pachulí"], desc:"Acuático y fresco con un toque atlético. Energía que conquista." },
+    { id:5, name:"Bleu", inspired:"Bleu de Chanel", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["limón","bergamota","menta","artemisa"], heart:["lavanda","piña","geranio","notas verdes"], base:["sándalo","cedro","ámbar","haba tonka"], desc:"Elegante y versátil con cítricos frescos y maderas cálidas." },
+    { id:6, name:"Le Male", inspired:"Jean Paul Gaultier Le Male", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["lavanda","menta","cardamomo","bergamota"], heart:["canela","flor de naranjo","alcaravea"], base:["vainilla","haba tonka","ámbar","sándalo","cedro"], desc:"Clásico con lavanda fresca y vainilla cálida. Seductor y reconfortante." },
+    { id:7, name:"212 VIP Men", inspired:"Carolina Herrera 212 VIP Men", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["maracuyá","lima","pimienta","jengibre"], heart:["vodka","ginebra","menta","especias"], base:["ámbar","cuero","notas amaderadas"], desc:"Vibrante y festivo con frutas tropicales y un toque licoroso." },
+    { id:8, name:"Bad Boy", inspired:"Carolina Herrera Bad Boy", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["pimienta blanca","bergamota","pimienta rosa"], heart:["cedro","salvia esclarea"], base:["haba tonka","cacao"], desc:"Especiado y oscuro: pimienta vibrante y cacao adictivo. Rebelde con estilo." },
+    { id:9, name:"Eros", inspired:"Versace Eros", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["menta","manzana verde","limón"], heart:["haba tonka","ambroxan","geranio"], base:["vainilla","cedro de Virginia","cedro del Atlas","vetiver"], desc:"Fresco y dulce con menta y vainilla envolvente. Poderoso y seductor." },
+    { id:10, name:"Fahrenheit", inspired:"Dior Fahrenheit", cat:"masculina", prices:{30:30000,50:46000,100:70000}, top:["nuez moscada","lavanda","cedro","mandarina","bergamota"], heart:["hoja de violeta","sándalo","clavel","jazmín"], base:["cuero","ámbar","pachulí","musgo de roble","vetiver"], desc:"Icónico con notas de cuero y violeta. Masculinidad cruda y sofisticada." },
+    { id:11, name:"Good Girl", inspired:"Carolina Herrera Good Girl", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["almendra","café","bergamota","limón"], heart:["tuberosa","jazmín sambac","flor de naranjo","rosa búlgara","iris"], base:["haba tonka","cacao","vainilla","sándalo","almizcle"], desc:"Dualidad irresistible entre flores luminosas y un fondo oscuro de café y cacao." },
+    { id:12, name:"212 VIP Rosé", inspired:"Carolina Herrera 212 VIP Rosé", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["champán rosado","pimienta rosa"], heart:["flor de durazno","rosa"], base:["almizcle blanco","notas amaderadas"], desc:"Burbujeante y femenina con champán y rosa. Coqueta como una noche de celebración." },
+    { id:13, name:"La Vie Est Belle", inspired:"Lancôme La Vie Est Belle", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["grosella negra","pera"], heart:["iris","jazmín","flor de naranjo"], base:["praliné","vainilla","pachulí","haba tonka"], desc:"Dulce y radiante con iris gourmand y praliné. Un abrazo de felicidad." },
+    { id:14, name:"J'adore", inspired:"Dior J'adore", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["pera","melón","magnolia","durazno","mandarina","bergamota"], heart:["jazmín","lirio de los valles","tuberosa","rosa","orquídea"], base:["almizcle","vainilla","cedro","mora"], desc:"Bouquet floral lujoso con jazmín y rosa. La quintaesencia de la feminidad elegante." },
+    { id:15, name:"CH", inspired:"Carolina Herrera CH", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["frutas tropicales","bergamota","pomelo","limón"], heart:["praliné","canela","flor de naranjo","jazmín","rosa"], base:["gamuza","pachulí","sándalo","almizcle"], desc:"Sofisticada con praliné especiado y cuero suave. Elegancia con alma latina." },
+    { id:16, name:"Black Opium", inspired:"YSL Black Opium", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["pera","pimienta rosa","flor de naranjo"], heart:["café","jazmín","almendra amarga","regaliz"], base:["vainilla","pachulí","madera de cachemira","cedro"], desc:"Adictiva y nocturna con café intenso y vainilla dulce. Rock and roll." },
+    { id:17, name:"Chance", inspired:"Chanel Chance", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["pimienta rosa","piña","jacinto","iris"], heart:["limón","jazmín","rosa"], base:["pachulí","almizcle","vetiver","vainilla"], desc:"Fresca y vivaz con un giro inesperado. Espontaneidad y feminidad moderna." },
+    { id:18, name:"Bright Crystal", inspired:"Versace Bright Crystal", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["granada","yuzu","acorde helado"], heart:["peonía","magnolia","loto"], base:["almizcle","ámbar","caoba"], desc:"Cristalina y luminosa con flores delicadas y granada fresca." },
+    { id:19, name:"Amor Amor", inspired:"Cacharel Amor Amor", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["grosella negra","naranja","mandarina","pomelo","bergamota"], heart:["rosa","albaricoque","jazmín","lirio de los valles"], base:["vainilla","haba tonka","almizcle","ámbar","cedro"], desc:"Frutal, apasionada y juvenil. Explosión de frutas rojas y vainilla cálida." },
+    { id:20, name:"Flowerbomb", inspired:"Viktor & Rolf Flowerbomb", cat:"femenina", prices:{30:30000,50:46000,100:70000}, top:["té","bergamota","osmanto"], heart:["orquídea","jazmín","rosa","fresia","flor de naranjo"], base:["pachulí","almizcle","vainilla"], desc:"Explosión floral adictiva con orquídea y rosa envueltas en pachulí y vainilla." },
+    { id:21, name:"Baccarat Rouge", inspired:"MFK Baccarat Rouge 540", cat:"unisex", prices:{30:30000,50:46000,100:70000}, top:["azafrán","jazmín"], heart:["madera de ámbar","ámbar gris","hediona"], base:["resina de abeto","cedro","azúcar","ambroxan"], desc:"Luminoso y etéreo con azafrán cristalino y ámbar dulce. Casi mágico." },
+    { id:22, name:"Oud Wood", inspired:"Tom Ford Oud Wood", cat:"unisex", prices:{30:30000,50:46000,100:70000}, top:["palo de rosa","cardamomo","pimienta china"], heart:["oud","sándalo","vetiver"], base:["haba tonka","vainilla","ámbar"], desc:"Sofisticado y misterioso con oud suave y maderas exóticas. Lujo silencioso." },
+    { id:23, name:"Erba Pura", inspired:"Xerjoff Erba Pura", cat:"unisex", prices:{30:30000,50:46000,100:70000}, top:["naranja siciliana","bergamota calabresa","limón siciliano"], heart:["frutas"], base:["almizcle blanco","vainilla","ámbar"], desc:"Cítricos vibrantes y frutas jugosas sobre una base cremosa de vainilla. Pura alegría." },
+    { id:24, name:"Tobacco Vanille", inspired:"Tom Ford Tobacco Vanille", cat:"unisex", prices:{30:30000,50:46000,100:70000}, top:["hoja de tabaco","notas especiadas"], heart:["vainilla","cacao","haba tonka","flor de tabaco"], base:["frutas secas","notas amaderadas"], desc:"Cálido y opulento con tabaco dulce y vainilla rica. Lujo junto a la chimenea." },
+    { id:25, name:"Kirke", inspired:"Tiziana Terenzi Kirke", cat:"unisex", prices:{30:30000,50:46000,100:70000}, top:["maracuyá","durazno","pera","frambuesa","casis"], heart:["lirio de los valles"], base:["almizcle","sándalo","vainilla","pachulí","heliotropo"], desc:"Frutal y luminoso con un corazón floral delicado y base cremosa." },
+    { id:26, name:"Arabian Tonka", inspired:"Montale Arabians Tonka", cat:"unisex", prices:{30:30000,50:46000,100:70000}, top:["azafrán","bergamota"], heart:["oud","rosa búlgara"], base:["haba tonka","caña de azúcar","ámbar","almizcle blanco"], desc:"Oriental y envolvente con azafrán dorado, rosa y tonka dulce." },
+];
+
+// Bottles by size with real photos
+const BOTTLES = {
+    30: [
+        { id: 'b30-1', name: 'Blanco Cuadrado', img: 'frasco-30ml-blanco.jpg' },
+        { id: 'b30-2', name: 'Esmerilado Cromado', img: 'frasco-30ml-esmerilado.jpg' },
+    ],
+    50: [
+        { id: 'b50-1', name: 'Cilíndrico Negro', img: 'frasco-50ml-cilindrico-negro.jpg' },
+        { id: 'b50-2', name: 'Cilíndrico Plateado', img: 'frasco-50ml-cilindrico-plateado.jpg' },
+        { id: 'b50-3', name: 'Dorado Art Déco', img: 'frasco-50ml-dorado-artdeco.jpg' },
+        { id: 'b50-4', name: 'Rojo Laberinto', img: 'frasco-50ml-rojo-laberinto.jpg' },
+        { id: 'b50-5', name: 'Rojo Llama', img: 'frasco-50ml-rojo-llama.jpg' },
+    ],
+    100: [
+        { id: 'b100-1', name: 'Cilíndrico Ámbar', img: 'frasco-100ml-cilindrico-ambar.jpg' },
+        { id: 'b100-2', name: 'Esférico Verde', img: 'frasco-100ml-esferico-verde.jpg' },
+        { id: 'b100-3', name: 'Cuadrado Verde', img: 'frasco-100ml-cuadrado-verde.jpg' },
+        { id: 'b100-4', name: 'Cristal Moño Dorado', img: 'frasco-100ml-cristal-mono.jpg' },
+    ],
+};
+
+// SVG icon for perfume bottle (inline, no emoji)
+const BOTTLE_SVG = '<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#B8976A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="10" width="10" height="12" rx="2"/><rect x="9" y="7" width="6" height="3" rx="1"/><line x1="10" y1="7" x2="10" y2="5"/><line x1="14" y1="7" x2="14" y2="5"/><rect x="10" y="4" width="4" height="1" rx="0.5"/></svg>';
+
+// Render all products
+const grid = document.getElementById('productsGrid');
+function renderProducts(filter = '') {
+    grid.innerHTML = '';
+    const f = filter.toLowerCase();
+    PRODUCTS.filter(p => !f || p.name.toLowerCase().includes(f) || p.inspired.toLowerCase().includes(f)).forEach(p => {
+        const topPreview = p.top.slice(0,3).join(', ');
+        grid.innerHTML += `
+            <div class="product-card" onclick="openModal(${p.id})">
+                <span class="category-badge">${p.cat}</span>
+                <div class="frag-icon">${BOTTLE_SVG}</div>
+                <h3>${p.name}</h3>
+                <p class="inspired-by">Inspirado en ${p.inspired}</p>
+                <div class="notes-preview">
+                    <span class="note-label">Salida:</span> ${topPreview}
+                </div>
+                <p class="price-from">Desde <span>$${p.prices[30].toLocaleString('es-CO')}</span></p>
+            </div>`;
+    });
+    if (!grid.innerHTML) grid.innerHTML = '<p style="color:var(--gray);text-align:center;grid-column:1/-1;">No se encontraron fragancias</p>';
+}
+renderProducts();
+
+function filterProducts() {
+    renderProducts(document.getElementById('searchInput').value);
+}
+
+// Modal state
+let modalState = { productId: null, size: null, bottleId: null };
+
+function openModal(id) {
+    const p = PRODUCTS.find(x => x.id === id);
+    modalState = { productId: id, size: null, bottleId: null };
+    document.getElementById('modalName').textContent = p.name;
+    document.getElementById('modalInspired').textContent = 'Inspirado en ' + p.inspired;
+    document.getElementById('modalDesc').textContent = p.desc;
+    document.getElementById('notesTop').textContent = p.top.join(' \u00b7 ');
+    document.getElementById('notesHeart').textContent = p.heart.join(' \u00b7 ');
+    document.getElementById('notesBase').textContent = p.base.join(' \u00b7 ');
+
+    // Size options
+    const sizeEl = document.getElementById('sizeOptions');
+    sizeEl.innerHTML = Object.entries(p.prices).map(([s, pr]) =>
+        `<div class="size-pill" onclick="selectSize(${s})" data-size="${s}">
+            <div class="sz">${s} ml</div>
+            <div class="sz-price">$${pr.toLocaleString('es-CO')}</div>
+        </div>`
+    ).join('');
+
+    document.getElementById('bottleSection').classList.remove('visible');
+    document.getElementById('btnAddCart').classList.remove('visible');
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function selectSize(size) {
+    modalState.size = size;
+    modalState.bottleId = null;
+    document.querySelectorAll('.size-pill').forEach(el => el.classList.toggle('active', el.dataset.size == size));
+
+    const bottles = BOTTLES[size] || [];
+    const bottlesGrid = document.getElementById('bottlesGrid');
+    const section = document.getElementById('bottleSection');
+
+    if (bottles.length === 1) {
+        // Auto-select single bottle
+        modalState.bottleId = bottles[0].id;
+        section.classList.remove('visible');
+        document.getElementById('btnAddCart').classList.add('visible');
+        return;
+    }
+
+    bottlesGrid.innerHTML = bottles.map(b =>
+        `<div>
+            <div class="bottle-opt" onclick="selectBottle('${b.id}')" data-bid="${b.id}">
+                <img src="${b.img}" alt="${b.name}" loading="lazy">
+                <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="bottle-name">${b.name}</div>
+        </div>`
+    ).join('');
+
+    section.classList.add('visible');
+    document.getElementById('btnAddCart').classList.remove('visible');
+}
+
+function selectBottle(bid) {
+    modalState.bottleId = bid;
+    document.querySelectorAll('.bottle-opt').forEach(el => el.classList.toggle('active', el.dataset.bid === bid));
+    document.getElementById('btnAddCart').classList.add('visible');
+}
+
+function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// Cart
+let cart = [];
+
+function addFromModal() {
+    const p = PRODUCTS.find(x => x.id === modalState.productId);
+    const size = modalState.size;
+    const bottleId = modalState.bottleId;
+    const price = p.prices[size];
+    const bottle = BOTTLES[size].find(b => b.id === bottleId);
+    const key = `${p.id}-${size}-${bottleId}`;
+
+    const existing = cart.find(c => c.key === key);
+    if (existing) { existing.qty++; }
+    else { cart.push({ key, id: p.id, name: p.name, size, price, bottleName: bottle.name, qty: 1 }); }
+
+    updateCart();
+    closeModal();
+    showToast(p.name + ' (' + size + 'ml) agregado');
+}
+
+function showToast(msg) {
+    const t = document.getElementById('toastText');
+    t.textContent = msg;
+    document.getElementById('toast').classList.add('show');
+    setTimeout(() => document.getElementById('toast').classList.remove('show'), 2500);
+}
+
+function removeFromCart(key) {
+    cart = cart.filter(c => c.key !== key);
+    updateCart();
+}
+
+// Promo tiers for 30ml
+const PROMO_TIERS = [
+    { min: 10, total: 240000, label: '10×30ml' },
+    { min: 5, total: 128000, label: '5×30ml' },
+    { min: 3, total: 80000, label: '3×30ml' },
+];
+
+function getPromoDiscount(count30) {
+    for (const tier of PROMO_TIERS) {
+        if (count30 >= tier.min) {
+            const fullPrice = count30 * 30000;
+            // Scale: e.g. 7 units → use 5-tier for 5 + individual for 2
+            const packs = Math.floor(count30 / tier.min);
+            const remainder = count30 % tier.min;
+            const discountedTotal = (packs * tier.total) + (remainder * 30000);
+            return { discount: fullPrice - discountedTotal, total: discountedTotal, label: tier.label, tier };
+        }
+    }
+    return null;
+}
+
+function updateCart() {
+    const count = cart.reduce((s, c) => s + c.qty, 0);
+    document.getElementById('cartCount').textContent = count;
+    const itemsEl = document.getElementById('cartItems');
+    const totalEl = document.getElementById('cartTotal');
+    const btn = document.getElementById('btnCheckout');
+
+    if (!cart.length) {
+        itemsEl.innerHTML = '<p style="color:var(--gray);text-align:center;margin-top:3rem;">Tu carrito está vacío</p>';
+        totalEl.textContent = '';
+        btn.disabled = true;
+        return;
+    }
+    btn.disabled = false;
+    let total = 0;
+    itemsEl.innerHTML = '';
+    cart.forEach(c => {
+        total += c.price * c.qty;
+        const sub = c.bottleName ? ` \u00b7 Frasco: ${c.bottleName}` : '';
+        itemsEl.innerHTML += `
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <h4>${c.name} (${c.size}ml) \u00d7 ${c.qty}</h4>
+                    <p>$${(c.price*c.qty).toLocaleString('es-CO')} COP${sub}</p>
+                </div>
+                <button class="cart-item-remove" onclick="removeFromCart('${c.key}')">&#10005;</button>
+            </div>`;
+    });
+
+    // Calculate 30ml promo discount
+    const count30 = cart.filter(c => c.size === 30).reduce((s,c) => s + c.qty, 0);
+    const promo = getPromoDiscount(count30);
+    
+    if (promo && promo.discount > 0) {
+        const otherTotal = cart.filter(c => c.size !== 30).reduce((s,c) => s + c.price * c.qty, 0);
+        total = promo.total + otherTotal;
+        itemsEl.innerHTML += `
+            <div class="cart-item" style="border-top:1px solid rgba(184,151,106,0.2);padding-top:0.8rem;margin-top:0.5rem;">
+                <div class="cart-item-info">
+                    <h4 style="color:var(--gold);">Descuento Combo ${count30}×30ml</h4>
+                    <p style="color:var(--gold-light);">-$${promo.discount.toLocaleString('es-CO')} COP</p>
+                </div>
+            </div>`;
+    }
+
+    totalEl.textContent = `Total: $${total.toLocaleString('es-CO')} COP`;
+}
+
+function toggleCart() {
+    document.getElementById('cartPanel').classList.toggle('open');
+    document.getElementById('cartOverlay').classList.toggle('open');
+}
+
+// Promo removed - discounts shown as banner, applied at checkout via WhatsApp
+
+function checkout() {
+    if (!cart.length) return;
+    let msg = "*Pedido Empire Essence*\n\n";
+    let total = 0;
+    cart.forEach(c => {
+        const sub = c.bottleName ? ` (Frasco: ${c.bottleName})` : '';
+        msg += `\u2022 ${c.name} (${c.size}ml)${sub} \u00d7 ${c.qty} \u2014 $${(c.price*c.qty).toLocaleString('es-CO')}\n`;
+        total += c.price * c.qty;
+    });
+    // Apply 30ml promo discount
+    const count30 = cart.filter(c => c.size === 30).reduce((s,c) => s + c.qty, 0);
+    const promo = getPromoDiscount(count30);
+    if (promo && promo.discount > 0) {
+        const otherTotal = cart.filter(c => c.size !== 30).reduce((s,c) => s + c.price * c.qty, 0);
+        total = promo.total + otherTotal;
+        msg += `\n*Descuento combo ${count30}\u00d730ml:* -$${promo.discount.toLocaleString('es-CO')}\n`;
+    }
+    msg += `\n*Total: $${total.toLocaleString('es-CO')} COP*`;
+    msg += "\nMi direcci\u00f3n es: ";
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+</script>
+</body>
+</html>
