@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empire Essence — Perfumería a Domicilio</title>
+    <title>Empire Essence — Perfumes Inspirados Premium | Envío a Domicilio Colombia</title>
+    <meta name="description" content="Perfumes inspirados de alta calidad. 194 fragancias premium desde $30.000. Envío a domicilio en Colombia. Lujo accesible con feromonas y alta concentración.">
+    <meta name="keywords" content="perfumes inspirados, perfumería Colombia, fragancias premium, perfumes a domicilio, Empire Essence, perfumes baratos Colombia">
+    <meta property="og:title" content="Empire Essence — Tu Esencia, Tu Imperio">
+    <meta property="og:description" content="194 fragancias premium inspiradas en los perfumes más icónicos del mundo. Desde $30.000 con envío a domicilio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://empireessence.co">
+    <meta property="og:image" content="https://empireessence.co/img/og-image.jpg">
+    <link rel="canonical" href="https://empireessence.co">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Empire Essence",
+      "description": "Perfumería artesanal con fragancias inspiradas premium. Envío a domicilio en Colombia.",
+      "url": "https://empireessence.co",
+      "telephone": "+573156753404",
+      "address": { "@type": "PostalAddress", "addressCountry": "CO" },
+      "priceRange": "$30.000 - $70.000 COP"
+    }
+    </script>
     <style>
         :root {
             --gold: #B8976A;
@@ -380,6 +400,17 @@
         .filter-btn:hover { border-color: var(--gold); color: var(--gold-light); }
         .filter-btn.active { background: var(--gold); color: var(--dark); border-color: var(--gold); font-weight: 600; }
 
+        /* NOTE FILTER BAR - horizontal scroll on mobile */
+        #noteFilterBar {
+            overflow-x: auto; -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; flex-wrap: nowrap;
+        }
+        #noteFilterBar::-webkit-scrollbar { display: none; }
+        @media (max-width: 768px) {
+            #noteFilterBar { justify-content: flex-start; padding: 0 1rem; }
+            #noteFilterBar .filter-btn { white-space: nowrap; flex-shrink: 0; }
+        }
+
         /* AVAILABILITY BADGE */
         .avail-badge {
             display: inline-flex; align-items: center; gap: 0.3rem;
@@ -411,7 +442,7 @@
 <section class="hero">
     <svg viewBox="0 0 120 120" width="90" height="90" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;margin-bottom:1.5rem;"><circle cx="60" cy="60" r="56" stroke="var(--gold)" stroke-width="1.2"/><circle cx="60" cy="60" r="50" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/><text x="28" y="78" font-family="'Cormorant',serif" font-size="56" font-weight="600" fill="var(--gold)" letter-spacing="-6">EE</text></svg>
     <h1>EMPIRE ESSENCE</h1>
-    <p class="tagline">Tu esencia, tu imperio</p>
+    <p class="tagline">Fragancias que despiertan emociones</p>
     <a href="#productos" class="cta" onclick="event.preventDefault();document.getElementById('productos').scrollIntoView({behavior:'smooth'})">Ver Fragancias</a>
     <div class="hero-ornament"></div>
 </section>
@@ -433,10 +464,23 @@
         <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">Todas</button>
         <button class="filter-btn" data-filter="disponible" onclick="setFilter(this)">🟢 Disponibles</button>
         <button class="filter-btn" data-filter="encargo" onclick="setFilter(this)">🕐 Por encargo</button>
+        <button class="filter-btn" data-filter="popular" onclick="setFilter(this)">🔥 Populares</button>
         <span style="color:rgba(184,151,106,0.2);display:flex;align-items:center;">|</span>
         <button class="filter-btn" data-filter="masculina" onclick="setFilter(this)">Masculina</button>
         <button class="filter-btn" data-filter="femenina" onclick="setFilter(this)">Femenina</button>
         <button class="filter-btn" data-filter="unisex" onclick="setFilter(this)">Unisex</button>
+    </div>
+
+    <!-- Note-based filters -->
+    <div class="filter-bar" id="noteFilterBar" style="margin-top:-0.5rem;">
+        <span style="color:var(--gray);font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;margin-right:0.3rem;">Notas:</span>
+        <button class="filter-btn note-filter" data-note="amaderado" onclick="toggleNoteFilter(this)">🌲 Amaderado</button>
+        <button class="filter-btn note-filter" data-note="cítrico" onclick="toggleNoteFilter(this)">🍋 Cítrico</button>
+        <button class="filter-btn note-filter" data-note="floral" onclick="toggleNoteFilter(this)">🌸 Floral</button>
+        <button class="filter-btn note-filter" data-note="dulce" onclick="toggleNoteFilter(this)">🍯 Dulce</button>
+        <button class="filter-btn note-filter" data-note="especiado" onclick="toggleNoteFilter(this)">🌶️ Especiado</button>
+        <button class="filter-btn note-filter" data-note="acuático" onclick="toggleNoteFilter(this)">🌊 Acuático</button>
+        <button class="filter-btn note-filter" data-note="oriental" onclick="toggleNoteFilter(this)">✨ Oriental</button>
     </div>
 
     <div class="search-bar">
@@ -515,9 +559,9 @@
     <h2 class="section-title">Quiénes Somos</h2>
     <p class="section-sub">Nuestra historia</p>
     <div style="color:var(--gold-light);font-size:0.95rem;line-height:1.9;text-align:center;opacity:0.85;margin-bottom:2.5rem;">
-        Empire Essence nació de la pasión por las fragancias y la creencia de que el lujo debe ser accesible. Seleccionamos las mejores esencias inspiradas en los perfumes más icónicos del mundo y las entregamos directamente a tu puerta.<br><br>
-        Cada fragancia es elaborada con ingredientes de alta calidad para ofrecer una experiencia olfativa que rivaliza con las marcas originales — a una fracción del precio.<br><br>
-        <strong style="color:var(--gold);">Nuestro compromiso:</strong> calidad, elegancia y un servicio que supera expectativas.
+        Un aroma puede devolverte un recuerdo, darte confianza o hacer que alguien no te olvide. Empire Essence nació de esa certeza: las fragancias transforman momentos en memorias.<br><br>
+        Trabajamos con esencias de alta concentración (60%) enriquecidas con fijadores y feromonas. El resultado: fragancias que rivalizan con las marcas más icónicas del mundo — a una fracción del precio, sin sacrificar duración ni proyección.<br><br>
+        <strong style="color:var(--gold);">Nuestro compromiso:</strong> que cada frasco que abras te haga sentir exactamente quien quieres ser.
     </div>
     <div style="text-align:center;margin-bottom:2rem;">
         <p style="color:var(--gray);font-size:0.8rem;text-transform:uppercase;letter-spacing:3px;margin-bottom:1rem;">Métodos de pago</p>
@@ -629,6 +673,40 @@
 
 <script>
 const WHATSAPP = "573156753404";
+
+// Popular product IDs (top sellers / most recognized)
+const POPULAR_IDS = [1,2,3,5,9,11,13,16,20,21,22,23,24];
+
+// Note classification map
+const NOTE_FAMILIES = {
+    amaderado: ["cedro","sándalo","vetiver","pachulí","guayaco","madera","abedul","roble","caoba","teca","ciprés","oud","palo de rosa","notas amaderadas","madera de cachemira","madera de agar","madera flotante","madera de cedro","madera de café","cedro de Virginia","cedro del Atlas","cedro rojo"],
+    cítrico: ["bergamota","limón","mandarina","pomelo","naranja","lima","toronja","yuzu","pomelo rosa","bergamota calabresa","limón siciliano","naranja siciliana","naranja amarga","naranja sanguina","limón verde","limón de Amalfi","nashi","ralladura de limón"],
+    floral: ["rosa","jazmín","iris","lirio","violeta","peonía","magnolia","gardenia","tuberosa","fresia","orquídea","osmanto","loto","nenúfar","flor de naranjo","jacinto","flor de tabaco","rosa búlgara","rosa de mayo","lirio de los valles","jazmín sambac","jazmín marroquí","mimosa","madreselva","glicina","heliotropo","agua de rosa"],
+    dulce: ["vainilla","caramelo","haba tonka","praliné","cacao","chocolate","miel","azúcar","frutas","frambuesa","durazno","mango","piña","pera","manzana","grosella negra","maracuyá","cereza","ciruela","arándano","melocotón","bayas","lichi","frutas secas"],
+    especiado: ["canela","pimienta","cardamomo","jengibre","nuez moscada","clavo","azafrán","anís","incienso","mirra","notas especiadas","pimienta negra","pimienta rosa","pimienta blanca","pimienta china","pimienta verde","pimienta roja","pimienta de Sichuan"],
+    acuático: ["notas marinas","notas acuáticas","calone","algae","algae marina","algodón","acorde helado","agua","ozono","sal","minerales","bambú"],
+    oriental: ["ámbar","almizcle","oud","resina","ládano","cuero","tabaco","gamuza","ron","haba tonka","ambroxan","ámbar gris","ámbar oscuro","bálsamo","notas balsámicas","resina de abeto","regaliz","davana"],
+};
+
+// Active note filters
+let activeNotes = new Set();
+
+function toggleNoteFilter(btn) {
+    const note = btn.dataset.note;
+    if (activeNotes.has(note)) { activeNotes.delete(note); btn.classList.remove('active'); }
+    else { activeNotes.add(note); btn.classList.add('active'); }
+    renderProducts();
+}
+
+function productMatchesNotes(p) {
+    if (activeNotes.size === 0) return true;
+    const allNotes = [...(p.top||[]),...(p.heart||[]),...(p.base||[])].map(n=>n.toLowerCase());
+    for (const family of activeNotes) {
+        const keywords = NOTE_FAMILIES[family].map(k=>k.toLowerCase());
+        if (allNotes.some(n => keywords.some(k => n.includes(k)))) return true;
+    }
+    return false;
+}
 
 const PRODUCTS = [
     { id:1, name:"Conquista", inspired:"Creed Aventus", cat:"masculina", avail:"disponible", prices:{30:30000,50:46000,100:70000}, top:["piña", "grosella negra", "manzana", "bergamota"], heart:["abedul", "pachulí", "rosa", "jazmín marroquí"], base:["musgo de roble", "almizcle", "ámbar gris", "vainilla"], desc:"Frutal y audaz con un corazón ahumado de abedul. Icónico aroma de poder y sofisticación." },
@@ -856,7 +934,7 @@ let activeFilters = { avail: 'all', cat: 'all' };
 function setFilter(btn) {
     const val = btn.dataset.filter;
     // Determine which group this filter belongs to
-    if (['disponible','encargo'].includes(val)) {
+    if (['disponible','encargo','popular'].includes(val)) {
         activeFilters.avail = activeFilters.avail === val ? 'all' : val;
     } else if (['masculina','femenina','unisex'].includes(val)) {
         activeFilters.cat = activeFilters.cat === val ? 'all' : val;
@@ -864,10 +942,10 @@ function setFilter(btn) {
         activeFilters = { avail: 'all', cat: 'all' };
     }
     // Update button states
-    document.querySelectorAll('.filter-btn').forEach(b => {
+    document.querySelectorAll('#filterBar .filter-btn').forEach(b => {
         const f = b.dataset.filter;
         if (f === 'all') b.classList.toggle('active', activeFilters.avail === 'all' && activeFilters.cat === 'all');
-        else if (['disponible','encargo'].includes(f)) b.classList.toggle('active', activeFilters.avail === f);
+        else if (['disponible','encargo','popular'].includes(f)) b.classList.toggle('active', activeFilters.avail === f);
         else b.classList.toggle('active', activeFilters.cat === f);
     });
     filterProducts();
@@ -879,9 +957,11 @@ function renderProducts() {
     grid.innerHTML = '';
     const searchText = (document.getElementById('searchInput').value || '').toLowerCase();
     const filtered = PRODUCTS.filter(p => {
-        if (searchText && !p.name.toLowerCase().includes(searchText) && !p.inspired.toLowerCase().includes(searchText)) return false;
-        if (activeFilters.avail !== 'all' && p.avail !== activeFilters.avail) return false;
+        if (searchText && !p.name.toLowerCase().includes(searchText) && !p.inspired.toLowerCase().includes(searchText) && !p.desc.toLowerCase().includes(searchText)) return false;
+        if (activeFilters.avail === 'popular' && !POPULAR_IDS.includes(p.id)) return false;
+        if (activeFilters.avail !== 'all' && activeFilters.avail !== 'popular' && p.avail !== activeFilters.avail) return false;
         if (activeFilters.cat !== 'all' && p.cat !== activeFilters.cat) return false;
+        if (!productMatchesNotes(p)) return false;
         return true;
     });
     filtered.forEach(p => {
@@ -889,9 +969,10 @@ function renderProducts() {
         const availBadge = p.avail === 'disponible'
             ? '<span class="avail-badge disponible">🟢 Disponible</span>'
             : '<span class="avail-badge encargo">🕐 3-5 días</span>';
+        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">🔥 Popular</span> ' : '';
         grid.innerHTML += `
             <div class="product-card" onclick="openModal(${p.id})">
-                ${availBadge}
+                ${popularBadge}${availBadge}
                 <span class="category-badge">${p.cat}</span>
                 <div class="frag-icon">${BOTTLE_SVG}</div>
                 <h3>${p.name}</h3>
