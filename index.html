@@ -478,9 +478,13 @@
         <button class="filter-btn" data-filter="unisex" onclick="setFilter(this)">Unisex</button>
     </div>
 
-    <!-- Filtro: Notas olfativas -->
-    <div style="text-align:center;margin-bottom:0.3rem;"><span style="color:var(--gray);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;">Notas olfativas</span></div>
-    <div class="filter-bar" id="noteFilterBar" style="margin-top:0;">
+    <!-- Filtro: Notas olfativas (colapsable) -->
+    <div style="text-align:center;margin-bottom:0.5rem;">
+        <button onclick="const nb=document.getElementById('noteFilterBar');const ar=this.querySelector('.arrow');if(nb.style.display==='none'){nb.style.display='flex';ar.style.transform='rotate(180deg)'}else{nb.style.display='none';ar.style.transform='rotate(0deg)'}" style="background:none;border:1px solid rgba(184,151,106,0.3);border-radius:20px;color:var(--gold-light);padding:0.4rem 1.2rem;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;display:inline-flex;align-items:center;gap:0.5rem;transition:border-color 0.3s;">
+            🎵 Filtrar por notas olfativas <span class="arrow" style="transition:transform 0.3s;display:inline-block;">▼</span>
+        </button>
+    </div>
+    <div class="filter-bar" id="noteFilterBar" style="margin-top:0;display:none;">
         <button class="filter-btn note-filter" data-note="amaderado" onclick="toggleNoteFilter(this)">🌲 Amaderado</button>
         <button class="filter-btn note-filter" data-note="cítrico" onclick="toggleNoteFilter(this)">🍋 Cítrico</button>
         <button class="filter-btn note-filter" data-note="floral" onclick="toggleNoteFilter(this)">🌸 Floral</button>
