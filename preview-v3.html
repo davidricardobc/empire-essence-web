@@ -1007,7 +1007,7 @@ function renderProducts() {
         const availBadge = p.avail === 'disponible'
             ? '<span class="avail-badge disponible">🟢 Disponible</span>'
             : '<span class="avail-badge encargo">🕐 3-5 días</span>';
-        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">🔥 Popular</span> ' : '';
+        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">🔥 Popular</span> ' : '<span class="avail-badge" style="visibility:hidden;border-color:transparent;">🔥 Popular</span> ';
         grid.innerHTML += `
             <div class="product-card" onclick="openModal(${p.id})">
                 ${popularBadge}${availBadge}
