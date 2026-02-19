@@ -461,20 +461,26 @@
     <h2 class="section-title">Nuestras Fragancias</h2>
     <p class="section-sub">Elige tu fragancia favorita · Todos los perfumes disponibles en 30, 50 y 100 ml</p>
 
-    <div class="filter-bar" id="filterBar">
+    <!-- Filtro: Disponibilidad -->
+    <div style="text-align:center;margin-bottom:0.3rem;"><span style="color:var(--gray);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;">Disponibilidad</span></div>
+    <div class="filter-bar" id="filterBar" style="margin-bottom:0.8rem;">
         <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">Todas</button>
         <button class="filter-btn" data-filter="disponible" onclick="setFilter(this)">🟢 Disponibles</button>
         <button class="filter-btn" data-filter="encargo" onclick="setFilter(this)">🕐 Por encargo</button>
         <button class="filter-btn" data-filter="popular" onclick="setFilter(this)">🔥 Populares</button>
-        <span style="color:rgba(184,151,106,0.2);display:flex;align-items:center;">|</span>
+    </div>
+
+    <!-- Filtro: Género -->
+    <div style="text-align:center;margin-bottom:0.3rem;"><span style="color:var(--gray);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;">Género</span></div>
+    <div class="filter-bar" id="genderBar" style="margin-bottom:0.8rem;">
         <button class="filter-btn" data-filter="masculina" onclick="setFilter(this)">Masculina</button>
         <button class="filter-btn" data-filter="femenina" onclick="setFilter(this)">Femenina</button>
         <button class="filter-btn" data-filter="unisex" onclick="setFilter(this)">Unisex</button>
     </div>
 
-    <!-- Note-based filters -->
-    <div class="filter-bar" id="noteFilterBar" style="margin-top:-0.5rem;">
-        <span style="color:var(--gray);font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;margin-right:0.3rem;">Notas:</span>
+    <!-- Filtro: Notas olfativas -->
+    <div style="text-align:center;margin-bottom:0.3rem;"><span style="color:var(--gray);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;">Notas olfativas</span></div>
+    <div class="filter-bar" id="noteFilterBar" style="margin-top:0;">
         <button class="filter-btn note-filter" data-note="amaderado" onclick="toggleNoteFilter(this)">🌲 Amaderado</button>
         <button class="filter-btn note-filter" data-note="cítrico" onclick="toggleNoteFilter(this)">🍋 Cítrico</button>
         <button class="filter-btn note-filter" data-note="floral" onclick="toggleNoteFilter(this)">🌸 Floral</button>
@@ -982,7 +988,7 @@ function setFilter(btn) {
         activeFilters = { avail: 'all', cat: 'all' };
     }
     // Update button states
-    document.querySelectorAll('#filterBar .filter-btn').forEach(b => {
+    document.querySelectorAll('#filterBar .filter-btn, #genderBar .filter-btn').forEach(b => {
         const f = b.dataset.filter;
         if (f === 'all') b.classList.toggle('active', activeFilters.avail === 'all' && activeFilters.cat === 'all');
         else if (['disponible','encargo','popular'].includes(f)) b.classList.toggle('active', activeFilters.avail === f);
