@@ -927,13 +927,13 @@ const BOTTLES = {
 
 // Hybrid icon system: gradient background by note family + SVG bottle by category
 const FAMILY_GRADIENTS = {
-    amaderado: 'linear-gradient(135deg, #4a3728, #8B6914, #3d2b1f)',
-    'cítrico': 'linear-gradient(135deg, #5c4a00, #c9a800, #7a6200)',
-    floral: 'linear-gradient(135deg, #4a1942, #b8507a, #6b2d5b)',
-    dulce: 'linear-gradient(135deg, #5c2d00, #d4760a, #7a4400)',
-    especiado: 'linear-gradient(135deg, #5c1a1a, #c0392b, #7a2e2e)',
-    'acuático': 'linear-gradient(135deg, #0a3d5c, #2980b9, #1a5276)',
-    oriental: 'linear-gradient(135deg, #3d1f5c, #8e44ad, #5b2d7a)',
+    amaderado: 'linear-gradient(135deg, #1a1510, #8B6914, #2a1f12)',
+    'cítrico': 'linear-gradient(135deg, #1a1608, #B8976A, #2a2210)',
+    floral: 'linear-gradient(135deg, #1a1015, #9e7a6a, #2a1820)',
+    dulce: 'linear-gradient(135deg, #1a1208, #a07840, #2a1c10)',
+    especiado: 'linear-gradient(135deg, #1a0e0e, #8a5a3a, #2a1515)',
+    'acuático': 'linear-gradient(135deg, #0e1a1e, #5a7a80, #121e22)',
+    oriental: 'linear-gradient(135deg, #151018, #7a6a50, #1a1520)',
 };
 const FAMILY_PRIORITY = ['floral','oriental','amaderado','especiado','dulce','cítrico','acuático'];
 
@@ -1007,7 +1007,7 @@ function renderProducts() {
         const availBadge = p.avail === 'disponible'
             ? '<span class="avail-badge disponible">🟢 Disponible</span>'
             : '<span class="avail-badge encargo">🕐 3-5 días</span>';
-        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">🔥 Popular</span> ' : '';
+        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">🔥 Popular</span> ' : '<span class="avail-badge" style="visibility:hidden;border-color:transparent;">🔥 Popular</span> ';
         grid.innerHTML += `
             <div class="product-card" onclick="openModal(${p.id})">
                 ${popularBadge}${availBadge}
