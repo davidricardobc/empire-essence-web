@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Empire Essence — Perfumería, Fragancias y Consejos</title>
+    <meta name="description" content="Blog de Empire Essence: guías, consejos y todo sobre perfumes inspirados, fragancias y perfumería artesanal en Colombia.">
+    <meta property="og:title" content="Blog | Empire Essence">
+    <meta property="og:description" content="Guías, consejos y todo sobre perfumes inspirados en Colombia.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://empireessence.co/blog/">
+    <link rel="canonical" href="https://empireessence.co/blog/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #B8976A;
+            --gold-light: #D4C4A8;
+            --dark: #1A1A1A;
+            --darker: #0D0D0D;
+            --white: #FAFAFA;
+            --gray: #888;
+            --bg: #111;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; }
+
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(17,17,17,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(184,151,106,0.2);
+            padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Cormorant', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-decoration: none; }
+        .logo-wrap { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+        .nav-links a { color: var(--white); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { width: 25px; height: 2px; background: var(--gold); transition: 0.3s; }
+
+        .blog-header {
+            padding: 8rem 2rem 3rem; text-align: center;
+            background: linear-gradient(135deg, var(--darker) 0%, #1a1510 50%, var(--darker) 100%);
+        }
+        .blog-header h1 { font-family: 'Cormorant', serif; font-size: 3rem; color: var(--gold); letter-spacing: 6px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .blog-header p { color: var(--gray); font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        .articles { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
+
+        .article-card {
+            background: var(--dark); border: 1px solid rgba(184,151,106,0.15);
+            border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem;
+            transition: transform 0.3s, border-color 0.3s; display: block; text-decoration: none;
+        }
+        .article-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+        .article-card .date { font-size: 0.75rem; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .article-card h2 { font-family: 'Cormorant', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem; }
+        .article-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+        .article-card .read-more { color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 1rem; display: inline-block; }
+
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(184,151,106,0.1); color: var(--gray); font-size: 0.85rem; }
+        footer .logo { margin-bottom: 1rem; display: block; }
+
+        @media (max-width: 768px) {
+            .blog-header h1 { font-size: 2rem; letter-spacing: 3px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(17,17,17,0.98); padding: 1rem 2rem; }
+            .nav-links.open a { margin: 0.5rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="logo-wrap">
+        <svg viewBox="0 0 60 60" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="28" stroke="var(--gold)" stroke-width="1.5"/><text x="16" y="40" font-family="'Cormorant',serif" font-size="28" font-weight="600" fill="var(--gold)" letter-spacing="-4">EE</text></svg>
+        <span class="logo">EMPIRE ESSENCE</span>
+    </a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+        <a href="/">Catálogo</a>
+        <a href="/blog/" class="active">Blog</a>
+    </div>
+</nav>
+
+<div class="blog-header">
+    <h1>Blog</h1>
+    <p>Guías, consejos y mundo de las fragancias</p>
+</div>
+
+<div class="articles">
+    <a href="perfumes-inspirados-colombia.html" class="article-card">
+        <div class="date">19 de febrero, 2026</div>
+        <h2>Perfumes Inspirados en Colombia: Guía Completa 2026</h2>
+        <p>Todo lo que necesitas saber sobre perfumes inspirados: qué son, por qué son legales, cómo elegir el tuyo y cuáles son los más vendidos en Colombia.</p>
+        <span class="read-more">Leer artículo →</span>
+    </a>
+</div>
+
+<footer>
+    <span class="logo">EMPIRE ESSENCE</span>
+    <p>&copy; 2026 Empire Essence · Perfumería a Domicilio · Colombia</p>
+</footer>
+
+</body>
+</html>
