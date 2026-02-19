@@ -504,6 +504,26 @@
 
     <div class="products-grid" id="productsGrid"></div>
 
+    <div id="showMoreWrapper" style="text-align:center;margin-top:2.5rem;display:none;">
+        <button id="btnShowMore" onclick="showMoreProducts()" style="
+            padding:1rem 2.5rem;border:1.5px solid var(--gold);background:transparent;
+            color:var(--gold);font-family:'Montserrat',sans-serif;font-size:0.9rem;
+            letter-spacing:1.5px;border-radius:30px;cursor:pointer;transition:all 0.3s;
+        " onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)'" onmouseout="this.style.background='transparent';this.style.color='var(--gold)'">
+        </button>
+    </div>
+
+    <div id="noResultsCta" style="display:none;text-align:center;grid-column:1/-1;padding:3rem 1rem;">
+        <p style="font-family:'Cormorant',serif;font-size:1.6rem;color:var(--gold);margin-bottom:0.8rem;">¿Buscas algo especial? Escríbenos y lo creamos para ti 🧪</p>
+        <a id="noResultsWaLink" href="#" target="_blank" style="
+            display:inline-block;padding:0.8rem 2rem;border:1.5px solid #25D366;
+            color:#25D366;border-radius:30px;text-decoration:none;font-size:0.85rem;
+            letter-spacing:1.5px;transition:all 0.3s;font-family:'Montserrat',sans-serif;
+        " onmouseover="this.style.background='#25D366';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#25D366'">
+            Escríbenos por WhatsApp
+        </a>
+    </div>
+
     </div>
 </section>
 
@@ -985,6 +1005,7 @@ const BOTTLE_SVG = '<svg viewBox="0 0 24 24" width="36" height="36" fill="none" 
 
 // Filter state
 let activeFilters = { avail: 'all', cat: 'all' };
+let showEncargo = false;
 
 function setFilter(btn) {
     const val = btn.dataset.filter;
@@ -995,6 +1016,10 @@ function setFilter(btn) {
         activeFilters.cat = activeFilters.cat === val ? 'all' : val;
     } else {
         activeFilters = { avail: 'all', cat: 'all' };
+    }
+    // Show encargo when "Todas" or "Por encargo" selected
+    if (activeFilters.avail === 'all' || activeFilters.avail === 'encargo') {
+        showEncargo = true;
     }
     // Update button states
     document.querySelectorAll('#filterBar .filter-btn, #genderBar .filter-btn').forEach(b => {
@@ -1011,8 +1036,12 @@ const grid = document.getElementById('productsGrid');
 function renderProducts() {
     grid.innerHTML = '';
     const searchText = (document.getElementById('searchInput').value || '').toLowerCase();
+    const isSearching = searchText.length > 0;
     const filtered = PRODUCTS.filter(p => {
-        if (searchText && !p.name.toLowerCase().includes(searchText) && !p.inspired.toLowerCase().includes(searchText) && !p.desc.toLowerCase().includes(searchText)) return false;
+        if (isSearching && !p.name.toLowerCase().includes(searchText) && !p.inspired.toLowerCase().includes(searchText) && !p.desc.toLowerCase().includes(searchText)) return false;
+        // Hide encargo products unless searching, showEncargo is true, or filter explicitly selects them
+        if (!isSearching && !showEncargo && p.avail === 'encargo' && activeFilters.avail !== 'encargo' && activeFilters.avail !== 'all') return false;
+        if (!isSearching && !showEncargo && p.avail === 'encargo' && activeFilters.avail === 'all') return false;
         if (activeFilters.avail === 'popular' && !POPULAR_IDS.includes(p.id)) return false;
         if (activeFilters.avail !== 'all' && activeFilters.avail !== 'popular' && p.avail !== activeFilters.avail) return false;
         if (activeFilters.cat !== 'all' && p.cat !== activeFilters.cat) return false;
@@ -1037,12 +1066,50 @@ function renderProducts() {
                 <p class="price-from">Desde <span>$${p.prices[30].toLocaleString('es-CO')}</span></p>
             </div>`;
     }).join('');
-    grid.innerHTML = html || '<p style="color:var(--gray);text-align:center;grid-column:1/-1;">No se encontraron fragancias</p>';
+
+    // No results CTA
+    const noResultsEl = document.getElementById('noResultsCta');
+    const showMoreEl = document.getElementById('showMoreWrapper');
+
+    if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (isSearching) {
+            const waMsg = encodeURIComponent(`Hola! Busco una fragancia inspirada en ${document.getElementById('searchInput').value}, ¿la pueden hacer?`);
+            document.getElementById('noResultsWaLink').href = `https://wa.me/${WHATSAPP}?text=${waMsg}`;
+            noResultsEl.style.display = 'block';
+        } else {
+            noResultsEl.style.display = 'none';
+            grid.innerHTML = '<p style="color:var(--gray);text-align:center;grid-column:1/-1;">No se encontraron fragancias</p>';
+        }
+        showMoreEl.style.display = 'none';
+    } else {
+        grid.innerHTML = html;
+        noResultsEl.style.display = 'none';
+
+        // Show "Ver más" button
+        const encargoCount = PRODUCTS.filter(p => p.avail === 'encargo').length;
+        if (!showEncargo && !isSearching && encargoCount > 0) {
+            document.getElementById('btnShowMore').textContent = `¿No encontraste tu favorito? Explora ${encargoCount} fragancias más`;
+            showMoreEl.style.display = 'block';
+        } else {
+            showMoreEl.style.display = 'none';
+        }
+    }
 }
 renderProducts();
 
 function filterProducts() {
     renderProducts();
+}
+
+function showMoreProducts() {
+    showEncargo = true;
+    const prevCount = grid.children.length;
+    renderProducts();
+    // Scroll to first new product
+    if (grid.children.length > prevCount) {
+        grid.children[prevCount].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 }
 
 // Modal state
