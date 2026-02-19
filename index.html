@@ -465,9 +465,9 @@
     <div style="text-align:center;margin-bottom:0.3rem;"><span style="color:var(--gray);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;">Disponibilidad</span></div>
     <div class="filter-bar" id="filterBar" style="margin-bottom:0.8rem;">
         <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">Todas</button>
-        <button class="filter-btn" data-filter="disponible" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Disponibles</button>
-        <button class="filter-btn" data-filter="encargo" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Por encargo</button>
-        <button class="filter-btn" data-filter="popular" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z"/></svg> Populares</button>
+        <button class="filter-btn" data-filter="disponible" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b9e6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Disponibles</button>
+        <button class="filter-btn" data-filter="encargo" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a0a0b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Por encargo</button>
+        <button class="filter-btn" data-filter="popular" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4a050" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z"/></svg> Populares</button>
     </div>
 
     <!-- Filtro: Género -->
@@ -481,19 +481,19 @@
     <!-- Filtro: Notas olfativas (colapsable) -->
     <div style="text-align:center;margin-bottom:0.5rem;">
         <button onclick="const nb=document.getElementById('noteFilterWrapper');const ar=this.querySelector('.arrow');if(nb.style.display==='none'){nb.style.display='block';ar.style.transform='rotate(180deg)'}else{nb.style.display='none';ar.style.transform='rotate(0deg)'}" style="background:none;border:1px solid rgba(184,151,106,0.3);border-radius:20px;color:var(--gold-light);padding:0.4rem 1.2rem;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;display:inline-flex;align-items:center;gap:0.5rem;transition:border-color 0.3s;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Filtrar por notas olfativas <span class="arrow" style="transition:transform 0.3s;display:inline-block;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><polyline points="6 9 12 15 18 9"/></svg></span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8976A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Filtrar por notas olfativas <span class="arrow" style="transition:transform 0.3s;display:inline-block;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8976A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
     </div>
     <div id="noteFilterWrapper" style="display:none;">
     <p style="text-align:center;color:var(--gray);font-size:0.7rem;opacity:0.7;margin:0.3rem 0 0.5rem;font-style:italic;">Cada fragancia combina varias familias. Filtra por la nota que más te atraiga.</p>
     <div class="filter-bar" id="noteFilterBar" style="margin-top:0;">
-        <button class="filter-btn note-filter" data-note="amaderado" onclick="toggleNoteFilter(this)">🌲 Amaderado</button>
-        <button class="filter-btn note-filter" data-note="cítrico" onclick="toggleNoteFilter(this)">🍋 Cítrico</button>
-        <button class="filter-btn note-filter" data-note="floral" onclick="toggleNoteFilter(this)">🌸 Floral</button>
-        <button class="filter-btn note-filter" data-note="dulce" onclick="toggleNoteFilter(this)">🍯 Dulce</button>
-        <button class="filter-btn note-filter" data-note="especiado" onclick="toggleNoteFilter(this)">🌶️ Especiado</button>
-        <button class="filter-btn note-filter" data-note="acuático" onclick="toggleNoteFilter(this)">🌊 Acuático</button>
-        <button class="filter-btn note-filter" data-note="oriental" onclick="toggleNoteFilter(this)">✨ Oriental</button>
+        <button class="filter-btn note-filter" data-note="amaderado" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B6914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 22V8"/><path d="M8 12l-3 3"/><path d="M16 12l3 3"/><path d="M9 8l-2-3"/><path d="M15 8l2-3"/><path d="M12 8a3 3 0 100-6 3 3 0 000 6z"/></svg> Amaderado</button>
+        <button class="filter-btn note-filter" data-note="cítrico" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 5-4 9-4 9h8s-4-4-4-9z"/></svg> Cítrico</button>
+        <button class="filter-btn note-filter" data-note="floral" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b8507a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><circle cx="12" cy="10" r="3"/><path d="M12 7c0-3-2-5-2-5s-2 2-2 5"/><path d="M12 7c0-3 2-5 2-5s2 2 2 5"/><path d="M9 10c-3 0-5-2-5-2s2-2 5-2"/><path d="M15 10c3 0 5-2 5-2s-2-2-5-2"/><path d="M12 13v8"/></svg> Floral</button>
+        <button class="filter-btn note-filter" data-note="dulce" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4760a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 3c-4 0-7 3-7 7 0 5 7 11 7 11s7-6 7-11c0-4-3-7-7-7z"/><circle cx="12" cy="10" r="2"/></svg> Dulce</button>
+        <button class="filter-btn note-filter" data-note="especiado" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg> Especiado</button>
+        <button class="filter-btn note-filter" data-note="acuático" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2980b9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M2 12c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/><path d="M2 17c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/><path d="M2 7c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/></svg> Acuático</button>
+        <button class="filter-btn note-filter" data-note="oriental" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M5 5l3 3"/><path d="M16 16l3 3"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M5 19l3-3"/><path d="M16 8l3-3"/><circle cx="12" cy="12" r="4"/></svg> Oriental</button>
     </div>
     </div>
 
@@ -514,7 +514,7 @@
     </div>
 
     <div id="noResultsCta" style="display:none;text-align:center;grid-column:1/-1;padding:3rem 1rem;">
-        <p style="font-family:'Cormorant',serif;font-size:1.6rem;color:var(--gold);margin-bottom:0.8rem;">¿Buscas algo especial? Escríbenos y lo creamos para ti <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;"><path d="M9 3h6v3H9z"/><path d="M10 6v2l-3 8v2h10v-2l-3-8V6"/><line x1="8" y1="18" x2="16" y2="18"/><circle cx="12" cy="14" r="1"/></svg></p>
+        <p style="font-family:'Cormorant',serif;font-size:1.6rem;color:var(--gold);margin-bottom:0.8rem;">¿Buscas algo especial? Escríbenos y lo creamos para ti <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;"><path d="M9 3h6v3H9z"/><path d="M10 6v2l-3 8v2h10v-2l-3-8V6"/><line x1="8" y1="18" x2="16" y2="18"/><circle cx="12" cy="14" r="1"/></svg></p>
         <a id="noResultsWaLink" href="#" target="_blank" style="
             display:inline-block;padding:0.8rem 2rem;border:1.5px solid #25D366;
             color:#25D366;border-radius:30px;text-decoration:none;font-size:0.85rem;
@@ -1050,9 +1050,9 @@ function renderProducts() {
     });
     const html = filtered.map(p => {
         const topPreview = p.top.slice(0,3).join(', ');
-        const svgCheck = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>';
-        const svgClock = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
-        const svgFlame = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z"/></svg>';
+        const svgCheck = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6b9e6b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>';
+        const svgClock = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0a0b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+        const svgFlame = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d4a050" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z"/></svg>';
         const availBadge = p.avail === 'disponible'
             ? '<span class="avail-badge disponible">' + svgCheck + ' Disponible</span>'
             : '<span class="avail-badge encargo">' + svgClock + ' 3-5 días</span>';
