@@ -951,11 +951,13 @@ const FAMILY_PRIORITY = ['floral','oriental','amaderado','especiado','dulce','c�
 
 function getDominantFamily(product) {
     const allNotes = [...(product.top||[]),...(product.heart||[]),...(product.base||[])].map(n=>n.toLowerCase());
+    let best = 'amaderado', bestCount = 0;
     for (const family of FAMILY_PRIORITY) {
         const keywords = NOTE_FAMILIES[family].map(k=>k.toLowerCase());
-        if (allNotes.some(n => keywords.some(k => n.includes(k)))) return family;
+        const count = allNotes.filter(n => keywords.some(k => n.includes(k))).length;
+        if (count > bestCount) { bestCount = count; best = family; }
     }
-    return 'amaderado'; // fallback
+    return best;
 }
 
 // SVG bottles by category
@@ -1014,14 +1016,13 @@ function renderProducts() {
         if (!productMatchesNotes(p)) return false;
         return true;
     });
-    filtered.forEach(p => {
+    const html = filtered.map(p => {
         const topPreview = p.top.slice(0,3).join(', ');
         const availBadge = p.avail === 'disponible'
             ? '<span class="avail-badge disponible">🟢 Disponible</span>'
             : '<span class="avail-badge encargo">🕐 3-5 días</span>';
         const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">🔥 Popular</span> ' : '<span class="avail-badge" style="visibility:hidden;border-color:transparent;">🔥 Popular</span> ';
-        grid.innerHTML += `
-            <div class="product-card" onclick="openModal(${p.id})">
+        return `<div class="product-card" onclick="openModal(${p.id})">
                 ${popularBadge}${availBadge}
                 <span class="category-badge">${p.cat}</span>
                 <div class="frag-icon">${getProductIcon(p)}</div>
@@ -1032,8 +1033,8 @@ function renderProducts() {
                 </div>
                 <p class="price-from">Desde <span>$${p.prices[30].toLocaleString('es-CO')}</span></p>
             </div>`;
-    });
-    if (!grid.innerHTML) grid.innerHTML = '<p style="color:var(--gray);text-align:center;grid-column:1/-1;">No se encontraron fragancias</p>';
+    }).join('');
+    grid.innerHTML = html || '<p style="color:var(--gray);text-align:center;grid-column:1/-1;">No se encontraron fragancias</p>';
 }
 renderProducts();
 
