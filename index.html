@@ -417,7 +417,7 @@
             font-size: 0.62rem; text-transform: uppercase; letter-spacing: 1px;
             padding: 0.15rem 0.5rem; border-radius: 10px; margin-bottom: 0.3rem;
         }
-        .avail-badge.disponible { color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+        .avail-badge.disponible { color: var(--gold); border: 1px solid rgba(184,151,106,0.3); }
         .avail-badge.encargo { color: var(--gray); border: 1px solid rgba(136,136,136,0.3); }
     </style>
 </head>
@@ -465,9 +465,9 @@
     <div style="text-align:center;margin-bottom:0.3rem;"><span style="color:var(--gray);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;">Disponibilidad</span></div>
     <div class="filter-bar" id="filterBar" style="margin-bottom:0.8rem;">
         <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">Todas</button>
-        <button class="filter-btn" data-filter="disponible" onclick="setFilter(this)">🟢 Disponibles</button>
-        <button class="filter-btn" data-filter="encargo" onclick="setFilter(this)">🕐 Por encargo</button>
-        <button class="filter-btn" data-filter="popular" onclick="setFilter(this)">🔥 Populares</button>
+        <button class="filter-btn" data-filter="disponible" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Disponibles</button>
+        <button class="filter-btn" data-filter="encargo" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Por encargo</button>
+        <button class="filter-btn" data-filter="popular" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z"/></svg> Populares</button>
     </div>
 
     <!-- Filtro: Género -->
@@ -481,7 +481,7 @@
     <!-- Filtro: Notas olfativas (colapsable) -->
     <div style="text-align:center;margin-bottom:0.5rem;">
         <button onclick="const nb=document.getElementById('noteFilterWrapper');const ar=this.querySelector('.arrow');if(nb.style.display==='none'){nb.style.display='block';ar.style.transform='rotate(180deg)'}else{nb.style.display='none';ar.style.transform='rotate(0deg)'}" style="background:none;border:1px solid rgba(184,151,106,0.3);border-radius:20px;color:var(--gold-light);padding:0.4rem 1.2rem;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;display:inline-flex;align-items:center;gap:0.5rem;transition:border-color 0.3s;">
-            🎵 Filtrar por notas olfativas <span class="arrow" style="transition:transform 0.3s;display:inline-block;">▼</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Filtrar por notas olfativas <span class="arrow" style="transition:transform 0.3s;display:inline-block;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
     </div>
     <div id="noteFilterWrapper" style="display:none;">
@@ -514,7 +514,7 @@
     </div>
 
     <div id="noResultsCta" style="display:none;text-align:center;grid-column:1/-1;padding:3rem 1rem;">
-        <p style="font-family:'Cormorant',serif;font-size:1.6rem;color:var(--gold);margin-bottom:0.8rem;">¿Buscas algo especial? Escríbenos y lo creamos para ti 🧪</p>
+        <p style="font-family:'Cormorant',serif;font-size:1.6rem;color:var(--gold);margin-bottom:0.8rem;">¿Buscas algo especial? Escríbenos y lo creamos para ti <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;"><path d="M9 3h6v3H9z"/><path d="M10 6v2l-3 8v2h10v-2l-3-8V6"/><line x1="8" y1="18" x2="16" y2="18"/><circle cx="12" cy="14" r="1"/></svg></p>
         <a id="noResultsWaLink" href="#" target="_blank" style="
             display:inline-block;padding:0.8rem 2rem;border:1.5px solid #25D366;
             color:#25D366;border-radius:30px;text-decoration:none;font-size:0.85rem;
@@ -1050,10 +1050,13 @@ function renderProducts() {
     });
     const html = filtered.map(p => {
         const topPreview = p.top.slice(0,3).join(', ');
+        const svgCheck = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>';
+        const svgClock = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+        const svgFlame = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z"/></svg>';
         const availBadge = p.avail === 'disponible'
-            ? '<span class="avail-badge disponible">🟢 Disponible</span>'
-            : '<span class="avail-badge encargo">🕐 3-5 días</span>';
-        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">🔥 Popular</span> ' : '<span class="avail-badge" style="visibility:hidden;border-color:transparent;">🔥 Popular</span> ';
+            ? '<span class="avail-badge disponible">' + svgCheck + ' Disponible</span>'
+            : '<span class="avail-badge encargo">' + svgClock + ' 3-5 días</span>';
+        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">' + svgFlame + ' Popular</span> ' : '<span class="avail-badge" style="visibility:hidden;border-color:transparent;">' + svgFlame + ' Popular</span> ';
         return `<div class="product-card" onclick="openModal(${p.id})">
                 ${popularBadge}${availBadge}
                 <span class="category-badge">${p.cat}</span>
