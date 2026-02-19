@@ -925,7 +925,45 @@ const BOTTLES = {
     ],
 };
 
-// SVG icon for perfume bottle (inline, no emoji)
+// Hybrid icon system: gradient background by note family + SVG bottle by category
+const FAMILY_GRADIENTS = {
+    amaderado: 'linear-gradient(135deg, #4a3728, #8B6914, #3d2b1f)',
+    'cítrico': 'linear-gradient(135deg, #5c4a00, #c9a800, #7a6200)',
+    floral: 'linear-gradient(135deg, #4a1942, #b8507a, #6b2d5b)',
+    dulce: 'linear-gradient(135deg, #5c2d00, #d4760a, #7a4400)',
+    especiado: 'linear-gradient(135deg, #5c1a1a, #c0392b, #7a2e2e)',
+    'acuático': 'linear-gradient(135deg, #0a3d5c, #2980b9, #1a5276)',
+    oriental: 'linear-gradient(135deg, #3d1f5c, #8e44ad, #5b2d7a)',
+};
+const FAMILY_PRIORITY = ['floral','oriental','amaderado','especiado','dulce','cítrico','acuático'];
+
+function getDominantFamily(product) {
+    const allNotes = [...(product.top||[]),...(product.heart||[]),...(product.base||[])].map(n=>n.toLowerCase());
+    for (const family of FAMILY_PRIORITY) {
+        const keywords = NOTE_FAMILIES[family].map(k=>k.toLowerCase());
+        if (allNotes.some(n => keywords.some(k => n.includes(k)))) return family;
+    }
+    return 'amaderado'; // fallback
+}
+
+// SVG bottles by category
+const BOTTLE_SVGS = {
+    // Geométrico for masculina
+    masculina: `<svg viewBox="0 0 50 50" width="44" height="44" fill="none" style="position:relative;z-index:1;"><polygon points="22,5 28,5 29,10 21,10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/><rect x="23" y="10" width="4" height="4" stroke="rgba(255,255,255,0.4)" stroke-width="0.6" fill="none"/><path d="M18 17 L32 17 L34 35 L32 43 C32 44.5, 29 46, 25 46 C21 46, 18 44.5, 18 43 L16 35 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.6)" stroke-width="0.8"/><text x="25" y="34" font-family="'Cormorant',serif" font-size="7" fill="rgba(255,255,255,0.35)" text-anchor="middle" font-weight="600">EE</text><path d="M21 20 L19 36" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    // Curvo for femenina
+    femenina: `<svg viewBox="0 0 50 50" width="44" height="44" fill="none" style="position:relative;z-index:1;"><circle cx="25" cy="8" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="0.7" fill="none"/><line x1="25" y1="11" x2="25" y2="15" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/><path d="M22 15 C17 20, 14 28, 16 36 C18 43, 22 45, 25 45 C28 45, 32 43, 34 36 C36 28, 33 20, 28 15 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.6)" stroke-width="0.8"/><path d="M20 25 C19 32, 20 38, 22 41" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    // Circular for unisex
+    unisex: `<svg viewBox="0 0 50 50" width="44" height="44" fill="none" style="position:relative;z-index:1;"><rect x="22" y="3" width="6" height="5" rx="1" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/><line x1="25" y1="8" x2="25" y2="13" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/><circle cx="25" cy="30" r="15" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.6)" stroke-width="0.8"/><circle cx="25" cy="30" r="9" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/><path d="M17 22 C16 28, 17 35, 19 38" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+};
+
+function getProductIcon(product) {
+    const family = getDominantFamily(product);
+    const gradient = FAMILY_GRADIENTS[family] || FAMILY_GRADIENTS.amaderado;
+    const svg = BOTTLE_SVGS[product.cat] || BOTTLE_SVGS.unisex;
+    return `<div style="width:48px;height:48px;border-radius:14px;background:${gradient};display:flex;align-items:center;justify-content:center;">${svg}</div>`;
+}
+
+// Legacy reference kept for other uses
 const BOTTLE_SVG = '<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#B8976A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="10" width="10" height="12" rx="2"/><rect x="9" y="7" width="6" height="3" rx="1"/><line x1="10" y1="7" x2="10" y2="5"/><line x1="14" y1="7" x2="14" y2="5"/><rect x="10" y="4" width="4" height="1" rx="0.5"/></svg>';
 
 // Filter state
@@ -974,7 +1012,7 @@ function renderProducts() {
             <div class="product-card" onclick="openModal(${p.id})">
                 ${popularBadge}${availBadge}
                 <span class="category-badge">${p.cat}</span>
-                <div class="frag-icon">${BOTTLE_SVG}</div>
+                <div class="frag-icon">${getProductIcon(p)}</div>
                 <h3>${p.name}</h3>
                 <p class="inspired-by">Inspirado en ${p.inspired}</p>
                 <div class="notes-preview">
@@ -1034,7 +1072,9 @@ function selectSize(size) {
         // Auto-select single bottle
         modalState.bottleId = bottles[0].id;
         section.classList.remove('visible');
-        document.getElementById('btnAddCart').classList.add('visible');
+        const addBtn = document.getElementById('btnAddCart');
+        addBtn.classList.add('visible');
+        setTimeout(() => addBtn.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
         return;
     }
 
@@ -1050,12 +1090,17 @@ function selectSize(size) {
 
     section.classList.add('visible');
     document.getElementById('btnAddCart').classList.remove('visible');
+    // Auto-scroll to bottle section
+    setTimeout(() => section.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
 }
 
 function selectBottle(bid) {
     modalState.bottleId = bid;
     document.querySelectorAll('.bottle-opt').forEach(el => el.classList.toggle('active', el.dataset.bid === bid));
-    document.getElementById('btnAddCart').classList.add('visible');
+    const addBtn = document.getElementById('btnAddCart');
+    addBtn.classList.add('visible');
+    // Auto-scroll to add-to-cart button
+    setTimeout(() => addBtn.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
 }
 
 function closeModal() {
