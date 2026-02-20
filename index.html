@@ -423,6 +423,29 @@
         }
         .avail-badge.disponible { color: var(--gold); border: 1px solid rgba(184,151,106,0.3); }
         .avail-badge.encargo { color: var(--gray); border: 1px solid rgba(136,136,136,0.3); }
+
+        /* BACK TO TOP */
+        .back-to-top {
+            position: fixed; bottom: 2rem; left: 2rem; width: 44px; height: 44px;
+            background: rgba(184,151,106,0.15); border: 1px solid rgba(184,151,106,0.3);
+            border-radius: 50%; display: none; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 90; transition: all 0.3s; backdrop-filter: blur(5px);
+        }
+        .back-to-top:hover { background: var(--gold); }
+        .back-to-top svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .back-to-top:hover svg { stroke: var(--dark); }
+        .back-to-top.visible { display: flex; }
+
+        /* PRODUCT COUNT */
+        .results-count {
+            text-align: center; color: var(--gray); font-size: 0.78rem;
+            margin-bottom: 1rem; letter-spacing: 1px;
+        }
+
+        /* SMOOTH SCROLL & CARD ANIMATION */
+        html { scroll-behavior: smooth; }
+        .product-card { opacity: 0; animation: cardIn 0.3s ease forwards; }
+        @keyframes cardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -448,6 +471,7 @@
     <svg viewBox="0 0 120 120" width="90" height="90" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;margin-bottom:1.5rem;"><circle cx="60" cy="60" r="56" stroke="var(--gold)" stroke-width="1.2"/><circle cx="60" cy="60" r="50" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/><text x="28" y="78" font-family="'Cormorant',serif" font-size="56" font-weight="600" fill="var(--gold)" letter-spacing="-6">EE</text></svg>
     <h1>EMPIRE ESSENCE</h1>
     <p class="tagline">Fragancias que despiertan emociones</p>
+    <p style="color:var(--gray);font-size:0.85rem;max-width:500px;margin:0 auto 2rem;position:relative;z-index:1;opacity:0.7;">Fragancias premium inspiradas en los perfumes más icónicos del mundo. Desde $30.000 con envío a domicilio en Colombia.</p>
     <a href="#productos" class="cta" onclick="event.preventDefault();document.getElementById('productos').scrollIntoView({behavior:'smooth'})">Ver Fragancias</a>
     <div class="hero-ornament"></div>
 </section>
@@ -506,6 +530,7 @@
         <input type="text" id="searchInput" placeholder="Buscar fragancia..." oninput="filterProducts()">
     </div>
 
+    <div class="results-count" id="resultsCount"></div>
     <div class="products-grid" id="productsGrid"></div>
 
     <div id="showMoreWrapper" style="text-align:center;margin-top:2.5rem;display:none;">
@@ -702,6 +727,11 @@
 </div>
 
 <!-- Toast -->
+<!-- Back to top -->
+<div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+
 <div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span id="toastText">Agregado al carrito</span></div>
 
 <footer>
@@ -1107,6 +1137,7 @@ function renderProducts() {
             showMoreEl.style.display = 'none';
         }
     }
+    if (typeof updateResultsCount === 'function') updateResultsCount(filtered.length, PRODUCTS.length);
 }
 renderProducts();
 
@@ -1331,6 +1362,26 @@ function checkout() {
     msg += `\n*Total: $${total.toLocaleString('es-CO')} COP*`;
     msg += "\nMi direcci\u00f3n es: ";
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ESC key closes modal and cart
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        if (document.getElementById('modalOverlay').classList.contains('open')) closeModal();
+        else if (document.getElementById('cartPanel').classList.contains('open')) toggleCart();
+    }
+});
+
+// Back to top visibility
+window.addEventListener('scroll', () => {
+    document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 600);
+});
+
+// Results count updater
+function updateResultsCount(count, total) {
+    const el = document.getElementById('resultsCount');
+    if (count === total) el.textContent = '';
+    else el.textContent = `Mostrando ${count} de ${total} fragancias`;
 }
 </script>
 <!-- Chatbot Alex: descomenta y pon la URL del túnel activo para activar -->
