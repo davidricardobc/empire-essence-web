@@ -11,6 +11,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://empireessence.co">
     <meta property="og:image" content="https://empireessence.co/img/og-image.jpg">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='28' fill='%231A1A1A' stroke='%23B8976A' stroke-width='2'/%3E%3Ctext x='12' y='40' font-family='serif' font-size='28' font-weight='600' fill='%23B8976A'%3EEE%3C/text%3E%3C/svg%3E">
     <link rel="canonical" href="https://empireessence.co">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -26,6 +27,9 @@
       "priceRange": "$30.000 - $70.000 COP"
     }
     </script>
+    <!-- Google Analytics — reemplaza G-XXXXXXXXXX con tu ID real -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
     <style>
         :root {
             --gold: #B8976A;
@@ -702,7 +706,13 @@
 
 <footer>
     <span class="logo">EMPIRE ESSENCE</span>
-    <p style="margin-bottom:0.8rem;"><a href="/blog/" style="color:var(--gold);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">Blog</a></p>
+    <div style="display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;">
+        <a href="/blog/" style="color:var(--gold);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">Blog</a>
+        <a href="https://instagram.com/empireessence.co" target="_blank" style="color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            Instagram
+        </a>
+    </div>
     <p>&copy; 2026 Empire Essence · Perfumería a Domicilio · Colombia</p>
 </footer>
 
@@ -858,7 +868,6 @@ const PRODUCTS = [
     { id:112, name:"Júbilo", inspired:"Clinique Happy", cat:"masculina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["lima", "notas verdes", "mandarina"], heart:["lirio de los valles", "fresia", "rosa"], base:["cedro", "ciprés", "almizcle"], desc:"Alegre y optimista como una mañana de sol tras la lluvia." },
     { id:113, name:"Giro", inspired:"Perry Ellis 360° Red", cat:"masculina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["pimienta roja", "mandarina", "jengibre"], heart:["tabaco", "canela", "clavo"], base:["notas amaderadas", "vainilla", "almizcle"], desc:"Un giro inesperado de especias rojas y tabaco envolvente." },
     { id:114, name:"Panorama", inspired:"Perry Ellis 360°", cat:"masculina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "bergamota", "notas verdes"], heart:["salvia", "cardamomo", "junípero"], base:["ámbar", "almizcle", "notas amaderadas"], desc:"Amplio y panorámico con frescura herbal y maderas suaves." },
-    { id:115, name:"Viveza", inspired:"Lacoste Red", cat:"masculina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["pimienta negra", "mandarina", "tomillo"], heart:["canela", "clavel", "cardamomo"], base:["sándalo", "ámbar", "musgo de roble"], desc:"Vivaz y chispeante con especias que despiertan los sentidos." },
     { id:116, name:"Chispazo", inspired:"Tommy Girl Now", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["manzana", "mandarina", "grosella negra"], heart:["magnolia", "flor de naranjo", "jazmín"], base:["sándalo", "almizcle", "vainilla"], desc:"Espontáneo y juvenil como un destello de alegría inesperada." },
     { id:117, name:"Antojo", inspired:"Ralph Lauren Big Pony 2", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "mango"], heart:["rosa mosqueta", "mimosa"], base:["vainilla", "almizcle", "cedro"], desc:"Dulce y frutal como un antojo irresistible de frutas tropicales." },
     { id:118, name:"Delizia", inspired:"Juicy Couture Viva La Juicy", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["frambuesa", "mandarina", "bayas silvestres"], heart:["gardenia", "madreselva", "jazmín"], base:["caramelo", "vainilla", "sándalo", "ámbar"], desc:"Golosa y glamurosa con frambuesa y caramelo irresistibles." },
@@ -906,7 +915,7 @@ const PRODUCTS = [
     { id:160, name:"Resplandor", inspired:"Paris Hilton Dazzle", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["naranja mandarina", "pera", "frambuesa"], heart:["gardenia", "jazmín", "iris"], base:["sándalo", "vainilla", "almizcle"], desc:"Deslumbrante y radiante como mil destellos de luz dorada." },
     { id:161, name:"Fiesta", inspired:"Paris Hilton Can Can", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["grosella negra", "clementina", "nectarina"], heart:["naranja silvestre", "lirio", "orquídea"], base:["ámbar", "vainilla", "almizcle"], desc:"Vibrante y festivo como una celebración que nunca termina." },
     { id:162, name:"Transparencia", inspired:"Paris Hilton Sheer", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "pera", "notas acuáticas"], heart:["jazmín", "fresia", "rosa de mayo"], base:["almizcle blanco", "sándalo", "cedro"], desc:"Diáfana y pura como una gota de rocío en un pétalo de rosa." },
-    { id:163, name:"Legado", inspired:"Paris Hilton Heiress", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "champán", "durazno"], heart:["jazmín sambac", "gardenia", "madreselva"], base:["vetiver", "rubia blanca", "almizcle"], desc:"Heredada y glamurosa con champán dorado y flores blancas." },
+    { id:163, name:"Herencia Dorada", inspired:"Paris Hilton Heiress", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "champán", "durazno"], heart:["jazmín sambac", "gardenia", "madreselva"], base:["vetiver", "rubia blanca", "almizcle"], desc:"Heredada y glamurosa con champán dorado y flores blancas." },
     { id:164, name:"Mística", inspired:"Creed Love in Black", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["grosella negra", "ciruela", "notas verdes"], heart:["rosa turca", "iris", "violeta"], base:["almizcle", "vainilla", "sándalo", "vetiver"], desc:"Oscura y fascinante como un ritual antiguo de amor eterno." },
     { id:165, name:"Hipnosis", inspired:"Dior Hypnotic Poison", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["coco", "albaricoque", "ciruela"], heart:["tuberosa", "jazmín sambac", "rosa", "lirio de los valles"], base:["vainilla", "almizcle", "sándalo", "almendra"], desc:"Hipnotizante y prohibido con vainilla narcótica y jazmín nocturno." },
     { id:166, name:"Dicha", inspired:"Dior Joy", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["bergamota", "mandarina", "flores blancas"], heart:["rosa centifolia", "jazmín grandiflorum", "peony"], base:["sándalo cremoso", "almizcle", "notas amaderadas"], desc:"Felicidad pura destilada en rosa centifolia y jazmín absoluto." },
@@ -1324,6 +1333,8 @@ function checkout() {
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 </script>
+<!-- Chatbot Alex: descomenta y pon la URL del túnel activo para activar -->
+<!-- <script>window.EE_CHAT_WEBHOOK="https://TU-TUNEL.trycloudflare.com/webhook/chat";</script> -->
 <script src="chat-widget.js"></script>
 </body>
 </html>
