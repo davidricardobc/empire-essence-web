@@ -1,7 +1,7 @@
 // Empire Essence — Chat Widget con AI (Alex)
 // Botón elegante + chat conectado a n8n/Ollama
 (function() {
-  const WEBHOOK_URL = 'https://conviction-anthony-titanium-murphy.trycloudflare.com/webhook/chat';
+  const WEBHOOK_URL = 'https://antonio-initially-remarks-mambo.trycloudflare.com/webhook/chat';
   const WA = '573156753404';
 
   // Estilos
@@ -13,7 +13,7 @@
 
     /* ═══ BOTÓN FLOTANTE ═══ */
     #ee-trigger {
-      position:fixed; bottom:28px; right:28px; z-index:99998;
+      position:fixed; bottom:28px; left:28px; z-index:99998;
       display:flex; align-items:center; gap:0;
       cursor:pointer; user-select:none;
       animation: ee-enter 0.8s cubic-bezier(0.16,1,0.3,1) both;
@@ -29,9 +29,10 @@
       background: rgba(10,10,10,0.92);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(201,169,78,0.3);
-      border-radius: 12px 12px 4px 12px;
+      border-radius: 12px 12px 12px 4px;
       padding: 10px 16px;
-      margin-right: 12px;
+      margin-left: 12px;
+      order: 2;
       color: #f0ece2;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
@@ -83,7 +84,7 @@
 
     /* ═══ VENTANA DE CHAT ═══ */
     #ee-window {
-      position:fixed; bottom:100px; right:28px; z-index:99999;
+      position:fixed; bottom:100px; left:28px; z-index:99999;
       width:380px; max-width:calc(100vw - 24px);
       height:520px; max-height:calc(100vh - 140px);
       background: #0a0a0a;
@@ -228,7 +229,7 @@
     @media (max-width: 480px) {
       #ee-window {
         width:100vw; height:100vh; max-height:100vh;
-        bottom:0; right:0;
+        bottom:0; left:0;
         border-radius:0; border:none;
       }
       #ee-trigger.open #ee-tooltip { display:none; }
