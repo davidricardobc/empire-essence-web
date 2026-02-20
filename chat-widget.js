@@ -1,7 +1,7 @@
 // Empire Essence — Chat Widget con AI (Alex)
 // Botón elegante + chat conectado a n8n/Ollama
 (function() {
-  const WEBHOOK_URL = 'http://localhost:5678/webhook/chat'; // TODO: cambiar a URL pública en producción
+  const WEBHOOK_URL = 'https://conviction-anthony-titanium-murphy.trycloudflare.com/webhook/chat';
   const WA = '573156753404';
 
   // Estilos
