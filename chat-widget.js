@@ -283,6 +283,7 @@
   const EEChat = {
     isOpen: false,
     greeted: false,
+    history: [], // Historial de conversación completo
 
     toggle() {
       this.isOpen = !this.isOpen;
@@ -298,11 +299,13 @@
         tooltip.style.pointerEvents = 'none';
         if (!this.greeted) {
           this.greeted = true;
+          const greeting = '¡Hola! 👋 Soy Alex, tu asesor de fragancias.\n\n¿Buscas algo para ti, para regalar, o solo quieres explorar?';
           setTimeout(() => {
             this.showTyping();
             setTimeout(() => {
               this.hideTyping();
-              this.addMsg('¡Hola! 👋 Soy Alex, tu asesor de fragancias.\n\n¿Buscas algo para ti, para regalar, o solo quieres explorar?', 'bot');
+              this.addMsg(greeting, 'bot');
+              this.history.push({ role: 'assistant', content: greeting });
             }, 1200);
           }, 400);
         }
@@ -314,7 +317,6 @@
       const msgs = document.getElementById('ee-msgs');
       const d = document.createElement('div');
       d.className = 'ee-msg ' + sender;
-      // Convert markdown bold and newlines
       let html = text
         .replace(/\*\*(.*?)\*\*/g, '<strong style="color:#c9a94e">$1</strong>')
         .replace(/\n/g, '<br>');
@@ -348,6 +350,7 @@
       input.value = '';
 
       this.addMsg(text, 'user');
+      this.history.push({ role: 'user', content: text });
       this.showTyping();
       
       const sendBtn = document.getElementById('ee-send');
@@ -358,12 +361,18 @@
         const res = await fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text })
+          body: JSON.stringify({ messages: this.history })
         });
         const data = await res.json();
         this.hideTyping();
         const response = data.response || 'Disculpa, no pude procesar tu mensaje. ¿Podrías repetirlo?';
         this.addMsg(response, 'bot');
+        this.history.push({ role: 'assistant', content: response });
+        
+        // Limitar historial a últimos 20 mensajes para no pasarse de tokens
+        if (this.history.length > 20) {
+          this.history = this.history.slice(-20);
+        }
       } catch (err) {
         this.hideTyping();
         this.addMsg('Parece que tengo problemas de conexión 😔\n\n¿Te gustaría que te asesore por WhatsApp?\n<a class="ee-wa-link" href="https://wa.me/' + WA + '?text=Hola%2C%20quiero%20asesor%C3%ADa%20de%20fragancias" target="_blank">📲 Abrir WhatsApp</a>', 'bot');
