@@ -228,11 +228,21 @@
     /* Mobile responsive */
     @media (max-width: 480px) {
       #ee-window {
-        width:100vw; height:100vh; max-height:100vh;
-        bottom:0; left:0;
-        border-radius:0; border:none;
+        width:calc(100vw - 16px); max-width:360px;
+        height:420px; max-height:calc(100vh - 120px);
+        bottom:96px; left:8px;
+        border-radius:16px;
       }
+      #ee-trigger { bottom:20px; left:16px; }
       #ee-trigger.open #ee-tooltip { display:none; }
+      #ee-fab { width:52px; height:52px; }
+      #ee-fab svg { width:22px; height:22px; }
+      .ee-msg { font-size:12.5px; max-width:88%; padding:9px 12px; }
+      #ee-input { font-size:12px; padding:9px 14px; }
+      #ee-header { padding:12px 14px; }
+      #ee-header .name { font-size:13px; }
+      #ee-avatar { width:36px; height:36px; font-size:16px; }
+      #ee-msgs { padding:14px 12px; gap:8px; }
     }
   `;
   document.head.appendChild(style);
