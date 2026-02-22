@@ -721,6 +721,12 @@
 
         <p class="modal-description" id="modalDesc"></p>
 
+        <!-- Savings over time (ergodicity: your trajectory matters, not the average) -->
+        <div id="modalSavings" class="modal-notes" style="background:rgba(74,222,128,0.04);border-color:rgba(74,222,128,0.15);display:none;">
+            <div class="notes-title" style="color:#4ade80;">💰 Tu Ahorro Real</div>
+            <div id="modalSavingsContent" style="font-size:0.85rem;color:var(--gold-light);line-height:1.7;"></div>
+        </div>
+
         <div class="modal-notes" id="modalNotes">
             <div class="notes-title">Pirámide Olfativa</div>
             <div class="note-row"><span class="note-icon">&#9652;</span><span class="note-type">Salida</span><span class="note-list" id="notesTop"></span></div>
@@ -1144,6 +1150,28 @@ function openModal(id) {
     document.getElementById('notesTop').textContent = p.top.join(' \u00b7 ');
     document.getElementById('notesHeart').textContent = p.heart.join(' \u00b7 ');
     document.getElementById('notesBase').textContent = p.base.join(' \u00b7 ');
+
+    // Savings calculator (ergodicity: show time-average savings, not just unit price)
+    const modalSav = document.getElementById('modalSavings');
+    const origP = ORIGINAL_PRICES[p.inspired];
+    if (origP) {
+        const origNum = parseInt(origP.replace(/[^\d]/g,''));
+        const eePrice = p.prices[100] || p.prices[50];
+        const saved = origNum - eePrice;
+        const pct = Math.round((saved / origNum) * 100);
+        const yearSaved = saved * 3;
+        document.getElementById('modalSavingsContent').innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+                <div><span style="text-decoration:line-through;color:var(--gray);font-size:0.8rem;">Original: ${origP}</span>
+                <span style="margin-left:0.5rem;color:#4ade80;font-weight:600;">EE: $${eePrice.toLocaleString('es-CO')}</span></div>
+                <div style="background:rgba(74,222,128,0.1);padding:0.3rem 0.8rem;border-radius:15px;font-size:0.8rem;color:#4ade80;font-weight:600;">-${pct}%</div>
+            </div>
+            <div style="margin-top:0.5rem;font-size:0.78rem;color:var(--gray);">
+                Ahorras <strong style="color:#4ade80;">$${saved.toLocaleString('es-CO')}</strong> por frasco ·
+                <strong style="color:#4ade80;">$${yearSaved.toLocaleString('es-CO')}</strong>/año<span style="opacity:0.5;"> (≈3 compras)</span>
+            </div>`;
+        modalSav.style.display = 'block';
+    } else { modalSav.style.display = 'none'; }
 
     // Size options
     const sizeEl = document.getElementById('sizeOptions');
