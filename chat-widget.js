@@ -40,13 +40,15 @@
       white-space: nowrap;
       opacity: 0;
       transform: translateX(10px);
-      animation: ee-tooltip-in 0.5s 3.5s cubic-bezier(0.16,1,0.3,1) forwards;
-      transition: opacity 0.3s;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    #ee-trigger:hover #ee-tooltip,
+    #ee-trigger:focus-within #ee-tooltip {
+      opacity: 1;
+      transform: translateX(0);
     }
     #ee-tooltip span { color: #c9a94e; font-weight: 500; }
-    @keyframes ee-tooltip-in {
-      to { opacity:1; transform:translateX(0); }
-    }
 
     /* Botón circular */
     #ee-fab {
@@ -252,7 +254,7 @@
   container.id = 'ee-chat';
   container.innerHTML = `
     <div id="ee-trigger" onclick="EEChat.toggle()">
-      <div id="ee-tooltip">¿Buscas tu <span>fragancia ideal</span>? 💬</div>
+      <div id="ee-tooltip"><span>Te ayudamos</span> 💬</div>
       <div id="ee-fab">
         <svg class="chat-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.04 2 11c0 2.76 1.36 5.22 3.5 6.84V22l3.74-2.06c.87.24 1.8.36 2.76.36 5.52 0 10-4.04 10-9S17.52 2 12 2zm1.07 12.15l-2.54-2.72L5.8 14.15l5.12-5.44 2.6 2.72 4.67-2.72-5.12 5.44z"/></svg>
         <svg class="close-icon" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -398,22 +400,6 @@
   } else {
     initInput();
   }
-
-  // Auto-hide tooltip after 8s
-  setTimeout(() => {
-    const tt = document.getElementById('ee-tooltip');
-    if (tt && !EEChat.isOpen) {
-      tt.style.transition = 'opacity 1s';
-      tt.style.opacity = '0';
-      // Show again briefly every 30s
-      setInterval(() => {
-        if (!EEChat.isOpen && tt) {
-          tt.style.opacity = '1';
-          setTimeout(() => { if (!EEChat.isOpen) tt.style.opacity = '0'; }, 5000);
-        }
-      }, 30000);
-    }
-  }, 12000);
 
   window.EEChat = EEChat;
 })();
