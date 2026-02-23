@@ -446,6 +446,41 @@
         html { scroll-behavior: smooth; }
         .product-card { opacity: 0; animation: cardIn 0.3s ease forwards; }
         @keyframes cardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* CLEAR FILTERS */
+        .clear-filters {
+            display: none; padding: 0.35rem 0.8rem; border: 1px solid rgba(229,62,62,0.4);
+            background: transparent; color: #e74c3c; border-radius: 20px;
+            font-size: 0.72rem; cursor: pointer; transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif; letter-spacing: 0.5px;
+        }
+        .clear-filters.visible { display: inline-flex; align-items: center; gap: 0.3rem; }
+        .clear-filters:hover { background: #e74c3c; color: white; }
+
+        /* SIMILAR FRAGRANCES */
+        .similar-section { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(184,151,106,0.1); }
+        .similar-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 0.8rem; opacity: 0.7; }
+        .similar-grid { display: flex; gap: 0.6rem; overflow-x: auto; padding-bottom: 0.5rem; }
+        .similar-grid::-webkit-scrollbar { display: none; }
+        .similar-card {
+            flex-shrink: 0; width: 110px; padding: 0.6rem; background: rgba(184,151,106,0.04);
+            border: 1px solid rgba(184,151,106,0.12); border-radius: 8px; cursor: pointer;
+            text-align: center; transition: border-color 0.3s;
+        }
+        .similar-card:hover { border-color: var(--gold); }
+        .similar-card .sim-name { font-family: 'Cormorant', serif; font-size: 0.85rem; margin-bottom: 0.15rem; }
+        .similar-card .sim-inspired { font-size: 0.65rem; color: var(--gray); font-style: italic; }
+
+        /* SOCIAL PROOF PULSE */
+        .social-pulse {
+            position: fixed; bottom: 6rem; left: 1.5rem; background: rgba(26,26,26,0.95);
+            border: 1px solid rgba(184,151,106,0.2); border-radius: 10px; padding: 0.6rem 1rem;
+            z-index: 80; display: none; align-items: center; gap: 0.6rem;
+            font-size: 0.78rem; color: var(--gold-light); backdrop-filter: blur(10px);
+            animation: slideInLeft 0.4s ease; max-width: 280px;
+        }
+        .social-pulse.show { display: flex; }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
     </style>
 </head>
 <body>
@@ -523,6 +558,9 @@
         <button class="filter-btn note-filter" data-note="acuático" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2980b9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M2 12c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/><path d="M2 17c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/><path d="M2 7c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/></svg> Acuático</button>
         <button class="filter-btn note-filter" data-note="oriental" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M5 5l3 3"/><path d="M16 16l3 3"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M5 19l3-3"/><path d="M16 8l3-3"/><circle cx="12" cy="12" r="4"/></svg> Oriental</button>
     </div>
+    </div>
+    <div style="text-align:center;margin-bottom:0.5rem;">
+        <button class="clear-filters" id="clearFiltersBtn" onclick="clearAllFilters()">✕ Limpiar filtros</button>
     </div>
 
     <div class="search-bar">
@@ -723,6 +761,12 @@
         <button class="btn-add-cart" id="btnAddCart" onclick="addFromModal()">
             Agregar al Carrito
         </button>
+
+        <!-- Similar fragrances -->
+        <div class="similar-section" id="similarSection">
+            <div class="similar-title">También te puede gustar</div>
+            <div class="similar-grid" id="similarGrid"></div>
+        </div>
     </div>
 </div>
 
@@ -733,6 +777,12 @@
 </div>
 
 <div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span id="toastText">Agregado al carrito</span></div>
+
+<!-- Social Proof Pulse -->
+<div class="social-pulse" id="socialPulse">
+    <span style="font-size:1.1rem;">🔥</span>
+    <span id="socialPulseText"></span>
+</div>
 
 <footer>
     <span class="logo">EMPIRE ESSENCE</span>
@@ -1383,6 +1433,91 @@ function updateResultsCount(count, total) {
     if (count === total) el.textContent = '';
     else el.textContent = `Mostrando ${count} de ${total} fragancias`;
 }
+
+// ===== CLEAR FILTERS =====
+function clearAllFilters() {
+    activeFilters = { avail: 'all', cat: 'all' };
+    activeNotes.clear();
+    document.getElementById('searchInput').value = '';
+    document.querySelectorAll('#filterBar .filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === 'all');
+    });
+    document.querySelectorAll('#noteFilterBar .note-filter').forEach(b => b.classList.remove('active'));
+    document.getElementById('clearFiltersBtn').classList.remove('visible');
+    renderProducts();
+}
+
+function updateClearButton() {
+    const hasFilters = activeFilters.avail !== 'all' || activeFilters.cat !== 'all' || activeNotes.size > 0 || document.getElementById('searchInput').value;
+    document.getElementById('clearFiltersBtn').classList.toggle('visible', !!hasFilters);
+}
+
+// Patch existing functions to update clear button
+const _origSetFilter = setFilter;
+setFilter = function(btn) { _origSetFilter(btn); updateClearButton(); };
+const _origToggleNote = toggleNoteFilter;
+toggleNoteFilter = function(btn) { _origToggleNote(btn); updateClearButton(); };
+const _origFilterProducts = filterProducts;
+filterProducts = function() { _origFilterProducts(); updateClearButton(); };
+
+// ===== SIMILAR FRAGRANCES =====
+function getSimilarProducts(product, count=5) {
+    const pFamily = getDominantFamily(product);
+    const pNotes = [...(product.top||[]),...(product.heart||[]),...(product.base||[])].map(n=>n.toLowerCase());
+    return PRODUCTS
+        .filter(p => p.id !== product.id)
+        .map(p => {
+            let score = 0;
+            const oNotes = [...(p.top||[]),...(p.heart||[]),...(p.base||[])].map(n=>n.toLowerCase());
+            pNotes.forEach(n => { if (oNotes.some(o => o.includes(n) || n.includes(o))) score += 2; });
+            if (getDominantFamily(p) === pFamily) score += 5;
+            if (p.cat === product.cat) score += 3;
+            if (p.avail === 'disponible') score += 1;
+            return { ...p, score };
+        })
+        .sort((a,b) => b.score - a.score)
+        .slice(0, count);
+}
+
+const _origOpenModal = openModal;
+openModal = function(id) {
+    _origOpenModal(id);
+    const p = PRODUCTS.find(x => x.id === id);
+    const similar = getSimilarProducts(p);
+    const grid = document.getElementById('similarGrid');
+    grid.innerHTML = similar.map(s => `
+        <div class="similar-card" onclick="closeModal();setTimeout(()=>openModal(${s.id}),200)">
+            <div class="sim-name">${s.name}</div>
+            <div class="sim-inspired">${s.inspired}</div>
+        </div>
+    `).join('');
+};
+
+// ===== SOCIAL PROOF PULSE =====
+const SOCIAL_MESSAGES = [
+    'Conquista — el más vendido esta semana',
+    'Alguien en Medellín pidió Despertar hace 2h',
+    'Trascendencia — 3 pedidos hoy',
+    'Dualidad — favorito del mes en femeninas',
+    'Vértigo — tendencia este mes',
+    '5 personas están viendo fragancias ahora',
+    'Combo 3×$80.000 — el más elegido',
+    'Equilibrio — recomendado para oficina',
+    'Alegría — nuevo éxito unisex',
+    'Refugio — perfecto para noches frías',
+];
+
+let socialPulseTimer = null;
+function showSocialPulse() {
+    const el = document.getElementById('socialPulse');
+    const textEl = document.getElementById('socialPulseText');
+    const msg = SOCIAL_MESSAGES[Math.floor(Math.random() * SOCIAL_MESSAGES.length)];
+    textEl.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 4000);
+    socialPulseTimer = setTimeout(showSocialPulse, (20 + Math.random() * 25) * 1000);
+}
+setTimeout(showSocialPulse, 15000);
 </script>
 <!-- Chatbot Alex: descomenta y pon la URL del túnel activo para activar -->
 <!-- <script>window.EE_CHAT_WEBHOOK="https://TU-TUNEL.trycloudflare.com/webhook/chat";</script> -->
