@@ -454,6 +454,106 @@
         .product-card { opacity: 0; animation: cardIn 0.3s ease forwards; }
         @keyframes cardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* SKELETON LOADING v3.7 */
+        .skeleton {
+            background: linear-gradient(90deg, var(--dark) 25%, rgba(184,151,106,0.05) 50%, var(--dark) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 12px;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .product-card.loading { pointer-events: none; }
+        .product-card.loading .frag-icon,
+        .product-card.loading h3,
+        .product-card.loading .inspired-by,
+        .product-card.loading .price-from,
+        .product-card.loading .notes-preview {
+            background: linear-gradient(90deg, rgba(184,151,106,0.1) 25%, rgba(184,151,106,0.2) 50%, rgba(184,151,106,0.1) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            color: transparent !important;
+            border-radius: 4px;
+        }
+        .product-card.loading .frag-icon { height: 48px; width: 48px; margin: 0 auto 0.8rem; }
+        .product-card.loading h3 { height: 1.15rem; width: 80%; margin: 0 auto 0.3rem; }
+        .product-card.loading .inspired-by { height: 0.78rem; width: 60%; margin: 0 auto; }
+
+        /* EMPTY STATE v3.7 */
+        .empty-state {
+            text-align: center; padding: 4rem 2rem; max-width: 400px; margin: 0 auto;
+        }
+        .empty-state-icon {
+            width: 80px; height: 80px; margin: 0 auto 1.5rem;
+            background: rgba(184,151,106,0.05); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(184,151,106,0.1);
+        }
+        .empty-state-icon svg {
+            width: 40px; height: 40px; stroke: var(--gold); stroke-width: 1.5;
+            fill: none; opacity: 0.6;
+        }
+        .empty-state h3 {
+            font-family: 'Cormorant', serif; font-size: 1.5rem; color: var(--gold);
+            margin-bottom: 0.8rem; font-weight: 500;
+        }
+        .empty-state p {
+            color: var(--gray); font-size: 0.9rem; line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .empty-state-suggestions {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+        }
+        .empty-state-suggestions span {
+            font-size: 0.75rem; color: var(--gray); padding: 0.4rem 0.8rem;
+            border: 1px solid rgba(184,151,106,0.2); border-radius: 20px;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .empty-state-suggestions span:hover {
+            border-color: var(--gold); color: var(--gold-light); background: rgba(184,151,106,0.05);
+        }
+
+        /* FILTER TAGS ACTIVE SUMMARY v3.7 */
+        .active-filters-bar {
+            display: none; justify-content: center; align-items: center;
+            gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;
+            padding: 0.5rem; background: rgba(184,151,106,0.03);
+            border-radius: 8px; border: 1px solid rgba(184,151,106,0.1);
+        }
+        .active-filters-bar.visible { display: flex; }
+        .active-filters-bar .filter-tag {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            background: rgba(184,151,106,0.1); color: var(--gold-light);
+            padding: 0.3rem 0.7rem; border-radius: 15px;
+            font-size: 0.72rem; cursor: pointer; transition: all 0.2s;
+        }
+        .active-filters-bar .filter-tag:hover {
+            background: rgba(229,62,62,0.2); color: #e74c3c;
+        }
+        .active-filters-bar .filter-tag svg {
+            width: 12px; height: 12px; fill: none; stroke: currentColor;
+            stroke-width: 2;
+        }
+        .active-filters-label {
+            font-size: 0.7rem; color: var(--gray); text-transform: uppercase;
+            letter-spacing: 1px; margin-right: 0.5rem;
+        }
+
+        /* SHIPPING BADGE v3.7 */
+        .shipping-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: rgba(74,222,128,0.1); color: #4ade80;
+            padding: 0.4rem 0.8rem; border-radius: 20px;
+            font-size: 0.75rem; margin-top: 1rem;
+            border: 1px solid rgba(74,222,128,0.2);
+        }
+        .shipping-badge svg {
+            width: 14px; height: 14px; fill: none; stroke: currentColor;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+
         /* ACTIVE FILTER COUNT BADGE */
         .filter-count {
             display: inline-flex; align-items: center; justify-content: center;
@@ -664,6 +764,12 @@
         </select>
     </div>
 
+    <!-- Active Filters Summary v3.7 -->
+    <div class="active-filters-bar" id="activeFiltersBar">
+        <span class="active-filters-label">Filtros activos:</span>
+        <div id="activeFiltersTags"></div>
+    </div>
+
     <div class="search-bar">
         <span class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
         <input type="text" id="searchInput" placeholder="Buscar fragancia..." oninput="filterProducts()">
@@ -671,6 +777,20 @@
 
     <div class="results-count" id="resultsCount"></div>
     <div class="products-grid" id="productsGrid"></div>
+
+    <!-- Empty State v3.7 -->
+    <div class="empty-state" id="emptyState" style="display:none;">
+        <div class="empty-state-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.4 4.4l-1.8-1.8c-.4-.4-.9-.6-1.4-.6H6.8c-.5 0-1 .2-1.4.6L3.6 4.4c-.4.4-.6.9-.6 1.4v12.4c0 .5.2 1 .6 1.4l1.8 1.8c.4.4.9.6 1.4.6h10.4c.5 0 1-.2 1.4-.6l1.8-1.8c.4-.4.6-.9.6-1.4V5.8c0-.5-.2-1-.6-1.4zM12 17.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5zM17 8H7V6h10v2z"/></svg>
+        </div>
+        <h3>No encontramos tu fragancia perfecta... aún</h3>
+        <p>Los filtros que aplicaste no coinciden con ninguna fragancia. Prueba con otra combinación o explora estas opciones:</p>
+        <div class="empty-state-suggestions" id="emptySuggestions">
+            <span onclick="clearAllFilters()">Ver todas las fragancias</span>
+            <span onclick="setFilter(document.querySelector('[data-filter=popular]'))">Ver las más populares</span>
+            <span onclick="showRandomFragrance()">Descubrir al azar</span>
+        </div>
+    </div>
 
     </div>
 </section>
@@ -851,6 +971,12 @@
         <button class="btn-add-cart" id="btnAddCart" onclick="addFromModal()">
             Agregar al Carrito
         </button>
+
+        <!-- Shipping Badge v3.7 -->
+        <div class="shipping-badge" id="modalShipping">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            <span id="shippingText">Envío gratis a todo Colombia en compras desde $80.000</span>
+        </div>
 
         <!-- Similar fragrances (stigmergy — one product leads to the next) -->
         <div class="similar-section" id="similarSection">
@@ -1719,6 +1845,207 @@ function showSocialPulse() {
 setTimeout(showSocialPulse, 15000);
 
 // Price anchoring removed — no comparisons with original brands to avoid legal risk
+
+// ===== v3.7 IMPROVEMENTS (26 Feb 2026) =====
+
+// URL Persistence — shareable filtered views
+function updateURL() {
+    const params = new URLSearchParams();
+    if (activeFilters.avail !== 'all') params.set('avail', activeFilters.avail);
+    if (activeFilters.cat !== 'all') params.set('cat', activeFilters.cat);
+    if (activeNotes.size > 0) params.set('notes', Array.from(activeNotes).join(','));
+    if (activeSize) params.set('size', activeSize);
+    if (currentSort !== 'default') params.set('sort', currentSort);
+    const search = document.getElementById('searchInput').value;
+    if (search) params.set('q', search);
+    
+    const newURL = params.toString() ? '?' + params.toString() : window.location.pathname;
+    window.history.replaceState({}, '', newURL);
+}
+
+// Read filters from URL on load
+function loadFiltersFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('avail')) activeFilters.avail = params.get('avail');
+    if (params.get('cat')) activeFilters.cat = params.get('cat');
+    if (params.get('notes')) params.get('notes').split(',').forEach(n => activeNotes.add(n));
+    if (params.get('size')) activeSize = params.get('size');
+    if (params.get('sort')) currentSort = params.get('sort');
+    if (params.get('q')) document.getElementById('searchInput').value = params.get('q');
+    
+    // Update UI
+    document.getElementById('sortSelect').value = currentSort;
+    document.querySelectorAll('#filterBar .filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === activeFilters.avail);
+    });
+    document.querySelectorAll('#genderBar .filter-btn').forEach(btn => {
+        if (btn.dataset.filter === activeFilters.cat) btn.classList.add('active');
+    });
+    document.querySelectorAll('.note-filter').forEach(btn => {
+        if (activeNotes.has(btn.dataset.note)) btn.classList.add('active');
+    });
+    document.querySelectorAll('.size-filter').forEach(btn => {
+        if (btn.dataset.size === activeSize) btn.classList.add('active');
+    });
+}
+
+// Active Filters Bar — visual summary
+function updateActiveFiltersBar() {
+    const bar = document.getElementById('activeFiltersBar');
+    const tags = document.getElementById('activeFiltersTags');
+    const active = [];
+    
+    if (activeFilters.avail !== 'all') {
+        const labels = { disponible: 'Disponibles', encargo: 'Por encargo', popular: 'Populares' };
+        active.push({ type: 'avail', value: activeFilters.avail, label: labels[activeFilters.avail] });
+    }
+    if (activeFilters.cat !== 'all') {
+        active.push({ type: 'cat', value: activeFilters.cat, label: activeFilters.cat.charAt(0).toUpperCase() + activeFilters.cat.slice(1) });
+    }
+    activeNotes.forEach(note => {
+        const btn = document.querySelector(`[data-note="${note}"]`);
+        active.push({ type: 'note', value: note, label: btn ? btn.textContent : note });
+    });
+    if (activeSize) {
+        active.push({ type: 'size', value: activeSize, label: activeSize + 'ml' });
+    }
+    
+    if (active.length === 0) {
+        bar.classList.remove('visible');
+        return;
+    }
+    
+    bar.classList.add('visible');
+    tags.innerHTML = active.map(f => `
+        <span class="filter-tag" onclick="removeFilter('${f.type}', '${f.value}')">
+            ${f.label} <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </span>
+    `).join('');
+}
+
+function removeFilter(type, value) {
+    if (type === 'avail') activeFilters.avail = 'all';
+    if (type === 'cat') activeFilters.cat = 'all';
+    if (type === 'note') activeNotes.delete(value);
+    if (type === 'size') activeSize = null;
+    
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.dataset.filter === value) btn.classList.remove('active');
+        if (btn.dataset.note === value) btn.classList.remove('active');
+        if (btn.dataset.size === value) btn.classList.remove('active');
+    });
+    
+    renderProducts();
+    updateActiveFiltersBar();
+    updateURL();
+}
+
+// Show random fragrance (exploration)
+function showRandomFragrance() {
+    const random = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
+    openModal(random.id);
+    clearAllFilters();
+}
+
+// Keyboard navigation for accessibility
+let focusedCardIndex = -1;
+function setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+        const cards = document.querySelectorAll('.product-card');
+        if (!cards.length) return;
+        
+        if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            focusedCardIndex = (focusedCardIndex + 1) % cards.length;
+            cards[focusedCardIndex].focus();
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            focusedCardIndex = (focusedCardIndex - 1 + cards.length) % cards.length;
+            cards[focusedCardIndex].focus();
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const cols = Math.floor(document.querySelector('.products-grid').offsetWidth / 240);
+            focusedCardIndex = Math.min(focusedCardIndex + cols, cards.length - 1);
+            cards[focusedCardIndex].focus();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const cols = Math.floor(document.querySelector('.products-grid').offsetWidth / 240);
+            focusedCardIndex = Math.max(focusedCardIndex - cols, 0);
+            cards[focusedCardIndex].focus();
+        } else if (e.key === 'Enter' && focusedCardIndex >= 0) {
+            e.preventDefault();
+            cards[focusedCardIndex].click();
+        }
+    });
+}
+
+// Enhanced empty state handling
+const _origRenderProducts = renderProducts;
+renderProducts = function() {
+    _origRenderProducts();
+    updateActiveFiltersBar();
+    updateURL();
+    
+    // Show/hide empty state
+    const visible = document.querySelectorAll('.product-card:not(.loading)');
+    const empty = document.getElementById('emptyState');
+    if (visible.length === 0 && document.getElementById('searchInput').value) {
+        empty.style.display = 'block';
+    } else {
+        empty.style.display = 'none';
+    }
+};
+
+// Loading skeleton for initial load
+function showSkeletonLoading() {
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = Array(8).fill(0).map(() => `
+        <div class="product-card loading">
+            <div class="frag-icon"></div>
+            <h3> </h3>
+            <div class="inspired-by"> </div>
+            <div class="price-from"><span> </span></div>
+        </div>
+    `).join('');
+}
+
+// Update shipping badge based on cart total
+function updateShippingBadge() {
+    const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+    const badge = document.getElementById('modalShipping');
+    const text = document.getElementById('shippingText');
+    
+    if (!badge || !text) return;
+    
+    if (total === 0) {
+        text.textContent = 'Envío gratis a todo Colombia en compras desde $80.000';
+        badge.style.background = 'rgba(74,222,128,0.1)';
+        badge.style.color = '#4ade80';
+    } else if (total >= 80000) {
+        text.textContent = '✅ ¡Tienes envío GRATIS!';
+        badge.style.background = 'rgba(74,222,128,0.2)';
+        badge.style.color = '#4ade80';
+    } else {
+        const remaining = 80000 - total;
+        text.textContent = `Agrega $${remaining.toLocaleString('es-CO')} más para envío gratis`;
+        badge.style.background = 'rgba(184,151,106,0.1)';
+        badge.style.color = 'var(--gold-light)';
+    }
+}
+
+// Patch updateCart to update shipping badge
+const _origUpdateCart = updateCart;
+updateCart = function() {
+    _origUpdateCart();
+    updateShippingBadge();
+};
+
+// Initialize
+loadFiltersFromURL();
+setupKeyboardNav();
+updateActiveFiltersBar();
+
+// v3.7 complete: UX++ (skeleton loading, keyboard nav, empty state, active filters bar, URL persistence, shipping badge)
 </script>
 </body>
 </html>
