@@ -624,7 +624,7 @@
     <div class="testimonials-grid">
         <div class="testimonial-card">
             <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-            <p class="testimonial-text">Pedí el Aventus y quedé impresionado. La duración es increíble y el aroma es prácticamente idéntico al original. Ya voy por mi tercera compra.</p>
+            <p class="testimonial-text">Me pedí "Conquista" y quedé impresionado. La duración es increíble y el aroma es espectacular. Ya voy por mi tercera compra.</p>
             <div class="testimonial-author">
                 <div class="testimonial-avatar">A</div>
                 <div class="testimonial-info">
@@ -635,7 +635,7 @@
         </div>
         <div class="testimonial-card">
             <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-            <p class="testimonial-text">El Good Girl es mi favorito. Me llegan siempre bien empacados y el envío fue más rápido de lo que esperaba. Totalmente recomendado.</p>
+            <p class="testimonial-text">"Dualidad" se convirtió en mi favorito. Me llegan siempre bien empacados y el envío fue más rápido de lo que esperaba. Totalmente recomendado.</p>
             <div class="testimonial-author">
                 <div class="testimonial-avatar">V</div>
                 <div class="testimonial-info">
@@ -1497,16 +1497,83 @@ openModal = function(id) {
 
 // ===== SOCIAL PROOF PULSE =====
 const SOCIAL_MESSAGES = [
+    // Más vendidos / populares
     'Conquista — el más vendido esta semana',
-    'Alguien en Medellín pidió Despertar hace 2h',
-    'Trascendencia — 3 pedidos hoy',
     'Dualidad — favorito del mes en femeninas',
     'Vértigo — tendencia este mes',
-    '5 personas están viendo fragancias ahora',
-    'Combo 3×$80.000 — el más elegido',
     'Equilibrio — recomendado para oficina',
     'Alegría — nuevo éxito unisex',
     'Refugio — perfecto para noches frías',
+    'Despertar — el clásico que nunca falla',
+    'Plenitud — top 5 en ventas',
+    
+    // Compras recientes por ciudad
+    'Alguien en Medellín pidió Despertar hace 2h',
+    'Alguien en Bogotá compró Conquista hace 5 min',
+    'Recién vendieron Dualidad en Cali',
+    'Un pedido de Barranquilla hace 10 min',
+    'Alguien en Bucaramanga pidió 3 fragancias',
+    'Venta reciente en Cartagena — Envío exprés',
+    'Cliente en Pereira acaba de ordenar',
+    'Pedido desde Manizales — Combo 5×30ml',
+    'Alguien en Cúcuta compró para regalo',
+    'Venta en Ibagué hace un momento',
+    'Cliente en Villavicencio viendo fragancias',
+    'Pedido de Pasto recién confirmado',
+    'Alguien en Montería eligió Envío Rápido',
+    'Compra desde Neiva hace 15 min',
+    'Cliente en Armenia ordenó 2 fragancias',
+    
+    // Pedidos múltiples / combos
+    'Combo 3×$80.000 — el más elegido',
+    'Combo 5×$128.000 — superventas',
+    'Alguien acaba de llevar 10×$240.000',
+    'Cliente pidió 5 fragancias diferentes',
+    'Venta: 3 de 30ml para probar variedades',
+    'Alguien compró el set completo 30+50+100ml',
+    
+    // Productos específicos con variedad
+    'Trascendencia — 3 pedidos hoy',
+    'Ambición — recién agotado en 30ml',
+    'Misterio — volando en talla 50ml',
+    'Desvelo — preferido para citas',
+    'Celebración — ideal para regalo',
+    'Gracia — elegancia en frasco',
+    'Presencia — sofisticación total',
+    'Éxtasis — explosión floral favorita',
+    'Nostalgia — el clásico reinventado',
+    'Impulso — fresco y atlético',
+    
+    // Urgencia / escasez
+    'Solo quedan 8 unidades de Conquista 30ml',
+    'Últimas 5 unidades de Dualidad 50ml',
+    'Corre — se agota rápido los fines de semana',
+    'Alta demanda: entrega puede tardar 1 día más',
+    '4 personas tienen Conquista en su carrito',
+    '3 personas viendo Despertar ahora mismo',
+    
+    // Actividad en tiempo real
+    '5 personas están viendo fragancias ahora',
+    '8 personas explorando la colección masculina',
+    '6 personas interesadas en fragancias unisex',
+    '12 personas viendo ofertas de 30ml',
+    'Alguien acaba de agregar al carrito',
+    'Carrito activo: 3 personas comprando ahora',
+    
+    // Contexto / uso
+    'Perfecto para el clima de hoy',
+    'Ideal para regalo de cumpleaños',
+    'Fragancia firma para el día a día',
+    'Recomendado para primera impresión',
+    'El favorito de quienes vuelven',
+    'Para quien quiere algo diferente',
+    
+    // Recomendaciones específicas
+    'Para noches especiales: Refugio',
+    'Para el trabajo: Equilibrio',
+    'Para salir: Conquista o Despertar',
+    'Para regalar: Dualidad nunca falla',
+    'Para iniciar tu colección: Combo 3×30ml',
 ];
 
 let socialPulseTimer = null;
