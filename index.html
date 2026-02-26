@@ -213,6 +213,15 @@
             color: var(--gold); font-size: 1rem; font-weight: 600; margin-top: 0.2rem;
             font-family: 'Cormorant', serif; letter-spacing: 0.5px;
         }
+        .size-pill .popular-badge {
+            position: absolute; top: -8px; right: -8px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: var(--dark); font-size: 0.6rem; font-weight: 700;
+            padding: 0.25rem 0.5rem; border-radius: 10px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+        }
+        .size-pill { position: relative; }
 
         /* BOTTLE GRID */
         .bottle-section { display: none; margin-bottom: 1.5rem; }
@@ -830,6 +839,9 @@
 
         <div class="step-label"><span class="step-num">1</span> Elige tu tamaño</div>
         <div class="size-options" id="sizeOptions"></div>
+        <div class="combo-hint" style="margin:-1rem 0 1.5rem;font-size:0.8rem;color:var(--gold-light);opacity:0.8;">
+            💡 <strong>Consejo:</strong> Lleva 2 o más de 30ml y ahorra en envío. Perfecto para probar diferentes esencias.
+        </div>
 
         <div class="bottle-section" id="bottleSection">
             <div class="step-label"><span class="step-num">2</span> Elige tu frasco</div>
@@ -1325,7 +1337,7 @@ function openModal(id) {
     document.getElementById('notesHeart').textContent = p.heart.join(' \u00b7 ');
     document.getElementById('notesBase').textContent = p.base.join(' \u00b7 ');
 
-    // Savings calculator (ergodicity: show time-average savings, not just unit price)
+    // Savings calculator - sin price anchoring, solo ahorro real
     const modalSav = document.getElementById('modalSavings');
     const origP = ORIGINAL_PRICES[p.inspired];
     if (origP) {
@@ -1336,25 +1348,28 @@ function openModal(id) {
         const yearSaved = saved * 3;
         document.getElementById('modalSavingsContent').innerHTML = `
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
-                <div><span style="text-decoration:line-through;color:var(--gray);font-size:0.8rem;">Original: ${origP}</span>
-                <span style="margin-left:0.5rem;color:#4ade80;font-weight:600;">EE: $${eePrice.toLocaleString('es-CO')}</span></div>
-                <div style="background:rgba(74,222,128,0.1);padding:0.3rem 0.8rem;border-radius:15px;font-size:0.8rem;color:#4ade80;font-weight:600;">-${pct}%</div>
+                <div style="color:var(--gold-light);font-size:0.85rem;">
+                    <span style="color:#4ade80;font-weight:600;">Ahorras ${pct}%</span> vs perfume original
+                </div>
+                <div style="background:rgba(74,222,128,0.1);padding:0.3rem 0.8rem;border-radius:15px;font-size:0.8rem;color:#4ade80;font-weight:600;">-$${saved.toLocaleString('es-CO')}</div>
             </div>
             <div style="margin-top:0.5rem;font-size:0.78rem;color:var(--gray);">
-                Ahorras <strong style="color:#4ade80;">$${saved.toLocaleString('es-CO')}</strong> por frasco ·
+                <strong style="color:#4ade80;">$${saved.toLocaleString('es-CO')}</strong> por frasco ·
                 <strong style="color:#4ade80;">$${yearSaved.toLocaleString('es-CO')}</strong>/año<span style="opacity:0.5;"> (≈3 compras)</span>
             </div>`;
         modalSav.style.display = 'block';
     } else { modalSav.style.display = 'none'; }
 
-    // Size options
+    // Size options - 30ml como más popular
     const sizeEl = document.getElementById('sizeOptions');
-    sizeEl.innerHTML = Object.entries(p.prices).map(([s, pr]) =>
-        `<div class="size-pill" onclick="selectSize(${s})" data-size="${s}">
+    sizeEl.innerHTML = Object.entries(p.prices).map(([s, pr]) => {
+        const popularBadge = s === '30' ? '<span class="popular-badge">⭐ Más Popular</span>' : '';
+        return `<div class="size-pill" onclick="selectSize(${s})" data-size="${s}">
+            ${popularBadge}
             <div class="sz">${s} ml</div>
             <div class="sz-price">$${pr.toLocaleString('es-CO')}</div>
-        </div>`
-    ).join('');
+        </div>`;
+    }).join('');
 
     document.getElementById('bottleSection').classList.remove('visible');
     const addBtn = document.getElementById('btnAddCart');
