@@ -703,7 +703,7 @@
     <div class="testimonials-grid">
         <div class="testimonial-card">
             <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-            <p class="testimonial-text">Pedí el Aventus y quedé impresionado. La duración es increíble y el aroma es prácticamente idéntico al original. Ya voy por mi tercera compra.</p>
+            <p class="testimonial-text">Me pedí "Conquista" y quedé impresionado. La duración es increíble y el aroma es espectacular. Ya voy por mi tercera compra.</p>
             <div class="testimonial-author">
                 <div class="testimonial-avatar">A</div>
                 <div class="testimonial-info">
@@ -714,7 +714,7 @@
         </div>
         <div class="testimonial-card">
             <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-            <p class="testimonial-text">El Good Girl es mi favorito. Me llegan siempre bien empacados y el envío fue más rápido de lo que esperaba. Totalmente recomendado.</p>
+            <p class="testimonial-text">"Dualidad" se convirtió en mi favorito. Me llegan siempre bien empacados y el envío fue más rápido de lo que esperaba. Totalmente recomendado.</p>
             <div class="testimonial-author">
                 <div class="testimonial-avatar">V</div>
                 <div class="testimonial-info">
@@ -1337,28 +1337,8 @@ function openModal(id) {
     document.getElementById('notesHeart').textContent = p.heart.join(' \u00b7 ');
     document.getElementById('notesBase').textContent = p.base.join(' \u00b7 ');
 
-    // Savings calculator - sin price anchoring, solo ahorro real
-    const modalSav = document.getElementById('modalSavings');
-    const origP = ORIGINAL_PRICES[p.inspired];
-    if (origP) {
-        const origNum = parseInt(origP.replace(/[^\d]/g,''));
-        const eePrice = p.prices[100] || p.prices[50];
-        const saved = origNum - eePrice;
-        const pct = Math.round((saved / origNum) * 100);
-        const yearSaved = saved * 3;
-        document.getElementById('modalSavingsContent').innerHTML = `
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
-                <div style="color:var(--gold-light);font-size:0.85rem;">
-                    <span style="color:#4ade80;font-weight:600;">Ahorras ${pct}%</span> vs perfume original
-                </div>
-                <div style="background:rgba(74,222,128,0.1);padding:0.3rem 0.8rem;border-radius:15px;font-size:0.8rem;color:#4ade80;font-weight:600;">-$${saved.toLocaleString('es-CO')}</div>
-            </div>
-            <div style="margin-top:0.5rem;font-size:0.78rem;color:var(--gray);">
-                <strong style="color:#4ade80;">$${saved.toLocaleString('es-CO')}</strong> por frasco ·
-                <strong style="color:#4ade80;">$${yearSaved.toLocaleString('es-CO')}</strong>/año<span style="opacity:0.5;"> (≈3 compras)</span>
-            </div>`;
-        modalSav.style.display = 'block';
-    } else { modalSav.style.display = 'none'; }
+    // Savings calculator removed — no price comparisons with original brands to avoid legal risk
+    document.getElementById('modalSavings').style.display = 'none';
 
     // Size options - 30ml como más popular
     const sizeEl = document.getElementById('sizeOptions');
@@ -1671,49 +1651,7 @@ function showSocialPulse() {
 // Start after 15 seconds on page
 setTimeout(showSocialPulse, 15000);
 
-// Original price map for anchoring (Cialdini + Kahneman anchoring bias)
-const ORIGINAL_PRICES = {
-    'Creed Aventus': '$800.000+',
-    'Dior Sauvage': '$550.000+',
-    'Paco Rabanne One Million': '$420.000+',
-    'Bleu de Chanel': '$580.000+',
-    'Carolina Herrera Good Girl': '$480.000+',
-    'Versace Eros': '$380.000+',
-    'YSL Black Opium': '$520.000+',
-    'MFK Baccarat Rouge 540': '$1.200.000+',
-    'Tom Ford Oud Wood': '$900.000+',
-    'Tom Ford Tobacco Vanille': '$950.000+',
-    'Lancôme La Vie Est Belle': '$450.000+',
-    'Viktor & Rolf Flowerbomb': '$500.000+',
-    'Xerjoff Erba Pura': '$750.000+',
-    'Chanel Coco Mademoiselle': '$600.000+',
-    'Chanel No. 5': '$550.000+',
-    'Dior J\'adore': '$500.000+',
-};
-
-// Patch renderProducts to show price anchor on popular items
-const _origRender = renderProducts;
-renderProducts = function() {
-    _origRender();
-    // Add price anchors to cards
-    document.querySelectorAll('.product-card').forEach(card => {
-        const nameEl = card.querySelector('h3');
-        if (!nameEl) return;
-        const name = nameEl.textContent;
-        const p = PRODUCTS.find(x => x.name === name);
-        if (!p) return;
-        const originalPrice = ORIGINAL_PRICES[p.inspired];
-        if (originalPrice) {
-            const priceEl = card.querySelector('.price-from');
-            if (priceEl && !priceEl.querySelector('.price-anchor')) {
-                priceEl.insertAdjacentHTML('afterend',
-                    `<div class="price-anchor">Original: <span class="original-price">${originalPrice}</span></div>`);
-            }
-        }
-    });
-};
-// Re-render to apply anchors
-renderProducts();
+// Price anchoring removed — no comparisons with original brands to avoid legal risk
 </script>
 </body>
 </html>
