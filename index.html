@@ -866,6 +866,8 @@
         <span></span><span></span><span></span>
     </button>
     <div class="nav-links">
+        <a href="#combos" style="color:var(--gold);">⭐ Combos</a>
+        <a href="#linea-elite" style="color:var(--gold-light);">👑 Elite</a>
         <a href="#productos">Fragancias</a>
         <a href="#envio">Envío</a>
         <a href="#nosotros">Nosotros</a>
@@ -882,14 +884,129 @@
     <div class="hero-ornament"></div>
 </section>
 
-<div style="background:rgba(184,151,106,0.04);border-bottom:1px solid rgba(184,151,106,0.12);padding:0.8rem 2rem;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;">
-    <span style="color:var(--gold);font-family:'Cormorant',serif;font-size:0.85rem;letter-spacing:2px;">COMBOS 30ml</span>
-    <span style="color:var(--gray);font-size:0.8rem;">3 × $80.000</span>
-    <span style="color:rgba(184,151,106,0.3);">|</span>
-    <span style="color:var(--gray);font-size:0.8rem;">5 × $128.000</span>
-    <span style="color:rgba(184,151,106,0.3);">|</span>
-    <span style="color:var(--gray);font-size:0.8rem;">10 × $240.000</span>
-</div>
+<!-- COMBOS DESTACADOS -->
+<section id="combos" style="background:linear-gradient(135deg, var(--darker) 0%, #1a1510 50%, var(--darker) 100%);padding:3rem 2rem;border-bottom:1px solid rgba(184,151,106,0.15);">
+    <h2 style="font-family:'Cormorant',serif;font-size:2rem;text-align:center;color:var(--gold);margin-bottom:0.5rem;letter-spacing:4px;text-transform:uppercase;">✨ COMBOS ESPECIALES</h2>
+    <p style="text-align:center;color:var(--gray);font-size:0.9rem;margin-bottom:2rem;letter-spacing:1px;">Más fragancias, mejores precios · Ahorra hasta $60.000</p>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;">
+        <!-- Combo 3 -->
+        <div style="background:linear-gradient(145deg, rgba(184,151,106,0.1) 0%, rgba(184,151,106,0.03) 100%);border:2px solid rgba(184,151,106,0.3);border-radius:16px;padding:1.5rem;text-align:center;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
+            <span style="display:inline-block;background:rgba(184,151,106,0.15);color:var(--gold);font-size:0.7rem;letter-spacing:2px;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;">Más Popular</span>
+            <h3 style="font-family:'Cormorant',serif;font-size:1.8rem;color:var(--white);margin-bottom:0.5rem;">Combo 3×30ml</h3>
+            <div style="font-size:2.5rem;color:var(--gold);font-weight:600;margin:1rem 0;">$80.000</div>
+            <p style="color:var(--gray);font-size:0.85rem;margin-bottom:1rem;">Ahorras $10.000</p>
+            <ul style="list-style:none;padding:0;margin:0 0 1.5rem;text-align:left;color:var(--gray);font-size:0.85rem;">
+                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> 3 fragancias a tu elección</li>
+                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Envío incluido</li>
+                <li style="padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Empaque premium</li>
+            </ul>
+            <button onclick="showComboModal(3)" style="width:100%;padding:1rem;background:transparent;border:2px solid var(--gold);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;border-radius:8px;">Elegir Fragancias</button>
+        </div>
+        
+        <!-- Combo 5 -->
+        <div style="background:linear-gradient(145deg, rgba(184,151,106,0.15) 0%, rgba(184,151,106,0.05) 100%);border:2px solid var(--gold);border-radius:16px;padding:1.5rem;text-align:center;position:relative;overflow:hidden;transform:scale(1.02);">
+            <div style="position:absolute;top:0;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.4rem 1rem;border-radius:0 0 8px 8px;text-transform:uppercase;font-weight:600;">⭐ Más Vendido</div>
+            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
+            <span style="display:inline-block;background:rgba(184,151,106,0.25);color:var(--gold);font-size:0.7rem;letter-spacing:2px;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;">Superventas</span>
+            <h3 style="font-family:'Cormorant',serif;font-size:1.8rem;color:var(--white);margin-bottom:0.5rem;">Combo 5×30ml</h3>
+            <div style="font-size:2.5rem;color:var(--gold);font-weight:600;margin:1rem 0;">$128.000</div>
+            <p style="color:var(--gray);font-size:0.85rem;margin-bottom:1rem;">Ahorras $22.000</p>
+            <ul style="list-style:none;padding:0;margin:0 0 1.5rem;text-align:left;color:var(--gray);font-size:0.85rem;">
+                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> 5 fragancias a tu elección</li>
+                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Envío incluido</li>
+                <li style="padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Muestra gratis sorpresa</li>
+            </ul>
+            <button onclick="showComboModal(5)" style="width:100%;padding:1rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;border-radius:8px;font-weight:600;">Elegir Fragancias</button>
+        </div>
+        
+        <!-- Combo 10 -->
+        <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, rgba(184,151,106,0.02) 100%);border:2px solid rgba(184,151,106,0.2);border-radius:16px;padding:1.5rem;text-align:center;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
+            <span style="display:inline-block;background:rgba(184,151,106,0.15);color:var(--gold);font-size:0.7rem;letter-spacing:2px;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;">Mayor Ahorro</span>
+            <h3 style="font-family:'Cormorant',serif;font-size:1.8rem;color:var(--white);margin-bottom:0.5rem;">Combo 10×30ml</h3>
+            <div style="font-size:2.5rem;color:var(--gold);font-weight:600;margin:1rem 0;">$240.000</div>
+            <p style="color:var(--gray);font-size:0.85rem;margin-bottom:1rem;">Ahorras $60.000</p>
+            <ul style="list-style:none;padding:0;margin:0 0 1.5rem;text-align:left;color:var(--gray);font-size:0.85rem;">
+                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> 10 fragancias a tu elección</li>
+                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Envío incluido</li>
+                <li style="padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> 2 muestras gratis sorpresa</li>
+            </ul>
+            <button onclick="showComboModal(10)" style="width:100%;padding:1rem;background:transparent;border:2px solid var(--gold);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;border-radius:8px;">Elegir Fragancias</button>
+        </div>
+    </div>
+</section>
+
+<!-- LÍNEA ÉLITE -->
+<section id="linea-elite" style="background:linear-gradient(180deg, var(--darker) 0%, #0a0a0a 100%);padding:3rem 2rem;border-bottom:1px solid rgba(184,151,106,0.15);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div style="text-align:center;margin-bottom:2rem;">
+            <span style="display:inline-block;background:linear-gradient(135deg, var(--gold) 0%, #D4C4A8 100%);color:var(--dark);font-size:0.7rem;letter-spacing:3px;padding:0.4rem 1.5rem;border-radius:20px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;">Nueva Colección</span>
+            <h2 style="font-family:'Cormorant',serif;font-size:2.5rem;color:var(--gold);margin-bottom:0.5rem;letter-spacing:4px;text-transform:uppercase;">👑 LÍNEA ÉLITE</h2>
+            <p style="color:var(--gray);font-size:0.95rem;max-width:600px;margin:0 auto;line-height:1.6;">Fragancias exclusivas con concentración superior al 25%. Las más solicitadas, en presentaciones premium de colección.</p>
+        </div>
+        
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:2rem;">
+            <!-- Elite Card 1 -->
+            <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, transparent 100%);border:1px solid rgba(184,151,106,0.25);border-radius:20px;padding:2rem;position:relative;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,151,106,0.25)';this.style.transform='translateY(0)'">
+                <div style="position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.3rem 0.8rem;border-radius:4px;text-transform:uppercase;font-weight:600;">50ml</div>
+                <div style="font-size:3rem;margin-bottom:1rem;">🥃</div>
+                <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Aventus Elite</h3>
+                <p style="color:var(--gold-light);font-size:0.85rem;font-style:italic;margin-bottom:1rem;">Inspirado en Creed Aventus</p>
+                <p style="color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:1.5rem;">La fragancia más icónica del mundo. Piña audaz, abedul ahumado y ámbar gris. Concentración 28%.</p>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:1.8rem;color:var(--gold);font-weight:600;">$85.000</span>
+                    <button onclick="addToCart({name:'Aventus Elite',size:'50ml',price:85000,linea:'elite'})" style="padding:0.8rem 1.5rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-weight:500;transition:all 0.3s;">Agregar</button>
+                </div>
+            </div>
+            
+            <!-- Elite Card 2 -->
+            <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, transparent 100%);border:1px solid rgba(184,151,106,0.25);border-radius:20px;padding:2rem;position:relative;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,151,106,0.25)';this.style.transform='translateY(0)'">
+                <div style="position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.3rem 0.8rem;border-radius:4px;text-transform:uppercase;font-weight:600;">50ml</div>
+                <div style="font-size:3rem;margin-bottom:1rem;">🌹</div>
+                <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Baccarat Elite</h3>
+                <p style="color:var(--gold-light);font-size:0.85rem;font-style:italic;margin-bottom:1rem;">Inspirado en MFK Baccarat Rouge</p>
+                <p style="color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:1.5rem;">Azafrán misterioso, cedro ahumado y ámbar resinoso. La fragancia más buscada del momento. Concentración 26%.</p>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:1.8rem;color:var(--gold);font-weight:600;">$85.000</span>
+                    <button onclick="addToCart({name:'Baccarat Elite',size:'50ml',price:85000,linea:'elite'})" style="padding:0.8rem 1.5rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-weight:500;transition:all 0.3s;">Agregar</button>
+                </div>
+            </div>
+            
+            <!-- Elite Card 3 -->
+            <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, transparent 100%);border:1px solid rgba(184,151,106,0.25);border-radius:20px;padding:2rem;position:relative;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,151,106,0.25)';this.style.transform='translateY(0)'">
+                <div style="position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.3rem 0.8rem;border-radius:4px;text-transform:uppercase;font-weight:600;">50ml</div>
+                <div style="font-size:3rem;margin-bottom:1rem;">🌊</div>
+                <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Sauvage Elite</h3>
+                <p style="color:var(--gold-light);font-size:0.85rem;font-style:italic;margin-bottom:1rem;">Inspirado en Dior Sauvage Elixir</p>
+                <p style="color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:1.5rem;">Intenso y salvaje con especias orientales y lavanda profunda. Versión más concentrada. 27% de esencia.</p>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:1.8rem;color:var(--gold);font-weight:600;">$85.000</span>
+                    <button onclick="addToCart({name:'Sauvage Elite',size:'50ml',price:85000,linea:'elite'})" style="padding:0.8rem 1.5rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-weight:500;transition:all 0.3s;">Agregar</button>
+                </div>
+            </div>
+            
+            <!-- Elite Card 4 -->
+            <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, transparent 100%);border:1px solid rgba(184,151,106,0.25);border-radius:20px;padding:2rem;position:relative;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,151,106,0.25)';this.style.transform='translateY(0)'">
+                <div style="position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.3rem 0.8rem;border-radius:4px;text-transform:uppercase;font-weight:600;">50ml</div>
+                <div style="font-size:3rem;margin-bottom:1rem;">⚡</div>
+                <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Invictus Elite</h3>
+                <p style="color:var(--gold-light);font-size:0.85rem;font-style:italic;margin-bottom:1rem;">Inspirado en Invictus Victory</p>
+                <p style="color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:1.5rem;">Edición más intensa con pimienta rosa, vainilla salvaje y ámbar profundo. Energía concentrada al 26%.</p>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:1.8rem;color:var(--gold);font-weight:600;">$85.000</span>
+                    <button onclick="addToCart({name:'Invictus Elite',size:'50ml',price:85000,linea:'elite'})" style="padding:0.8rem 1.5rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-weight:500;transition:all 0.3s;">Agregar</button>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align:center;margin-top:2rem;">
+            <p style="color:var(--gray);font-size:0.85rem;margin-bottom:1rem;">Presentación premium · Frasco de colección · Estuche de regalo incluido</p>
+            <a href="#productos" style="display:inline-block;padding:1rem 2rem;border:2px solid var(--gold);color:var(--gold);text-decoration:none;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;border-radius:8px;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)'" onmouseout="this.style.background='transparent';this.style.color='var(--gold)'">Ver Colección Completa</a>
+        </div>
+    </div>
+</section>
 
 <section id="productos">
     <h2 class="section-title">Nuestras Fragancias</h2>
@@ -2296,6 +2413,219 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add quick add buttons on initial render
     setTimeout(addQuickAddButtons, 100);
 });
+
+// ============================================
+// COMBOS & LÍNEA ÉLITE FUNCTIONS
+// ============================================
+
+// Show combo modal for selecting fragrances
+function showComboModal(comboSize) {
+    const comboNames = { 3: 'Combo 3×30ml', 5: 'Combo 5×30ml', 10: 'Combo 10×30ml' };
+    const comboPrices = { 3: 80000, 5: 128000, 10: 240000 };
+    const savings = { 3: 10000, 5: 22000, 10: 60000 };
+    
+    // Create modal HTML
+    const modalHTML = `
+        <div id="comboModal" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity 0.3s;">
+            <div style="background:var(--dark);border:1px solid rgba(184,151,106,0.3);border-radius:20px;max-width:600px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;">
+                <div style="padding:1.5rem;border-bottom:1px solid rgba(184,151,106,0.15);display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--gold);margin:0;">${comboNames[comboSize]}</h3>
+                        <p style="color:var(--gray);font-size:0.85rem;margin:0.5rem 0 0;">Selecciona ${comboSize} fragancias · Ahorras $${savings[comboSize].toLocaleString('es-CO')}</p>
+                    </div>
+                    <button onclick="closeComboModal()" style="background:none;border:none;color:var(--gray);font-size:1.5rem;cursor:pointer;padding:0.5rem;line-height:1;">×</button>
+                </div>
+                <div style="padding:1.5rem;overflow-y:auto;flex:1;">
+                    <div id="comboSelected" style="margin-bottom:1.5rem;">
+                        <p style="color:var(--gold);font-size:0.85rem;margin-bottom:0.5rem;">Seleccionados: <span id="comboCount">0</span>/${comboSize}</p>
+                        <div id="comboList" style="display:flex;flex-wrap:wrap;gap:0.5rem;"></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.8rem;max-height:300px;overflow-y:auto;padding-right:0.5rem;">
+                        ${PRODUCTS.map(p => `
+                            <div class="combo-item" data-id="${p.id}" onclick="toggleComboItem(this, ${p.id})" style="background:rgba(184,151,106,0.05);border:1px solid rgba(184,151,106,0.15);border-radius:8px;padding:0.8rem;cursor:pointer;transition:all 0.2s;">
+                                <div style="font-size:0.85rem;color:var(--white);font-weight:500;margin-bottom:0.3rem;">${p.name}</div>
+                                <div style="font-size:0.7rem;color:var(--gold-light);font-style:italic;">${p.inspired}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div style="padding:1.5rem;border-top:1px solid rgba(184,151,106,0.15);display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <span style="font-size:1.5rem;color:var(--gold);font-weight:600;">$${comboPrices[comboSize].toLocaleString('es-CO')}</span>
+                    </div>
+                    <button id="comboAddBtn" onclick="addComboToCart(${comboSize}, ${comboPrices[comboSize]})" disabled style="padding:1rem 2rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;border-radius:8px;font-weight:600;cursor:pointer;opacity:0.5;transition:all 0.3s;">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+        document.getElementById('comboModal').style.opacity = '1';
+    });
+    
+    // Store combo state
+    window.comboSelection = { size: comboSize, items: [] };
+    
+    // Track event
+    gtag && gtag('event', 'view_combo', { combo_size: comboSize, combo_name: comboNames[comboSize] });
+}
+
+function closeComboModal() {
+    const modal = document.getElementById('comboModal');
+    if (modal) {
+        modal.style.opacity = '0';
+        setTimeout(() => modal.remove(), 300);
+    }
+}
+
+function toggleComboItem(el, productId) {
+    const product = PRODUCTS.find(p => p.id === productId);
+    const isSelected = el.classList.contains('selected');
+    const maxSize = window.comboSelection.size;
+    
+    if (isSelected) {
+        // Remove
+        el.classList.remove('selected');
+        el.style.background = 'rgba(184,151,106,0.05)';
+        el.style.borderColor = 'rgba(184,151,106,0.15)';
+        window.comboSelection.items = window.comboSelection.items.filter(id => id !== productId);
+    } else if (window.comboSelection.items.length < maxSize) {
+        // Add
+        el.classList.add('selected');
+        el.style.background = 'rgba(184,151,106,0.2)';
+        el.style.borderColor = 'var(--gold)';
+        window.comboSelection.items.push(productId);
+    }
+    
+    // Update UI
+    document.getElementById('comboCount').textContent = window.comboSelection.items.length;
+    document.getElementById('comboList').innerHTML = window.comboSelection.items.map(id => {
+        const p = PRODUCTS.find(x => x.id === id);
+        return `<span style="background:var(--gold);color:var(--dark);padding:0.3rem 0.8rem;border-radius:4px;font-size:0.75rem;">${p.name}</span>`;
+    }).join('');
+    
+    // Enable/disable button
+    const btn = document.getElementById('comboAddBtn');
+    if (window.comboSelection.items.length === maxSize) {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+    } else {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        btn.style.cursor = 'not-allowed';
+    }
+}
+
+function addComboToCart(size, price) {
+    const items = window.comboSelection.items.map(id => PRODUCTS.find(p => p.id === id));
+    
+    // Add combo as special item
+    cart.push({
+        name: `Combo ${size}×30ml`,
+        size: '30ml (combo)',
+        price: price / size,
+        combo: true,
+        comboSize: size,
+        comboItems: items.map(i => i.name)
+    });
+    
+    // Add individual tracking items
+    items.forEach(product => {
+        cart.push({
+            name: product.name,
+            size: '30ml',
+            price: 0, // Included in combo
+            comboItem: true,
+            parentCombo: `${size}×30ml`
+        });
+    });
+    
+    updateCart();
+    closeComboModal();
+    
+    // Show toast
+    showToast(`✅ Combo ${size}×30ml agregado al carrito`);
+    
+    // Track
+    gtag && gtag('event', 'add_to_cart', {
+        currency: 'COP',
+        value: price,
+        items: [{
+            item_name: `Combo ${size}×30ml`,
+            item_variant: '30ml combo',
+            price: price,
+            quantity: 1
+        }]
+    });
+}
+
+// Simple toast notification
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.innerHTML = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: var(--gold);
+        color: var(--dark);
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        z-index: 10000;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease;
+        font-weight: 500;
+    `;
+    document.body.appendChild(toast);
+    
+    requestAnimationFrame(() => {
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+    
+    setTimeout(() => {
+        toast.style.transform = 'translateX(-50%) translateY(100px)';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Override addToCart to support Elite products
+const _originalAddToCart = addToCart;
+addToCart = function(productData) {
+    if (productData.linea === 'elite') {
+        // Elite products have special handling
+        cart.push({
+            name: productData.name,
+            size: productData.size,
+            price: productData.price,
+            linea: 'elite'
+        });
+        updateCart();
+        showToast(`✨ ${productData.name} agregado · Línea Elite`);
+        
+        gtag && gtag('event', 'add_to_cart', {
+            currency: 'COP',
+            value: productData.price,
+            items: [{
+                item_name: productData.name,
+                item_category: 'Línea Elite',
+                item_variant: productData.size,
+                price: productData.price,
+                quantity: 1
+            }]
+        });
+    } else {
+        // Regular flow - will be handled by existing addToCart
+        // Call existing modal flow
+        openModal(productData);
+    }
+};
 
 // Track page views
 gtag && gtag('event', 'page_view', {
