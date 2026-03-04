@@ -11,25 +11,12 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://empireessence.co">
     <meta property="og:image" content="https://empireessence.co/img/og-image.jpg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/icon-192.png">
     <link rel="canonical" href="https://empireessence.co">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Preload critical images -->
-    <link rel="preload" as="image" href="/img/products/2026-02-28-fragrance-30ml-hero.png" type="image/png">
-    
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H95JBKTZ2B"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-H95JBKTZ2B', {
-        send_page_view: true,
-        currency: 'COP'
-      });
-    </script>
-    
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -42,6 +29,9 @@
       "priceRange": "$30.000 - $70.000 COP"
     }
     </script>
+    <!-- Google Analytics — reemplaza G-XXXXXXXXXX con tu ID real -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
     <style>
         :root {
             --gold: #B8976A;
@@ -229,15 +219,6 @@
             color: var(--gold); font-size: 1rem; font-weight: 600; margin-top: 0.2rem;
             font-family: 'Cormorant', serif; letter-spacing: 0.5px;
         }
-        .size-pill .popular-badge {
-            position: absolute; top: -8px; right: -8px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: var(--dark); font-size: 0.6rem; font-weight: 700;
-            padding: 0.25rem 0.5rem; border-radius: 10px;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(245,158,11,0.3);
-        }
-        .size-pill { position: relative; }
 
         /* BOTTLE GRID */
         .bottle-section { display: none; margin-bottom: 1.5rem; }
@@ -398,159 +379,6 @@
             .product-card { padding: 1rem; }
             .bottles-grid { grid-template-columns: repeat(3, 1fr); }
             .testimonials-grid { grid-template-columns: 1fr; }
-            
-            /* v3.8 Mobile Optimizations */
-            .filter-btn { 
-                min-height: 48px; 
-                padding: 0.75rem 1.25rem;
-                font-size: 0.85rem;
-            }
-            .product-card {
-                min-height: 220px;
-            }
-            .quick-add-btn {
-                width: 48px;
-                height: 48px;
-                font-size: 1.5rem;
-            }
-            .cart-icon {
-                width: 56px;
-                height: 56px;
-            }
-        }
-
-        /* v3.8 - Quick Add Button */
-        .quick-add-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--gold);
-            color: var(--dark);
-            border: none;
-            font-size: 1.4rem;
-            font-weight: 700;
-            cursor: pointer;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            box-shadow: 0 2px 12px rgba(184,151,106,0.4);
-        }
-        .product-card:hover .quick-add-btn,
-        .product-card:focus .quick-add-btn {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .quick-add-btn:hover {
-            transform: scale(1.1);
-            background: var(--gold-light);
-        }
-        .quick-add-btn:active {
-            transform: scale(0.95);
-        }
-        
-        /* Touch devices - always show quick add */
-        @media (hover: none) {
-            .quick-add-btn {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* v3.8 - Shipping Progress Bar */
-        .shipping-progress-container {
-            max-width: 500px;
-            margin: 0 auto 2rem;
-            padding: 1rem 1.5rem;
-            background: rgba(184,151,106,0.04);
-            border: 1px solid rgba(184,151,106,0.15);
-            border-radius: 12px;
-        }
-        .shipping-progress-text {
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--gold-light);
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-        }
-        .shipping-progress-bar-bg {
-            height: 8px;
-            background: rgba(184,151,106,0.15);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .shipping-progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
-            border-radius: 4px;
-            transition: width 0.5s ease;
-            position: relative;
-        }
-        .shipping-progress-bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        /* v3.8 - Improved Filter Buttons (48px minimum) */
-        .filter-btn {
-            min-height: 40px;
-            min-width: 48px;
-            padding: 0.5rem 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* v3.8 - Sticky Search Enhancement */
-        .search-sticky-wrapper {
-            position: sticky;
-            top: 70px;
-            z-index: 90;
-            background: rgba(17,17,17,0.98);
-            padding: 1rem 0;
-            margin: -1rem -2rem 1.5rem;
-            backdrop-filter: blur(10px);
-        }
-
-        /* v3.8 - Cart Recovery Badge */
-        .cart-recovery-badge {
-            position: fixed;
-            bottom: 6rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--gold);
-            color: var(--dark);
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            z-index: 400;
-            opacity: 0;
-            transition: all 0.4s;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(184,151,106,0.4);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .cart-recovery-badge.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        .cart-recovery-badge:hover {
-            transform: translateX(-50%) translateY(-2px);
         }
 
         /* Toast */
@@ -595,7 +423,7 @@
             font-size: 0.62rem; text-transform: uppercase; letter-spacing: 1px;
             padding: 0.15rem 0.5rem; border-radius: 10px; margin-bottom: 0.3rem;
         }
-        .avail-badge.disponible { color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+        .avail-badge.disponible { color: var(--gold); border: 1px solid rgba(184,151,106,0.3); }
         .avail-badge.encargo { color: var(--gray); border: 1px solid rgba(136,136,136,0.3); }
 
         /* BACK TO TOP */
@@ -610,102 +438,16 @@
         .back-to-top:hover svg { stroke: var(--dark); }
         .back-to-top.visible { display: flex; }
 
-        /* PRODUCT COUNT INDICATOR */
+        /* PRODUCT COUNT */
         .results-count {
             text-align: center; color: var(--gray); font-size: 0.78rem;
             margin-bottom: 1rem; letter-spacing: 1px;
         }
 
-        /* SMOOTH SCROLL */
+        /* SMOOTH SCROLL & CARD ANIMATION */
         html { scroll-behavior: smooth; }
-
-        /* CARD ENTRANCE ANIMATION */
         .product-card { opacity: 0; animation: cardIn 0.3s ease forwards; }
         @keyframes cardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .product-card.loading .frag-icon { height: 48px; width: 48px; margin: 0 auto 0.8rem; }
-        .product-card.loading h3 { height: 1.15rem; width: 80%; margin: 0 auto 0.3rem; }
-        .product-card.loading .inspired-by { height: 0.78rem; width: 60%; margin: 0 auto; }
-
-        /* EMPTY STATE v3.7 */
-        .empty-state {
-            text-align: center; padding: 4rem 2rem; max-width: 400px; margin: 0 auto;
-        }
-        .empty-state-icon {
-            width: 80px; height: 80px; margin: 0 auto 1.5rem;
-            background: rgba(184,151,106,0.05); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            border: 1px solid rgba(184,151,106,0.1);
-        }
-        .empty-state-icon svg {
-            width: 40px; height: 40px; stroke: var(--gold); stroke-width: 1.5;
-            fill: none; opacity: 0.6;
-        }
-        .empty-state h3 {
-            font-family: 'Cormorant', serif; font-size: 1.5rem; color: var(--gold);
-            margin-bottom: 0.8rem; font-weight: 500;
-        }
-        .empty-state p {
-            color: var(--gray); font-size: 0.9rem; line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        .empty-state-suggestions {
-            display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
-        }
-        .empty-state-suggestions span {
-            font-size: 0.75rem; color: var(--gray); padding: 0.4rem 0.8rem;
-            border: 1px solid rgba(184,151,106,0.2); border-radius: 20px;
-            cursor: pointer; transition: all 0.3s;
-        }
-        .empty-state-suggestions span:hover {
-            border-color: var(--gold); color: var(--gold-light); background: rgba(184,151,106,0.05);
-        }
-
-        /* FILTER TAGS ACTIVE SUMMARY v3.7 */
-        .active-filters-bar {
-            display: none; justify-content: center; align-items: center;
-            gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;
-            padding: 0.5rem; background: rgba(184,151,106,0.03);
-            border-radius: 8px; border: 1px solid rgba(184,151,106,0.1);
-        }
-        .active-filters-bar.visible { display: flex; }
-        .active-filters-bar .filter-tag {
-            display: inline-flex; align-items: center; gap: 0.3rem;
-            background: rgba(184,151,106,0.1); color: var(--gold-light);
-            padding: 0.3rem 0.7rem; border-radius: 15px;
-            font-size: 0.72rem; cursor: pointer; transition: all 0.2s;
-        }
-        .active-filters-bar .filter-tag:hover {
-            background: rgba(229,62,62,0.2); color: #e74c3c;
-        }
-        .active-filters-bar .filter-tag svg {
-            width: 12px; height: 12px; fill: none; stroke: currentColor;
-            stroke-width: 2;
-        }
-        .active-filters-label {
-            font-size: 0.7rem; color: var(--gray); text-transform: uppercase;
-            letter-spacing: 1px; margin-right: 0.5rem;
-        }
-
-        /* SHIPPING BADGE v3.7 */
-        .shipping-badge {
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            background: rgba(74,222,128,0.1); color: #4ade80;
-            padding: 0.4rem 0.8rem; border-radius: 20px;
-            font-size: 0.75rem; margin-top: 1rem;
-            border: 1px solid rgba(74,222,128,0.2);
-        }
-        .shipping-badge svg {
-            width: 14px; height: 14px; fill: none; stroke: currentColor;
-            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-        }
-
-        /* ACTIVE FILTER COUNT BADGE */
-        .filter-count {
-            display: inline-flex; align-items: center; justify-content: center;
-            background: var(--gold); color: var(--dark); font-size: 0.6rem;
-            width: 16px; height: 16px; border-radius: 50%; margin-left: 0.3rem;
-            font-weight: 700;
-        }
 
         /* CLEAR FILTERS */
         .clear-filters {
@@ -717,7 +459,7 @@
         .clear-filters.visible { display: inline-flex; align-items: center; gap: 0.3rem; }
         .clear-filters:hover { background: #e74c3c; color: white; }
 
-        /* SIMILAR FRAGRANCES (stigmergy — related products as trail) */
+        /* SIMILAR FRAGRANCES */
         .similar-section { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(184,151,106,0.1); }
         .similar-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 0.8rem; opacity: 0.7; }
         .similar-grid { display: flex; gap: 0.6rem; overflow-x: auto; padding-bottom: 0.5rem; }
@@ -731,100 +473,34 @@
         .similar-card .sim-name { font-family: 'Cormorant', serif; font-size: 0.85rem; margin-bottom: 0.15rem; }
         .similar-card .sim-inspired { font-size: 0.65rem; color: var(--gray); font-style: italic; }
 
-        /* PRICE ANCHOR (show original price for comparison) */
-        .price-anchor {
-            font-size: 0.68rem; color: var(--gray); opacity: 0.5; margin-top: 0.3rem;
+        /* SOCIAL PROOF PULSE */
+        .social-pulse {
+            position: fixed; bottom: 6rem; left: 1.5rem; background: rgba(26,26,26,0.95);
+            border: 1px solid rgba(184,151,106,0.2); border-radius: 10px; padding: 0.6rem 1rem;
+            z-index: 80; display: none; align-items: center; gap: 0.6rem;
+            font-size: 0.78rem; color: var(--gold-light); backdrop-filter: blur(10px);
+            animation: slideInLeft 0.4s ease; max-width: 280px;
         }
-        .price-anchor .original-price {
-            text-decoration: line-through; color: #e74c3c; opacity: 0.7;
-        }
-
-        /* TOOLTIPS v3.3 */
-        [data-tooltip] { position: relative; cursor: help; }
-        [data-tooltip]::after {
-            content: attr(data-tooltip);
-            position: absolute; bottom: 100%; left: 50%;
-            transform: translateX(-50%) translateY(-5px);
-            background: rgba(26,26,26,0.95); color: var(--gold-light);
-            padding: 0.4rem 0.8rem; border-radius: 6px;
-            font-size: 0.7rem; white-space: nowrap;
-            border: 1px solid rgba(184,151,106,0.3);
-            opacity: 0; pointer-events: none; transition: all 0.2s;
-            z-index: 100; font-family: 'Montserrat', sans-serif;
-        }
-        [data-tooltip]:hover::after { opacity: 1; transform: translateX(-50%) translateY(-8px); }
-
-        /* STICKY FILTER CONTAINER v3.3 */
-        .filter-container {
-            position: sticky; top: 70px; z-index: 90;
-            background: rgba(17,17,17,0.95); backdrop-filter: blur(10px);
-            padding: 1rem 0; margin: -1rem -2rem 1.5rem; border-bottom: 1px solid rgba(184,151,106,0.1);
-        }
-
-        /* SORT DROPDOWN v3.3 */
-        .sort-bar {
-            display: flex; justify-content: center; align-items: center;
-            gap: 0.5rem; margin-bottom: 1rem;
-        }
-        .sort-label { color: var(--gray); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
-        .sort-select {
-            background: var(--dark); border: 1px solid rgba(184,151,106,0.3);
-            color: var(--gold); padding: 0.4rem 1rem; border-radius: 20px;
-            font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
-            cursor: pointer; outline: none;
-        }
-        .sort-select:focus { border-color: var(--gold); }
-        .sort-select option { background: var(--dark); color: var(--white); }
-
-        /* SIZE FILTER BAR v3.3 */
-        #sizeFilterBar { margin-top: 0.5rem; }
-
-        /* MOBILE FILTER DRAWER v3.3 */
-        .mobile-filter-btn {
-            display: none; position: fixed; bottom: 6rem; left: 50%;
-            transform: translateX(-50%); z-index: 85;
-            padding: 0.8rem 1.5rem; background: var(--gold); color: var(--dark);
-            border: none; border-radius: 30px; font-family: 'Montserrat', sans-serif;
-            font-weight: 600; font-size: 0.85rem; letter-spacing: 1px;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(184,151,106,0.3);
-            align-items: center; gap: 0.5rem;
-        }
-        .mobile-filter-btn:hover { transform: translateX(-50%) scale(1.05); }
-        @media (max-width: 768px) {
-            .mobile-filter-btn { display: inline-flex; }
-            .filter-container { position: relative; top: 0; }
-            .filter-bar:not(#noteFilterBar) { display: none; }
-            .filter-container.drawer-open .filter-bar:not(#noteFilterBar) { display: flex; flex-direction: column; align-items: center; }
-        }
-
-        /* NOTE FILTER TOOLTIPS */
-        .note-filter { position: relative; }
-        .note-filter:hover::before {
-            content: attr(data-note-desc); position: absolute; bottom: 120%; left: 50%;
-            transform: translateX(-50%); background: rgba(26,26,26,0.95);
-            color: var(--gold-light); padding: 0.4rem 0.8rem; border-radius: 6px;
-            font-size: 0.7rem; white-space: nowrap; border: 1px solid rgba(184,151,106,0.3);
-            z-index: 100; font-family: 'Montserrat', sans-serif; pointer-events: none;
-        }
+        .social-pulse.show { display: flex; }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo" style="display:flex;align-items:center;gap:0.7rem;">
+    <a href="#" class="logo" style="display:flex;align-items:center;gap:0.7rem;text-decoration:none;color:var(--gold);" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
         <svg viewBox="0 0 60 60" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="28" stroke="var(--gold)" stroke-width="1.5"/><text x="16" y="40" font-family="'Cormorant',serif" font-size="28" font-weight="600" fill="var(--gold)" letter-spacing="-4">EE</text></svg>
         EMPIRE ESSENCE
-    </div>
+    </a>
     <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
     </button>
     <div class="nav-links">
-        <a href="#combos" style="color:var(--gold);">⭐ Combos</a>
-        <a href="#linea-elite" style="color:var(--gold-light);">👑 Elite</a>
         <a href="#productos">Fragancias</a>
         <a href="#envio">Envío</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#mayoristas">Mayoristas</a>
+        <a href="/blog/">Blog</a>
     </div>
 </nav>
 
@@ -832,193 +508,61 @@
     <svg viewBox="0 0 120 120" width="90" height="90" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;margin-bottom:1.5rem;"><circle cx="60" cy="60" r="56" stroke="var(--gold)" stroke-width="1.2"/><circle cx="60" cy="60" r="50" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/><text x="28" y="78" font-family="'Cormorant',serif" font-size="56" font-weight="600" fill="var(--gold)" letter-spacing="-6">EE</text></svg>
     <h1>EMPIRE ESSENCE</h1>
     <p class="tagline">Fragancias que despiertan emociones</p>
-    <p style="color:var(--gray);font-size:0.85rem;max-width:500px;margin:0 auto 2rem;position:relative;z-index:1;opacity:0.7;">194 fragancias premium inspiradas en los perfumes más icónicos del mundo. Desde $30.000 con envío a domicilio en Colombia.</p>
+    <p style="color:var(--gray);font-size:0.85rem;max-width:500px;margin:0 auto 2rem;position:relative;z-index:1;opacity:0.7;">Fragancias premium inspiradas en los perfumes más icónicos del mundo. Desde $30.000 con envío a domicilio en Colombia.</p>
     <a href="#productos" class="cta" onclick="event.preventDefault();document.getElementById('productos').scrollIntoView({behavior:'smooth'})">Ver Fragancias</a>
     <div class="hero-ornament"></div>
 </section>
 
-<!-- COMBOS DESTACADOS -->
-<section id="combos" style="background:linear-gradient(135deg, var(--darker) 0%, #1a1510 50%, var(--darker) 100%);padding:3rem 2rem;border-bottom:1px solid rgba(184,151,106,0.15);">
-    <h2 style="font-family:'Cormorant',serif;font-size:2rem;text-align:center;color:var(--gold);margin-bottom:0.5rem;letter-spacing:4px;text-transform:uppercase;">✨ COMBOS ESPECIALES</h2>
-    <p style="text-align:center;color:var(--gray);font-size:0.9rem;margin-bottom:2rem;letter-spacing:1px;">Más fragancias, mejores precios · Ahorra hasta $60.000</p>
-    
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;">
-        <!-- Combo 3 -->
-        <div style="background:linear-gradient(145deg, rgba(184,151,106,0.1) 0%, rgba(184,151,106,0.03) 100%);border:2px solid rgba(184,151,106,0.3);border-radius:16px;padding:1.5rem;text-align:center;position:relative;overflow:hidden;">
-            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
-            <span style="display:inline-block;background:rgba(184,151,106,0.15);color:var(--gold);font-size:0.7rem;letter-spacing:2px;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;">Más Popular</span>
-            <h3 style="font-family:'Cormorant',serif;font-size:1.8rem;color:var(--white);margin-bottom:0.5rem;">Combo 3×30ml</h3>
-            <div style="font-size:2.5rem;color:var(--gold);font-weight:600;margin:1rem 0;">$80.000</div>
-            <p style="color:var(--gray);font-size:0.85rem;margin-bottom:1rem;">Ahorras $10.000</p>
-            <ul style="list-style:none;padding:0;margin:0 0 1.5rem;text-align:left;color:var(--gray);font-size:0.85rem;">
-                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> 3 fragancias a tu elección</li>
-                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Envío incluido</li>
-                <li style="padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Empaque premium</li>
-            </ul>
-            <button onclick="showComboModal(3)" style="width:100%;padding:1rem;background:transparent;border:2px solid var(--gold);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;border-radius:8px;">Elegir Fragancias</button>
-        </div>
-        
-        <!-- Combo 5 -->
-        <div style="background:linear-gradient(145deg, rgba(184,151,106,0.15) 0%, rgba(184,151,106,0.05) 100%);border:2px solid var(--gold);border-radius:16px;padding:1.5rem;text-align:center;position:relative;overflow:hidden;transform:scale(1.02);">
-            <div style="position:absolute;top:0;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.4rem 1rem;border-radius:0 0 8px 8px;text-transform:uppercase;font-weight:600;">⭐ Más Vendido</div>
-            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
-            <span style="display:inline-block;background:rgba(184,151,106,0.25);color:var(--gold);font-size:0.7rem;letter-spacing:2px;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;">Superventas</span>
-            <h3 style="font-family:'Cormorant',serif;font-size:1.8rem;color:var(--white);margin-bottom:0.5rem;">Combo 5×30ml</h3>
-            <div style="font-size:2.5rem;color:var(--gold);font-weight:600;margin:1rem 0;">$128.000</div>
-            <p style="color:var(--gray);font-size:0.85rem;margin-bottom:1rem;">Ahorras $22.000</p>
-            <ul style="list-style:none;padding:0;margin:0 0 1.5rem;text-align:left;color:var(--gray);font-size:0.85rem;">
-                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> 5 fragancias a tu elección</li>
-                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Envío incluido</li>
-                <li style="padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Muestra gratis sorpresa</li>
-            </ul>
-            <button onclick="showComboModal(5)" style="width:100%;padding:1rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;border-radius:8px;font-weight:600;">Elegir Fragancias</button>
-        </div>
-        
-        <!-- Combo 10 -->
-        <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, rgba(184,151,106,0.02) 100%);border:2px solid rgba(184,151,106,0.2);border-radius:16px;padding:1.5rem;text-align:center;position:relative;overflow:hidden;">
-            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
-            <span style="display:inline-block;background:rgba(184,151,106,0.15);color:var(--gold);font-size:0.7rem;letter-spacing:2px;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;">Mayor Ahorro</span>
-            <h3 style="font-family:'Cormorant',serif;font-size:1.8rem;color:var(--white);margin-bottom:0.5rem;">Combo 10×30ml</h3>
-            <div style="font-size:2.5rem;color:var(--gold);font-weight:600;margin:1rem 0;">$240.000</div>
-            <p style="color:var(--gray);font-size:0.85rem;margin-bottom:1rem;">Ahorras $60.000</p>
-            <ul style="list-style:none;padding:0;margin:0 0 1.5rem;text-align:left;color:var(--gray);font-size:0.85rem;">
-                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> 10 fragancias a tu elección</li>
-                <li style="margin-bottom:0.5rem;padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> Envío incluido</li>
-                <li style="padding-left:1.5rem;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">✓</span> 2 muestras gratis sorpresa</li>
-            </ul>
-            <button onclick="showComboModal(10)" style="width:100%;padding:1rem;background:transparent;border:2px solid var(--gold);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;border-radius:8px;">Elegir Fragancias</button>
-        </div>
-    </div>
-</section>
-
-<!-- LÍNEA ÉLITE -->
-<section id="linea-elite" style="background:linear-gradient(180deg, var(--darker) 0%, #0a0a0a 100%);padding:3rem 2rem;border-bottom:1px solid rgba(184,151,106,0.15);">
-    <div style="max-width:1200px;margin:0 auto;">
-        <div style="text-align:center;margin-bottom:2rem;">
-            <span style="display:inline-block;background:linear-gradient(135deg, var(--gold) 0%, #D4C4A8 100%);color:var(--dark);font-size:0.7rem;letter-spacing:3px;padding:0.4rem 1.5rem;border-radius:20px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;">Nueva Colección</span>
-            <h2 style="font-family:'Cormorant',serif;font-size:2.5rem;color:var(--gold);margin-bottom:0.5rem;letter-spacing:4px;text-transform:uppercase;">👑 LÍNEA ÉLITE</h2>
-            <p style="color:var(--gray);font-size:0.95rem;max-width:600px;margin:0 auto;line-height:1.6;">Fragancias exclusivas con concentración superior al 25%. Las más solicitadas, en presentaciones premium de colección.</p>
-        </div>
-        
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:2rem;">
-            <!-- Elite Card 1 -->
-            <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, transparent 100%);border:1px solid rgba(184,151,106,0.25);border-radius:20px;padding:2rem;position:relative;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,151,106,0.25)';this.style.transform='translateY(0)'">
-                <div style="position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.3rem 0.8rem;border-radius:4px;text-transform:uppercase;font-weight:600;">50ml</div>
-                <div style="font-size:3rem;margin-bottom:1rem;">🥃</div>
-                <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Aventus Elite</h3>
-                <p style="color:var(--gold-light);font-size:0.85rem;font-style:italic;margin-bottom:1rem;">Inspirado en Creed Aventus</p>
-                <p style="color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:1.5rem;">La fragancia más icónica del mundo. Piña audaz, abedul ahumado y ámbar gris. Concentración 28%.</p>
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-size:1.8rem;color:var(--gold);font-weight:600;">$85.000</span>
-                    <button onclick="addToCart({name:'Aventus Elite',size:'50ml',price:85000,linea:'elite'})" style="padding:0.8rem 1.5rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-weight:500;transition:all 0.3s;">Agregar</button>
-                </div>
-            </div>
-            
-            <!-- Elite Card 2 -->
-            <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, transparent 100%);border:1px solid rgba(184,151,106,0.25);border-radius:20px;padding:2rem;position:relative;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,151,106,0.25)';this.style.transform='translateY(0)'">
-                <div style="position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.3rem 0.8rem;border-radius:4px;text-transform:uppercase;font-weight:600;">50ml</div>
-                <div style="font-size:3rem;margin-bottom:1rem;">🌹</div>
-                <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Baccarat Elite</h3>
-                <p style="color:var(--gold-light);font-size:0.85rem;font-style:italic;margin-bottom:1rem;">Inspirado en MFK Baccarat Rouge</p>
-                <p style="color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:1.5rem;">Azafrán misterioso, cedro ahumado y ámbar resinoso. La fragancia más buscada del momento. Concentración 26%.</p>
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-size:1.8rem;color:var(--gold);font-weight:600;">$85.000</span>
-                    <button onclick="addToCart({name:'Baccarat Elite',size:'50ml',price:85000,linea:'elite'})" style="padding:0.8rem 1.5rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-weight:500;transition:all 0.3s;">Agregar</button>
-                </div>
-            </div>
-            
-            <!-- Elite Card 3 -->
-            <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, transparent 100%);border:1px solid rgba(184,151,106,0.25);border-radius:20px;padding:2rem;position:relative;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,151,106,0.25)';this.style.transform='translateY(0)'">
-                <div style="position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.3rem 0.8rem;border-radius:4px;text-transform:uppercase;font-weight:600;">50ml</div>
-                <div style="font-size:3rem;margin-bottom:1rem;">🌊</div>
-                <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Sauvage Elite</h3>
-                <p style="color:var(--gold-light);font-size:0.85rem;font-style:italic;margin-bottom:1rem;">Inspirado en Dior Sauvage Elixir</p>
-                <p style="color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:1.5rem;">Intenso y salvaje con especias orientales y lavanda profunda. Versión más concentrada. 27% de esencia.</p>
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-size:1.8rem;color:var(--gold);font-weight:600;">$85.000</span>
-                    <button onclick="addToCart({name:'Sauvage Elite',size:'50ml',price:85000,linea:'elite'})" style="padding:0.8rem 1.5rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-weight:500;transition:all 0.3s;">Agregar</button>
-                </div>
-            </div>
-            
-            <!-- Elite Card 4 -->
-            <div style="background:linear-gradient(145deg, rgba(184,151,106,0.08) 0%, transparent 100%);border:1px solid rgba(184,151,106,0.25);border-radius:20px;padding:2rem;position:relative;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,151,106,0.25)';this.style.transform='translateY(0)'">
-                <div style="position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--dark);font-size:0.65rem;letter-spacing:1px;padding:0.3rem 0.8rem;border-radius:4px;text-transform:uppercase;font-weight:600;">50ml</div>
-                <div style="font-size:3rem;margin-bottom:1rem;">⚡</div>
-                <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Invictus Elite</h3>
-                <p style="color:var(--gold-light);font-size:0.85rem;font-style:italic;margin-bottom:1rem;">Inspirado en Invictus Victory</p>
-                <p style="color:var(--gray);font-size:0.85rem;line-height:1.6;margin-bottom:1.5rem;">Edición más intensa con pimienta rosa, vainilla salvaje y ámbar profundo. Energía concentrada al 26%.</p>
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-size:1.8rem;color:var(--gold);font-weight:600;">$85.000</span>
-                    <button onclick="addToCart({name:'Invictus Elite',size:'50ml',price:85000,linea:'elite'})" style="padding:0.8rem 1.5rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:8px;font-weight:500;transition:all 0.3s;">Agregar</button>
-                </div>
-            </div>
-        </div>
-        
-        <div style="text-align:center;margin-top:2rem;">
-            <p style="color:var(--gray);font-size:0.85rem;margin-bottom:1rem;">Presentación premium · Frasco de colección · Estuche de regalo incluido</p>
-            <a href="#productos" style="display:inline-block;padding:1rem 2rem;border:2px solid var(--gold);color:var(--gold);text-decoration:none;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;border-radius:8px;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)'" onmouseout="this.style.background='transparent';this.style.color='var(--gold)'">Ver Colección Completa</a>
-        </div>
-    </div>
-</section>
+<div style="background:rgba(184,151,106,0.04);border-bottom:1px solid rgba(184,151,106,0.12);padding:0.8rem 2rem;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;">
+    <span style="color:var(--gold);font-family:'Cormorant',serif;font-size:0.85rem;letter-spacing:2px;">COMBOS 30ml</span>
+    <span style="color:var(--gray);font-size:0.8rem;">3 × $80.000</span>
+    <span style="color:rgba(184,151,106,0.3);">|</span>
+    <span style="color:var(--gray);font-size:0.8rem;">5 × $128.000</span>
+    <span style="color:rgba(184,151,106,0.3);">|</span>
+    <span style="color:var(--gray);font-size:0.8rem;">10 × $240.000</span>
+</div>
 
 <section id="productos">
     <h2 class="section-title">Nuestras Fragancias</h2>
     <p class="section-sub">Elige tu fragancia favorita · Todos los perfumes disponibles en 30, 50 y 100 ml</p>
 
-    <div class="filter-bar" id="filterBar">
+    <!-- Filtro: Disponibilidad -->
+    <div style="text-align:center;margin-bottom:0.3rem;"><span style="color:var(--gray);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;">Disponibilidad</span></div>
+    <div class="filter-bar" id="filterBar" style="margin-bottom:0.8rem;">
         <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">Todas</button>
-        <button class="filter-btn" data-filter="disponible" onclick="setFilter(this)">🟢 Disponibles</button>
-        <button class="filter-btn" data-filter="encargo" onclick="setFilter(this)">🕐 Por encargo</button>
-        <button class="filter-btn" data-filter="popular" onclick="setFilter(this)">🔥 Populares</button>
-        <span style="color:rgba(184,151,106,0.2);display:flex;align-items:center;">|</span>
+        <button class="filter-btn" data-filter="disponible" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b9e6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Disponibles</button>
+        <button class="filter-btn" data-filter="encargo" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a0a0b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Por encargo</button>
+        <button class="filter-btn" data-filter="popular" onclick="setFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4a050" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z"/></svg> Populares</button>
+    </div>
+
+    <!-- Filtro: Género -->
+    <div style="text-align:center;margin-bottom:0.3rem;"><span style="color:var(--gray);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;">Género</span></div>
+    <div class="filter-bar" id="genderBar" style="margin-bottom:0.8rem;">
         <button class="filter-btn" data-filter="masculina" onclick="setFilter(this)">Masculina</button>
         <button class="filter-btn" data-filter="femenina" onclick="setFilter(this)">Femenina</button>
         <button class="filter-btn" data-filter="unisex" onclick="setFilter(this)">Unisex</button>
     </div>
 
-    <!-- Note-based filters -->
-    <!-- Size Filter Bar v3.3 -->
-    <div class="filter-bar" id="sizeFilterBar">
-        <span style="color:var(--gray);font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;margin-right:0.3rem;">Tamaño:</span>
-        <button class="filter-btn size-filter" data-size="30" onclick="toggleSizeFilter(this)">30ml</button>
-        <button class="filter-btn size-filter" data-size="50" onclick="toggleSizeFilter(this)">50ml</button>
-        <button class="filter-btn size-filter" data-size="100" onclick="toggleSizeFilter(this)">100ml</button>
+    <!-- Filtro: Notas olfativas (colapsable) -->
+    <div style="text-align:center;margin-bottom:0.5rem;">
+        <button onclick="const nb=document.getElementById('noteFilterWrapper');const ar=this.querySelector('.arrow');if(nb.style.display==='none'){nb.style.display='block';ar.style.transform='rotate(180deg)'}else{nb.style.display='none';ar.style.transform='rotate(0deg)'}" style="background:none;border:1px solid rgba(184,151,106,0.3);border-radius:20px;color:var(--gold-light);padding:0.4rem 1.2rem;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;display:inline-flex;align-items:center;gap:0.5rem;transition:border-color 0.3s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8976A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Filtrar por notas olfativas <span class="arrow" style="transition:transform 0.3s;display:inline-block;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8976A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
     </div>
-
-    <!-- Extended Note Filter Bar v3.3 -->
-    <div class="filter-bar" id="noteFilterBar" style="margin-top:0.5rem;">
-        <span style="color:var(--gray);font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;margin-right:0.3rem;">Notas:</span>
-        <button class="filter-btn note-filter" data-note="amaderado" data-note-desc="Suelos de bosque, intensidad profunda" onclick="toggleNoteFilter(this)">🌲 Amaderado</button>
-        <button class="filter-btn note-filter" data-note="cítrico" data-note-desc="Energía fresca, citrus vibrante" onclick="toggleNoteFilter(this)">🍋 Cítrico</button>
-        <button class="filter-btn note-filter" data-note="floral" data-note-desc="Romanticismo, delicadeza, feminidad" onclick="toggleNoteFilter(this)">🌸 Floral</button>
-        <button class="filter-btn note-filter" data-note="dulce" data-note-desc="Calidez reconfortante, tentación" onclick="toggleNoteFilter(this)">🍯 Dulce</button>
-        <button class="filter-btn note-filter" data-note="especiado" data-note-desc="Fuego y pasión, especias" onclick="toggleNoteFilter(this)">🌶️ Especiado</button>
-        <button class="filter-btn note-filter" data-note="acuático" data-note-desc="Brisa marina, frescura infinita" onclick="toggleNoteFilter(this)">🌊 Acuático</button>
-        <button class="filter-btn note-filter" data-note="oriental" data-note-desc="Misterio exótico, riqueza" onclick="toggleNoteFilter(this)">✨ Oriental</button>
-        <button class="filter-btn note-filter" data-note="verde" data-note-desc="Naturaleza viva, hojas frescas" onclick="toggleNoteFilter(this)">🌿 Verde</button>
-        <button class="filter-btn note-filter" data-note="gourmand" data-note-desc="Delicias dulces, tentación" onclick="toggleNoteFilter(this)">🧁 Gourmand</button>
-        <button class="filter-btn note-filter" data-note="cuero" data-note-desc="Intensidad, tabaco sofisticado" onclick="toggleNoteFilter(this)">🎩 Cuero</button>
-        <button class="filter-btn note-filter" data-note="praliné" data-note-desc="Chocolate y avellana indulgente" onclick="toggleNoteFilter(this)">🍫 Praliné</button>
-        <button class="filter-btn note-filter" data-note="resinoso" data-note-desc="Ámbar sagrado, incienso" onclick="toggleNoteFilter(this)">🪵 Resinoso</button>
-        <button class="clear-filters" id="clearFiltersBtn" onclick="clearAllFilters()">✕ Limpiar</button>
+    <div id="noteFilterWrapper" style="display:none;">
+    <p style="text-align:center;color:var(--gray);font-size:0.7rem;opacity:0.7;margin:0.3rem 0 0.5rem;font-style:italic;">Cada fragancia combina varias familias. Filtra por la nota que más te atraiga.</p>
+    <div class="filter-bar" id="noteFilterBar" style="margin-top:0;">
+        <button class="filter-btn note-filter" data-note="amaderado" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B6914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 22V8"/><path d="M8 12l-3 3"/><path d="M16 12l3 3"/><path d="M9 8l-2-3"/><path d="M15 8l2-3"/><path d="M12 8a3 3 0 100-6 3 3 0 000 6z"/></svg> Amaderado</button>
+        <button class="filter-btn note-filter" data-note="cítrico" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 5-4 9-4 9h8s-4-4-4-9z"/></svg> Cítrico</button>
+        <button class="filter-btn note-filter" data-note="floral" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b8507a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><circle cx="12" cy="10" r="3"/><path d="M12 7c0-3-2-5-2-5s-2 2-2 5"/><path d="M12 7c0-3 2-5 2-5s2 2 2 5"/><path d="M9 10c-3 0-5-2-5-2s2-2 5-2"/><path d="M15 10c3 0 5-2 5-2s-2-2-5-2"/><path d="M12 13v8"/></svg> Floral</button>
+        <button class="filter-btn note-filter" data-note="dulce" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4760a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 3c-4 0-7 3-7 7 0 5 7 11 7 11s7-6 7-11c0-4-3-7-7-7z"/><circle cx="12" cy="10" r="2"/></svg> Dulce</button>
+        <button class="filter-btn note-filter" data-note="especiado" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg> Especiado</button>
+        <button class="filter-btn note-filter" data-note="acuático" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2980b9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M2 12c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/><path d="M2 17c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/><path d="M2 7c2-2 4-3 6-3s4 2 6 3 4 2 6 0"/></svg> Acuático</button>
+        <button class="filter-btn note-filter" data-note="oriental" onclick="toggleNoteFilter(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M5 5l3 3"/><path d="M16 16l3 3"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M5 19l3-3"/><path d="M16 8l3-3"/><circle cx="12" cy="12" r="4"/></svg> Oriental</button>
     </div>
-
-    <!-- Sort Bar v3.3 -->
-    <div class="sort-bar">
-        <span class="sort-label">Ordenar por:</span>
-        <select class="sort-select" id="sortSelect" onchange="sortProducts()">
-            <option value="default">Relevancia</option>
-            <option value="price-asc">Precio: Menor a Mayor</option>
-            <option value="price-desc">Precio: Mayor a Menor</option>
-            <option value="popular">Popularidad</option>
-            <option value="name">Nombre: A-Z</option>
-        </select>
     </div>
-
-    <!-- Active Filters Summary v3.7 -->
-    <div class="active-filters-bar" id="activeFiltersBar">
-        <span class="active-filters-label">Filtros activos:</span>
-        <div id="activeFiltersTags"></div>
+    <div style="text-align:center;margin-bottom:0.5rem;">
+        <button class="clear-filters" id="clearFiltersBtn" onclick="clearAllFilters()">✕ Limpiar filtros</button>
     </div>
 
     <div class="search-bar">
@@ -1026,29 +570,27 @@
         <input type="text" id="searchInput" placeholder="Buscar fragancia..." oninput="filterProducts()">
     </div>
 
-    <!-- v3.8 - Shipping Progress Bar -->
-    <div class="shipping-progress-container" id="shippingProgressContainer">
-        <div class="shipping-progress-text" id="shippingProgressText">🎁 Envío gratis en compras desde $80.000</div>
-        <div class="shipping-progress-bar-bg">
-            <div class="shipping-progress-bar-fill" id="shippingProgressBar" style="width: 0%;"></div>
-        </div>
-    </div>
-
     <div class="results-count" id="resultsCount"></div>
     <div class="products-grid" id="productsGrid"></div>
 
-    <!-- Empty State v3.7 -->
-    <div class="empty-state" id="emptyState" style="display:none;">
-        <div class="empty-state-icon">
-            <svg viewBox="0 0 24 24"><path d="M20.4 4.4l-1.8-1.8c-.4-.4-.9-.6-1.4-.6H6.8c-.5 0-1 .2-1.4.6L3.6 4.4c-.4.4-.6.9-.6 1.4v12.4c0 .5.2 1 .6 1.4l1.8 1.8c.4.4.9.6 1.4.6h10.4c.5 0 1-.2 1.4-.6l1.8-1.8c.4-.4.6-.9.6-1.4V5.8c0-.5-.2-1-.6-1.4zM12 17.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5zM17 8H7V6h10v2z"/></svg>
-        </div>
-        <h3>No encontramos tu fragancia perfecta... aún</h3>
-        <p>Los filtros que aplicaste no coinciden con ninguna fragancia. Prueba con otra combinación o explora estas opciones:</p>
-        <div class="empty-state-suggestions" id="emptySuggestions">
-            <span onclick="clearAllFilters()">Ver todas las fragancias</span>
-            <span onclick="setFilter(document.querySelector('[data-filter=popular]'))">Ver las más populares</span>
-            <span onclick="showRandomFragrance()">Descubrir al azar</span>
-        </div>
+    <div id="showMoreWrapper" style="text-align:center;margin-top:2.5rem;display:none;">
+        <button id="btnShowMore" onclick="showMoreProducts()" style="
+            padding:1rem 2.5rem;border:1.5px solid var(--gold);background:transparent;
+            color:var(--gold);font-family:'Montserrat',sans-serif;font-size:0.9rem;
+            letter-spacing:1.5px;border-radius:30px;cursor:pointer;transition:all 0.3s;
+        " onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)'" onmouseout="this.style.background='transparent';this.style.color='var(--gold)'">
+        </button>
+    </div>
+
+    <div id="noResultsCta" style="display:none;text-align:center;grid-column:1/-1;padding:3rem 1rem;">
+        <p style="font-family:'Cormorant',serif;font-size:1.6rem;color:var(--gold);margin-bottom:0.8rem;">¿Buscas algo especial? Escríbenos y lo creamos para ti <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;"><path d="M9 3h6v3H9z"/><path d="M10 6v2l-3 8v2h10v-2l-3-8V6"/><line x1="8" y1="18" x2="16" y2="18"/><circle cx="12" cy="14" r="1"/></svg></p>
+        <a id="noResultsWaLink" href="#" target="_blank" style="
+            display:inline-block;padding:0.8rem 2rem;border:1.5px solid #25D366;
+            color:#25D366;border-radius:30px;text-decoration:none;font-size:0.85rem;
+            letter-spacing:1.5px;transition:all 0.3s;font-family:'Montserrat',sans-serif;
+        " onmouseover="this.style.background='#25D366';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#25D366'">
+            Escríbenos por WhatsApp
+        </a>
     </div>
 
     </div>
@@ -1203,12 +745,6 @@
 
         <p class="modal-description" id="modalDesc"></p>
 
-        <!-- Savings over time (ergodicity: your trajectory matters, not the average) -->
-        <div id="modalSavings" class="modal-notes" style="background:rgba(74,222,128,0.04);border-color:rgba(74,222,128,0.15);display:none;">
-            <div class="notes-title" style="color:#4ade80;">💰 Tu Ahorro Real</div>
-            <div id="modalSavingsContent" style="font-size:0.85rem;color:var(--gold-light);line-height:1.7;"></div>
-        </div>
-
         <div class="modal-notes" id="modalNotes">
             <div class="notes-title">Pirámide Olfativa</div>
             <div class="note-row"><span class="note-icon">&#9652;</span><span class="note-type">Salida</span><span class="note-list" id="notesTop"></span></div>
@@ -1218,9 +754,6 @@
 
         <div class="step-label"><span class="step-num">1</span> Elige tu tamaño</div>
         <div class="size-options" id="sizeOptions"></div>
-        <div class="combo-hint" style="margin:-1rem 0 1.5rem;font-size:0.8rem;color:var(--gold-light);opacity:0.8;">
-            💡 <strong>Consejo:</strong> Lleva 2 o más de 30ml y ahorra en envío. Perfecto para probar diferentes esencias.
-        </div>
 
         <div class="bottle-section" id="bottleSection">
             <div class="step-label"><span class="step-num">2</span> Elige tu frasco</div>
@@ -1231,13 +764,7 @@
             Agregar al Carrito
         </button>
 
-        <!-- Shipping Badge v3.7 -->
-        <div class="shipping-badge" id="modalShipping">
-            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            <span id="shippingText">Envío gratis a todo Colombia en compras desde $80.000</span>
-        </div>
-
-        <!-- Similar fragrances (stigmergy — one product leads to the next) -->
+        <!-- Similar fragrances -->
         <div class="similar-section" id="similarSection">
             <div class="similar-title">También te puede gustar</div>
             <div class="similar-grid" id="similarGrid"></div>
@@ -1253,8 +780,21 @@
 
 <div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span id="toastText">Agregado al carrito</span></div>
 
+<!-- Social Proof Pulse -->
+<div class="social-pulse" id="socialPulse">
+    <span style="font-size:1.1rem;">🔥</span>
+    <span id="socialPulseText"></span>
+</div>
+
 <footer>
     <span class="logo">EMPIRE ESSENCE</span>
+    <div style="display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;">
+        <a href="/blog/" style="color:var(--gold);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">Blog</a>
+        <a href="https://instagram.com/empireessence.co" target="_blank" style="color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            Instagram
+        </a>
+    </div>
     <p>&copy; 2026 Empire Essence · Perfumería a Domicilio · Colombia</p>
 </footer>
 
@@ -1264,7 +804,7 @@ const WHATSAPP = "573156753404";
 // Popular product IDs (top sellers / most recognized)
 const POPULAR_IDS = [1,2,3,5,9,11,13,16,20,21,22,23,24];
 
-// Note classification map — Extended families v3.3
+// Note classification map
 const NOTE_FAMILIES = {
     amaderado: ["cedro","sándalo","vetiver","pachulí","guayaco","madera","abedul","roble","caoba","teca","ciprés","oud","palo de rosa","notas amaderadas","madera de cachemira","madera de agar","madera flotante","madera de cedro","madera de café","cedro de Virginia","cedro del Atlas","cedro rojo"],
     cítrico: ["bergamota","limón","mandarina","pomelo","naranja","lima","toronja","yuzu","pomelo rosa","bergamota calabresa","limón siciliano","naranja siciliana","naranja amarga","naranja sanguina","limón verde","limón de Amalfi","nashi","ralladura de limón"],
@@ -1273,28 +813,6 @@ const NOTE_FAMILIES = {
     especiado: ["canela","pimienta","cardamomo","jengibre","nuez moscada","clavo","azafrán","anís","incienso","mirra","notas especiadas","pimienta negra","pimienta rosa","pimienta blanca","pimienta china","pimienta verde","pimienta roja","pimienta de Sichuan"],
     acuático: ["notas marinas","notas acuáticas","calone","algae","algae marina","algodón","acorde helado","agua","ozono","sal","minerales","bambú"],
     oriental: ["ámbar","almizcle","oud","resina","ládano","cuero","tabaco","gamuza","ron","haba tonka","ambroxan","ámbar gris","ámbar oscuro","bálsamo","notas balsámicas","resina de abeto","regaliz","davana"],
-    // Nuevas familias v3.3
-    verde: ["hojas verdes","hoja","notas verdes","tomate verde","hojas de cassis","hojas de mango","hierba","romero","artemisa","albahaca","salvia","tomillo","eucalipto","hojas de eucalipto","hiedra","menta","pino","abeto","césped","té verde","hojas de té","notas vegetales"],
-    gourmand: ["café","caramelo","chocolate","vainilla","praliné","avellana","nuez","almendra","coco","leche","crema","mantequilla","galleta","pan","canela dulce","azúcar","miel","jarabe","postre","helado","frutas secas"],
-    cuero: ["cuero","gamuza","piel","tabaco","ron","whisky","brandy","licor","madera ahumada","notas ahumadas"],
-    praliné: ["praliné","chocolate","avellana","cacao","nuez","caramelo","café","vainilla","crema","dulce de leche","turrón"],
-    resinoso: ["ámbar","incienso","mirra","ládano","bálsamo","benjuí","elemi","olíbano","resina","resina de abeto","notas balsámicas","ámbar gris","sándalo","pachulí oscuro","vetiver profundo"],
-};
-
-// Note descriptions for tooltips
-const NOTE_DESCRIPTIONS = {
-    amaderado: "Suelos de bosque, intensidad profunda y sensual",
-    cítrico: "Energía fresca, citrus vibrante que despierta",
-    floral: "Romanticismo, delicadeza, feminidad en flor",
-    dulce: "Calidez reconfortante, tentación gourmand",
-    especiado: "Fuego y pasión, especias que encienden",
-    acuático: "Brisa marina, frescura oceánica infinita",
-    oriental: "Misterio exótico, riqueza de Oriente",
-    verde: "Naturaleza viva, hojas y vida vegetal",
-    gourmand: "Delicias comestibles, dulzura adictiva",
-    cuero: "Intensidad masculina, tabaco y sofisticación",
-    praliné: "Chocolate y avellana, placer indulgente",
-    resinoso: "Ámbar sagrado, incienso que eleva el espíritu",
 };
 
 // Active note filters
@@ -1432,7 +950,6 @@ const PRODUCTS = [
     { id:112, name:"Júbilo", inspired:"Clinique Happy", cat:"masculina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["lima", "notas verdes", "mandarina"], heart:["lirio de los valles", "fresia", "rosa"], base:["cedro", "ciprés", "almizcle"], desc:"Alegre y optimista como una mañana de sol tras la lluvia." },
     { id:113, name:"Giro", inspired:"Perry Ellis 360° Red", cat:"masculina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["pimienta roja", "mandarina", "jengibre"], heart:["tabaco", "canela", "clavo"], base:["notas amaderadas", "vainilla", "almizcle"], desc:"Un giro inesperado de especias rojas y tabaco envolvente." },
     { id:114, name:"Panorama", inspired:"Perry Ellis 360°", cat:"masculina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "bergamota", "notas verdes"], heart:["salvia", "cardamomo", "junípero"], base:["ámbar", "almizcle", "notas amaderadas"], desc:"Amplio y panorámico con frescura herbal y maderas suaves." },
-    { id:115, name:"Viveza", inspired:"Lacoste Red", cat:"masculina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["pimienta negra", "mandarina", "tomillo"], heart:["canela", "clavel", "cardamomo"], base:["sándalo", "ámbar", "musgo de roble"], desc:"Vivaz y chispeante con especias que despiertan los sentidos." },
     { id:116, name:"Chispazo", inspired:"Tommy Girl Now", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["manzana", "mandarina", "grosella negra"], heart:["magnolia", "flor de naranjo", "jazmín"], base:["sándalo", "almizcle", "vainilla"], desc:"Espontáneo y juvenil como un destello de alegría inesperada." },
     { id:117, name:"Antojo", inspired:"Ralph Lauren Big Pony 2", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "mango"], heart:["rosa mosqueta", "mimosa"], base:["vainilla", "almizcle", "cedro"], desc:"Dulce y frutal como un antojo irresistible de frutas tropicales." },
     { id:118, name:"Delizia", inspired:"Juicy Couture Viva La Juicy", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["frambuesa", "mandarina", "bayas silvestres"], heart:["gardenia", "madreselva", "jazmín"], base:["caramelo", "vainilla", "sándalo", "ámbar"], desc:"Golosa y glamurosa con frambuesa y caramelo irresistibles." },
@@ -1480,7 +997,7 @@ const PRODUCTS = [
     { id:160, name:"Resplandor", inspired:"Paris Hilton Dazzle", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["naranja mandarina", "pera", "frambuesa"], heart:["gardenia", "jazmín", "iris"], base:["sándalo", "vainilla", "almizcle"], desc:"Deslumbrante y radiante como mil destellos de luz dorada." },
     { id:161, name:"Fiesta", inspired:"Paris Hilton Can Can", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["grosella negra", "clementina", "nectarina"], heart:["naranja silvestre", "lirio", "orquídea"], base:["ámbar", "vainilla", "almizcle"], desc:"Vibrante y festivo como una celebración que nunca termina." },
     { id:162, name:"Transparencia", inspired:"Paris Hilton Sheer", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "pera", "notas acuáticas"], heart:["jazmín", "fresia", "rosa de mayo"], base:["almizcle blanco", "sándalo", "cedro"], desc:"Diáfana y pura como una gota de rocío en un pétalo de rosa." },
-    { id:163, name:"Legado", inspired:"Paris Hilton Heiress", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "champán", "durazno"], heart:["jazmín sambac", "gardenia", "madreselva"], base:["vetiver", "rubia blanca", "almizcle"], desc:"Heredada y glamurosa con champán dorado y flores blancas." },
+    { id:163, name:"Herencia Dorada", inspired:"Paris Hilton Heiress", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["mandarina", "champán", "durazno"], heart:["jazmín sambac", "gardenia", "madreselva"], base:["vetiver", "rubia blanca", "almizcle"], desc:"Heredada y glamurosa con champán dorado y flores blancas." },
     { id:164, name:"Mística", inspired:"Creed Love in Black", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["grosella negra", "ciruela", "notas verdes"], heart:["rosa turca", "iris", "violeta"], base:["almizcle", "vainilla", "sándalo", "vetiver"], desc:"Oscura y fascinante como un ritual antiguo de amor eterno." },
     { id:165, name:"Hipnosis", inspired:"Dior Hypnotic Poison", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["coco", "albaricoque", "ciruela"], heart:["tuberosa", "jazmín sambac", "rosa", "lirio de los valles"], base:["vainilla", "almizcle", "sándalo", "almendra"], desc:"Hipnotizante y prohibido con vainilla narcótica y jazmín nocturno." },
     { id:166, name:"Dicha", inspired:"Dior Joy", cat:"femenina", avail:"encargo", prices:{30:30000,50:46000,100:70000}, top:["bergamota", "mandarina", "flores blancas"], heart:["rosa centifolia", "jazmín grandiflorum", "peony"], base:["sándalo cremoso", "almizcle", "notas amaderadas"], desc:"Felicidad pura destilada en rosa centifolia y jazmín absoluto." },
@@ -1548,11 +1065,13 @@ const FAMILY_PRIORITY = ['floral','oriental','amaderado','especiado','dulce','c�
 
 function getDominantFamily(product) {
     const allNotes = [...(product.top||[]),...(product.heart||[]),...(product.base||[])].map(n=>n.toLowerCase());
+    let best = 'amaderado', bestCount = 0;
     for (const family of FAMILY_PRIORITY) {
         const keywords = NOTE_FAMILIES[family].map(k=>k.toLowerCase());
-        if (allNotes.some(n => keywords.some(k => n.includes(k)))) return family;
+        const count = allNotes.filter(n => keywords.some(k => n.includes(k))).length;
+        if (count > bestCount) { bestCount = count; best = family; }
     }
-    return 'amaderado'; // fallback
+    return best;
 }
 
 // SVG bottles by category
@@ -1575,54 +1094,9 @@ function getProductIcon(product) {
 // Legacy reference kept for other uses
 const BOTTLE_SVG = '<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#B8976A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="10" width="10" height="12" rx="2"/><rect x="9" y="7" width="6" height="3" rx="1"/><line x1="10" y1="7" x2="10" y2="5"/><line x1="14" y1="7" x2="14" y2="5"/><rect x="10" y="4" width="4" height="1" rx="0.5"/></svg>';
 
-// Filter state v3.3
+// Filter state
 let activeFilters = { avail: 'all', cat: 'all' };
-let activeSize = null; // 30, 50, 100, or null
-let currentSort = 'default'; // default, price-asc, price-desc, popular, name
-
-function toggleSizeFilter(btn) {
-    const size = parseInt(btn.dataset.size);
-    if (activeSize === size) {
-        activeSize = null;
-        btn.classList.remove('active');
-    } else {
-        activeSize = size;
-        document.querySelectorAll('.size-filter').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    }
-    renderProducts();
-}
-
-function sortProducts() {
-    currentSort = document.getElementById('sortSelect').value;
-    renderProducts();
-}
-
-function sortProductList(products) {
-    const sorted = [...products];
-    switch(currentSort) {
-        case 'price-asc':
-            sorted.sort((a, b) => a.prices[30] - b.prices[30]);
-            break;
-        case 'price-desc':
-            sorted.sort((a, b) => b.prices[100] - a.prices[100]);
-            break;
-        case 'popular':
-            sorted.sort((a, b) => {
-                const aPop = POPULAR_IDS.includes(a.id) ? 1 : 0;
-                const bPop = POPULAR_IDS.includes(b.id) ? 1 : 0;
-                return bPop - aPop;
-            });
-            break;
-        case 'name':
-            sorted.sort((a, b) => a.name.localeCompare(b.name));
-            break;
-        default:
-            // Default order (by ID)
-            sorted.sort((a, b) => a.id - b.id);
-    }
-    return sorted;
-}
+let showEncargo = false;
 
 function setFilter(btn) {
     const val = btn.dataset.filter;
@@ -1634,8 +1108,12 @@ function setFilter(btn) {
     } else {
         activeFilters = { avail: 'all', cat: 'all' };
     }
+    // Show encargo when "Todas" or "Por encargo" selected
+    if (activeFilters.avail === 'all' || activeFilters.avail === 'encargo') {
+        showEncargo = true;
+    }
     // Update button states
-    document.querySelectorAll('#filterBar .filter-btn').forEach(b => {
+    document.querySelectorAll('#filterBar .filter-btn, #genderBar .filter-btn').forEach(b => {
         const f = b.dataset.filter;
         if (f === 'all') b.classList.toggle('active', activeFilters.avail === 'all' && activeFilters.cat === 'all');
         else if (['disponible','encargo','popular'].includes(f)) b.classList.toggle('active', activeFilters.avail === f);
@@ -1649,25 +1127,28 @@ const grid = document.getElementById('productsGrid');
 function renderProducts() {
     grid.innerHTML = '';
     const searchText = (document.getElementById('searchInput').value || '').toLowerCase();
-    let filtered = PRODUCTS.filter(p => {
-        if (searchText && !p.name.toLowerCase().includes(searchText) && !p.inspired.toLowerCase().includes(searchText) && !p.desc.toLowerCase().includes(searchText)) return false;
+    const isSearching = searchText.length > 0;
+    const filtered = PRODUCTS.filter(p => {
+        if (isSearching && !p.name.toLowerCase().includes(searchText) && !p.inspired.toLowerCase().includes(searchText) && !p.desc.toLowerCase().includes(searchText)) return false;
+        // Hide encargo products unless searching, showEncargo is true, or filter explicitly selects them
+        if (!isSearching && !showEncargo && p.avail === 'encargo' && activeFilters.avail !== 'encargo' && activeFilters.avail !== 'all') return false;
+        if (!isSearching && !showEncargo && p.avail === 'encargo' && activeFilters.avail === 'all') return false;
         if (activeFilters.avail === 'popular' && !POPULAR_IDS.includes(p.id)) return false;
         if (activeFilters.avail !== 'all' && activeFilters.avail !== 'popular' && p.avail !== activeFilters.avail) return false;
         if (activeFilters.cat !== 'all' && p.cat !== activeFilters.cat) return false;
-        if (activeSize && !p.prices[activeSize]) return false;
         if (!productMatchesNotes(p)) return false;
         return true;
     });
-    // Apply sorting
-    filtered = sortProductList(filtered);
-    filtered.forEach(p => {
+    const html = filtered.map(p => {
         const topPreview = p.top.slice(0,3).join(', ');
+        const svgCheck = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6b9e6b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>';
+        const svgClock = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0a0b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+        const svgFlame = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d4a050" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z"/></svg>';
         const availBadge = p.avail === 'disponible'
-            ? '<span class="avail-badge disponible" data-tooltip="Lista para enviar en 24h">🟢 Disponible</span>'
-            : '<span class="avail-badge encargo" data-tooltip="Llega en 3-5 días hábiles">🕐 3-5 días</span>';
-        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">🔥 Popular</span> ' : '<span class="avail-badge" style="visibility:hidden;border-color:transparent;">🔥 Popular</span> ';
-        grid.innerHTML += `
-            <div class="product-card" onclick="openModal(${p.id})">
+            ? '<span class="avail-badge disponible">' + svgCheck + ' Disponible</span>'
+            : '<span class="avail-badge encargo">' + svgClock + ' 3-5 días</span>';
+        const popularBadge = POPULAR_IDS.includes(p.id) ? '<span class="avail-badge" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">' + svgFlame + ' Popular</span> ' : '<span class="avail-badge" style="visibility:hidden;border-color:transparent;">' + svgFlame + ' Popular</span> ';
+        return `<div class="product-card" onclick="openModal(${p.id})">
                 ${popularBadge}${availBadge}
                 <span class="category-badge">${p.cat}</span>
                 <div class="frag-icon">${getProductIcon(p)}</div>
@@ -1678,29 +1159,52 @@ function renderProducts() {
                 </div>
                 <p class="price-from">Desde <span>$${p.prices[30].toLocaleString('es-CO')}</span></p>
             </div>`;
-    });
-    if (!grid.innerHTML) {
-            grid.innerHTML = `
-                <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;">
-                    <div style="font-size:3rem;margin-bottom:1rem;">🔍</div>
-                    <p style="color:var(--gold);font-family:'Cormorant',serif;font-size:1.3rem;margin-bottom:0.5rem;">No encontramos fragancias con esos criterios</p>
-                    <p style="color:var(--gray);font-size:0.9rem;">Prueba quitar filtros o buscar otro nombre</p>
-                    <button onclick="clearAllFilters()" style="margin-top:1.5rem;padding:0.7rem 1.5rem;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:20px;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)';" onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">Limpiar todos los filtros</button>
-                </div>
-            `;
+    }).join('');
+
+    // No results CTA
+    const noResultsEl = document.getElementById('noResultsCta');
+    const showMoreEl = document.getElementById('showMoreWrapper');
+
+    if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (isSearching) {
+            const waMsg = encodeURIComponent(`Hola! Busco una fragancia inspirada en ${document.getElementById('searchInput').value}, ¿la pueden hacer?`);
+            document.getElementById('noResultsWaLink').href = `https://wa.me/${WHATSAPP}?text=${waMsg}`;
+            noResultsEl.style.display = 'block';
+        } else {
+            noResultsEl.style.display = 'none';
+            grid.innerHTML = '<p style="color:var(--gray);text-align:center;grid-column:1/-1;">No se encontraron fragancias</p>';
         }
-    // Update results count
-    const countEl = document.getElementById('resultsCount');
-    const total = PRODUCTS.length;
-    if (filtered.length === total) countEl.textContent = `${total} fragancias`;
-    else countEl.textContent = `${filtered.length} de ${total} fragancias`;
-    // Stagger card animations
-    grid.querySelectorAll('.product-card').forEach((card, i) => { card.style.animationDelay = `${i * 0.02}s`; });
+        showMoreEl.style.display = 'none';
+    } else {
+        grid.innerHTML = html;
+        noResultsEl.style.display = 'none';
+
+        // Show "Ver más" button
+        const encargoCount = PRODUCTS.filter(p => p.avail === 'encargo').length;
+        if (!showEncargo && !isSearching && encargoCount > 0) {
+            document.getElementById('btnShowMore').textContent = `¿No encontraste tu favorito? Explora ${encargoCount} fragancias más`;
+            showMoreEl.style.display = 'block';
+        } else {
+            showMoreEl.style.display = 'none';
+        }
+    }
+    if (typeof updateResultsCount === 'function') updateResultsCount(filtered.length, PRODUCTS.length);
 }
 renderProducts();
 
 function filterProducts() {
     renderProducts();
+}
+
+function showMoreProducts() {
+    showEncargo = true;
+    const prevCount = grid.children.length;
+    renderProducts();
+    // Scroll to first new product
+    if (grid.children.length > prevCount) {
+        grid.children[prevCount].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 }
 
 // Modal state
@@ -1716,19 +1220,14 @@ function openModal(id) {
     document.getElementById('notesHeart').textContent = p.heart.join(' \u00b7 ');
     document.getElementById('notesBase').textContent = p.base.join(' \u00b7 ');
 
-    // Savings calculator removed — no price comparisons with original brands to avoid legal risk
-    document.getElementById('modalSavings').style.display = 'none';
-
-    // Size options - 30ml como más popular
+    // Size options
     const sizeEl = document.getElementById('sizeOptions');
-    sizeEl.innerHTML = Object.entries(p.prices).map(([s, pr]) => {
-        const popularBadge = s === '30' ? '<span class="popular-badge">⭐ Más Popular</span>' : '';
-        return `<div class="size-pill" onclick="selectSize(${s})" data-size="${s}">
-            ${popularBadge}
+    sizeEl.innerHTML = Object.entries(p.prices).map(([s, pr]) =>
+        `<div class="size-pill" onclick="selectSize(${s})" data-size="${s}">
             <div class="sz">${s} ml</div>
             <div class="sz-price">$${pr.toLocaleString('es-CO')}</div>
-        </div>`;
-    }).join('');
+        </div>`
+    ).join('');
 
     document.getElementById('bottleSection').classList.remove('visible');
     const addBtn = document.getElementById('btnAddCart');
@@ -1917,12 +1416,7 @@ function checkout() {
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// Back to top visibility
-window.addEventListener('scroll', () => {
-    document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 600);
-});
-
-// Keyboard shortcut: Escape closes modal/cart
+// ESC key closes modal and cart
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
         if (document.getElementById('modalOverlay').classList.contains('open')) closeModal();
@@ -1930,26 +1424,31 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// ===== v3.1 IMPROVEMENTS (21 Feb 2026) =====
+// Back to top visibility
+window.addEventListener('scroll', () => {
+    document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 600);
+});
 
-// Clear all filters (UX improvement — reduce friction)
+// Results count updater
+function updateResultsCount(count, total) {
+    const el = document.getElementById('resultsCount');
+    if (count === total) el.textContent = '';
+    else el.textContent = `Mostrando ${count} de ${total} fragancias`;
+}
+
+// ===== CLEAR FILTERS =====
 function clearAllFilters() {
     activeFilters = { avail: 'all', cat: 'all' };
     activeNotes.clear();
-    activeSize = null;
-    currentSort = 'default';
     document.getElementById('searchInput').value = '';
-    document.getElementById('sortSelect').value = 'default';
     document.querySelectorAll('#filterBar .filter-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.filter === 'all');
     });
     document.querySelectorAll('#noteFilterBar .note-filter').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.size-filter').forEach(b => b.classList.remove('active'));
     document.getElementById('clearFiltersBtn').classList.remove('visible');
     renderProducts();
 }
 
-// Show/hide clear button based on active filters
 function updateClearButton() {
     const hasFilters = activeFilters.avail !== 'all' || activeFilters.cat !== 'all' || activeNotes.size > 0 || document.getElementById('searchInput').value;
     document.getElementById('clearFiltersBtn').classList.toggle('visible', !!hasFilters);
@@ -1963,23 +1462,18 @@ toggleNoteFilter = function(btn) { _origToggleNote(btn); updateClearButton(); };
 const _origFilterProducts = filterProducts;
 filterProducts = function() { _origFilterProducts(); updateClearButton(); };
 
-// Similar fragrances (stigmergy — products leave "trails" to related products)
+// ===== SIMILAR FRAGRANCES =====
 function getSimilarProducts(product, count=5) {
     const pFamily = getDominantFamily(product);
     const pNotes = [...(product.top||[]),...(product.heart||[]),...(product.base||[])].map(n=>n.toLowerCase());
-    
     return PRODUCTS
         .filter(p => p.id !== product.id)
         .map(p => {
             let score = 0;
             const oNotes = [...(p.top||[]),...(p.heart||[]),...(p.base||[])].map(n=>n.toLowerCase());
-            // Shared notes
             pNotes.forEach(n => { if (oNotes.some(o => o.includes(n) || n.includes(o))) score += 2; });
-            // Same family
             if (getDominantFamily(p) === pFamily) score += 5;
-            // Same category bonus
             if (p.cat === product.cat) score += 3;
-            // Prefer available
             if (p.avail === 'disponible') score += 1;
             return { ...p, score };
         })
@@ -1987,7 +1481,6 @@ function getSimilarProducts(product, count=5) {
         .slice(0, count);
 }
 
-// Patch openModal to show similar products
 const _origOpenModal = openModal;
 openModal = function(id) {
     _origOpenModal(id);
@@ -2002,446 +1495,101 @@ openModal = function(id) {
     `).join('');
 };
 
-
-// Price anchoring removed — no comparisons with original brands to avoid legal risk
-
-// ===== v3.7 IMPROVEMENTS (26 Feb 2026) =====
-
-// URL Persistence — shareable filtered views
-function updateURL() {
-    const params = new URLSearchParams();
-    if (activeFilters.avail !== 'all') params.set('avail', activeFilters.avail);
-    if (activeFilters.cat !== 'all') params.set('cat', activeFilters.cat);
-    if (activeNotes.size > 0) params.set('notes', Array.from(activeNotes).join(','));
-    if (activeSize) params.set('size', activeSize);
-    if (currentSort !== 'default') params.set('sort', currentSort);
-    const search = document.getElementById('searchInput').value;
-    if (search) params.set('q', search);
+// ===== SOCIAL PROOF PULSE =====
+const SOCIAL_MESSAGES = [
+    // Más vendidos / populares
+    'Conquista — el más vendido esta semana',
+    'Dualidad — favorito del mes en femeninas',
+    'Vértigo — tendencia este mes',
+    'Equilibrio — recomendado para oficina',
+    'Alegría — nuevo éxito unisex',
+    'Refugio — perfecto para noches frías',
+    'Despertar — el clásico que nunca falla',
+    'Plenitud — top 5 en ventas',
     
-    const newURL = params.toString() ? '?' + params.toString() : window.location.pathname;
-    window.history.replaceState({}, '', newURL);
+    // Compras recientes por ciudad
+    'Alguien en Medellín pidió Despertar hace 2h',
+    'Alguien en Bogotá compró Conquista hace 5 min',
+    'Recién vendieron Dualidad en Cali',
+    'Un pedido de Barranquilla hace 10 min',
+    'Alguien en Bucaramanga pidió 3 fragancias',
+    'Venta reciente en Cartagena — Envío exprés',
+    'Cliente en Pereira acaba de ordenar',
+    'Pedido desde Manizales — Combo 5×30ml',
+    'Alguien en Cúcuta compró para regalo',
+    'Venta en Ibagué hace un momento',
+    'Cliente en Villavicencio viendo fragancias',
+    'Pedido de Pasto recién confirmado',
+    'Alguien en Montería eligió Envío Rápido',
+    'Compra desde Neiva hace 15 min',
+    'Cliente en Armenia ordenó 2 fragancias',
+    
+    // Pedidos múltiples / combos
+    'Combo 3×$80.000 — el más elegido',
+    'Combo 5×$128.000 — superventas',
+    'Alguien acaba de llevar 10×$240.000',
+    'Cliente pidió 5 fragancias diferentes',
+    'Venta: 3 de 30ml para probar variedades',
+    'Alguien compró el set completo 30+50+100ml',
+    
+    // Productos específicos con variedad
+    'Trascendencia — 3 pedidos hoy',
+    'Ambición — recién agotado en 30ml',
+    'Misterio — volando en talla 50ml',
+    'Desvelo — preferido para citas',
+    'Celebración — ideal para regalo',
+    'Gracia — elegancia en frasco',
+    'Presencia — sofisticación total',
+    'Éxtasis — explosión floral favorita',
+    'Nostalgia — el clásico reinventado',
+    'Impulso — fresco y atlético',
+    
+    // Urgencia / escasez
+    'Solo quedan 8 unidades de Conquista 30ml',
+    'Últimas 5 unidades de Dualidad 50ml',
+    'Corre — se agota rápido los fines de semana',
+    'Alta demanda: entrega puede tardar 1 día más',
+    '4 personas tienen Conquista en su carrito',
+    '3 personas viendo Despertar ahora mismo',
+    
+    // Actividad en tiempo real
+    '5 personas están viendo fragancias ahora',
+    '8 personas explorando la colección masculina',
+    '6 personas interesadas en fragancias unisex',
+    '12 personas viendo ofertas de 30ml',
+    'Alguien acaba de agregar al carrito',
+    'Carrito activo: 3 personas comprando ahora',
+    
+    // Contexto / uso
+    'Perfecto para el clima de hoy',
+    'Ideal para regalo de cumpleaños',
+    'Fragancia firma para el día a día',
+    'Recomendado para primera impresión',
+    'El favorito de quienes vuelven',
+    'Para quien quiere algo diferente',
+    
+    // Recomendaciones específicas
+    'Para noches especiales: Refugio',
+    'Para el trabajo: Equilibrio',
+    'Para salir: Conquista o Despertar',
+    'Para regalar: Dualidad nunca falla',
+    'Para iniciar tu colección: Combo 3×30ml',
+];
+
+let socialPulseTimer = null;
+function showSocialPulse() {
+    const el = document.getElementById('socialPulse');
+    const textEl = document.getElementById('socialPulseText');
+    const msg = SOCIAL_MESSAGES[Math.floor(Math.random() * SOCIAL_MESSAGES.length)];
+    textEl.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 4000);
+    socialPulseTimer = setTimeout(showSocialPulse, (20 + Math.random() * 25) * 1000);
 }
-
-// Read filters from URL on load
-function loadFiltersFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('avail')) activeFilters.avail = params.get('avail');
-    if (params.get('cat')) activeFilters.cat = params.get('cat');
-    if (params.get('notes')) params.get('notes').split(',').forEach(n => activeNotes.add(n));
-    if (params.get('size')) activeSize = params.get('size');
-    if (params.get('sort')) currentSort = params.get('sort');
-    if (params.get('q')) document.getElementById('searchInput').value = params.get('q');
-    
-    // Update UI
-    document.getElementById('sortSelect').value = currentSort;
-    document.querySelectorAll('#filterBar .filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === activeFilters.avail);
-    });
-    document.querySelectorAll('#genderBar .filter-btn').forEach(btn => {
-        if (btn.dataset.filter === activeFilters.cat) btn.classList.add('active');
-    });
-    document.querySelectorAll('.note-filter').forEach(btn => {
-        if (activeNotes.has(btn.dataset.note)) btn.classList.add('active');
-    });
-    document.querySelectorAll('.size-filter').forEach(btn => {
-        if (btn.dataset.size === activeSize) btn.classList.add('active');
-    });
-}
-
-// Active Filters Bar — visual summary
-function updateActiveFiltersBar() {
-    const bar = document.getElementById('activeFiltersBar');
-    const tags = document.getElementById('activeFiltersTags');
-    const active = [];
-    
-    if (activeFilters.avail !== 'all') {
-        const labels = { disponible: 'Disponibles', encargo: 'Por encargo', popular: 'Populares' };
-        active.push({ type: 'avail', value: activeFilters.avail, label: labels[activeFilters.avail] });
-    }
-    if (activeFilters.cat !== 'all') {
-        active.push({ type: 'cat', value: activeFilters.cat, label: activeFilters.cat.charAt(0).toUpperCase() + activeFilters.cat.slice(1) });
-    }
-    activeNotes.forEach(note => {
-        const btn = document.querySelector(`[data-note="${note}"]`);
-        active.push({ type: 'note', value: note, label: btn ? btn.textContent : note });
-    });
-    if (activeSize) {
-        active.push({ type: 'size', value: activeSize, label: activeSize + 'ml' });
-    }
-    
-    if (active.length === 0) {
-        bar.classList.remove('visible');
-        return;
-    }
-    
-    bar.classList.add('visible');
-    tags.innerHTML = active.map(f => `
-        <span class="filter-tag" onclick="removeFilter('${f.type}', '${f.value}')">
-            ${f.label} <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </span>
-    `).join('');
-}
-
-function removeFilter(type, value) {
-    if (type === 'avail') activeFilters.avail = 'all';
-    if (type === 'cat') activeFilters.cat = 'all';
-    if (type === 'note') activeNotes.delete(value);
-    if (type === 'size') activeSize = null;
-    
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        if (btn.dataset.filter === value) btn.classList.remove('active');
-        if (btn.dataset.note === value) btn.classList.remove('active');
-        if (btn.dataset.size === value) btn.classList.remove('active');
-    });
-    
-    renderProducts();
-    updateActiveFiltersBar();
-    updateURL();
-}
-
-// Show random fragrance (exploration)
-function showRandomFragrance() {
-    const random = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
-    openModal(random.id);
-    clearAllFilters();
-}
-
-// Enhanced empty state handling
-const _origRenderProducts = renderProducts;
-renderProducts = function() {
-    _origRenderProducts();
-    updateActiveFiltersBar();
-    updateURL();
-    
-    // Show/hide empty state
-    const visible = document.querySelectorAll('.product-card:not(.loading)');
-    const empty = document.getElementById('emptyState');
-    if (visible.length === 0 && document.getElementById('searchInput').value) {
-        empty.style.display = 'block';
-    } else {
-        empty.style.display = 'none';
-    }
-};
-
-// Update shipping badge based on cart total
-function updateShippingBadge() {
-    const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
-    const badge = document.getElementById('modalShipping');
-    const text = document.getElementById('shippingText');
-    
-    if (!badge || !text) return;
-    
-    if (total === 0) {
-        text.textContent = 'Envío gratis a todo Colombia en compras desde $80.000';
-        badge.style.background = 'rgba(74,222,128,0.1)';
-        badge.style.color = '#4ade80';
-    } else if (total >= 80000) {
-        text.textContent = '✅ ¡Tienes envío GRATIS!';
-        badge.style.background = 'rgba(74,222,128,0.2)';
-        badge.style.color = '#4ade80';
-    } else {
-        const remaining = 80000 - total;
-        text.textContent = `Agrega $${remaining.toLocaleString('es-CO')} más para envío gratis`;
-        badge.style.background = 'rgba(184,151,106,0.1)';
-        badge.style.color = 'var(--gold-light)';
-    }
-}
-
-// Patch updateCart to update shipping badge
-const _origUpdateCart = updateCart;
-updateCart = function() {
-    _origUpdateCart();
-    updateShippingBadge();
-};
-
-// Initialize
-loadFiltersFromURL();
-updateActiveFiltersBar();
-
-// v3.7 complete: UX++ (empty state, active filters bar, URL persistence, shipping badge)
-
-// ============================================
-// v3.8 OPTIMIZATIONS - Empire Essence
-// ============================================
-
-// Register Service Worker for PWA capabilities
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-                console.log('[SW] Registered:', registration.scope);
-            })
-            .catch((error) => {
-                console.log('[SW] Registration failed:', error);
-            });
-    });
-}
-
-// Quick Add functionality - Add to product cards
-function addQuickAddButtons() {
-    document.querySelectorAll('.product-card').forEach(card => {
-        // Don't add if already has quick add
-        if (card.querySelector('.quick-add-btn')) return;
-        
-        const productId = card.getAttribute('onclick')?.match(/openModal\((\d+)\)/)?.[1];
-        if (!productId) return;
-
-        const quickAddBtn = document.createElement('button');
-        quickAddBtn.className = 'quick-add-btn';
-        quickAddBtn.innerHTML = '+';
-        quickAddBtn.title = 'Agregar rápido (30ml)';
-        quickAddBtn.setAttribute('aria-label', 'Agregar al carrito rápidamente');
-        quickAddBtn.onclick = (e) => {
-            e.stopPropagation();
-            if (window.CartManager) {
-                CartManager.quickAdd(parseInt(productId), 30);
-            }
-        };
-        
-        card.appendChild(quickAddBtn);
-    });
-}
-
-// Enhance renderProducts to add quick add buttons
-const _origRenderProducts_v38 = renderProducts;
-renderProducts = function() {
-    _origRenderProducts_v38();
-    addQuickAddButtons();
-};
-
-// Initialize cart manager when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    // Load cart manager script
-    const cartScript = document.createElement('script');
-    cartScript.src = '/js/cart-manager.js';
-    cartScript.async = true;
-    document.head.appendChild(cartScript);
-    
-    // Add quick add buttons on initial render
-    setTimeout(addQuickAddButtons, 100);
-});
-
-// ============================================
-// COMBOS & LÍNEA ÉLITE FUNCTIONS
-// ============================================
-
-// Show combo modal for selecting fragrances
-function showComboModal(comboSize) {
-    const comboNames = { 3: 'Combo 3×30ml', 5: 'Combo 5×30ml', 10: 'Combo 10×30ml' };
-    const comboPrices = { 3: 80000, 5: 128000, 10: 240000 };
-    const savings = { 3: 10000, 5: 22000, 10: 60000 };
-    
-    // Create modal HTML
-    const modalHTML = `
-        <div id="comboModal" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity 0.3s;">
-            <div style="background:var(--dark);border:1px solid rgba(184,151,106,0.3);border-radius:20px;max-width:600px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;">
-                <div style="padding:1.5rem;border-bottom:1px solid rgba(184,151,106,0.15);display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <h3 style="font-family:'Cormorant',serif;font-size:1.5rem;color:var(--gold);margin:0;">${comboNames[comboSize]}</h3>
-                        <p style="color:var(--gray);font-size:0.85rem;margin:0.5rem 0 0;">Selecciona ${comboSize} fragancias · Ahorras $${savings[comboSize].toLocaleString('es-CO')}</p>
-                    </div>
-                    <button onclick="closeComboModal()" style="background:none;border:none;color:var(--gray);font-size:1.5rem;cursor:pointer;padding:0.5rem;line-height:1;">×</button>
-                </div>
-                <div style="padding:1.5rem;overflow-y:auto;flex:1;">
-                    <div id="comboSelected" style="margin-bottom:1.5rem;">
-                        <p style="color:var(--gold);font-size:0.85rem;margin-bottom:0.5rem;">Seleccionados: <span id="comboCount">0</span>/${comboSize}</p>
-                        <div id="comboList" style="display:flex;flex-wrap:wrap;gap:0.5rem;"></div>
-                    </div>
-                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.8rem;max-height:300px;overflow-y:auto;padding-right:0.5rem;">
-                        ${PRODUCTS.map(p => `
-                            <div class="combo-item" data-id="${p.id}" onclick="toggleComboItem(this, ${p.id})" style="background:rgba(184,151,106,0.05);border:1px solid rgba(184,151,106,0.15);border-radius:8px;padding:0.8rem;cursor:pointer;transition:all 0.2s;">
-                                <div style="font-size:0.85rem;color:var(--white);font-weight:500;margin-bottom:0.3rem;">${p.name}</div>
-                                <div style="font-size:0.7rem;color:var(--gold-light);font-style:italic;">${p.inspired}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                <div style="padding:1.5rem;border-top:1px solid rgba(184,151,106,0.15);display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <span style="font-size:1.5rem;color:var(--gold);font-weight:600;">$${comboPrices[comboSize].toLocaleString('es-CO')}</span>
-                    </div>
-                    <button id="comboAddBtn" onclick="addComboToCart(${comboSize}, ${comboPrices[comboSize]})" disabled style="padding:1rem 2rem;background:var(--gold);border:none;color:var(--dark);font-family:'Montserrat',sans-serif;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;border-radius:8px;font-weight:600;cursor:pointer;opacity:0.5;transition:all 0.3s;">Agregar al Carrito</button>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Add modal to body
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-    
-    // Animate in
-    requestAnimationFrame(() => {
-        document.getElementById('comboModal').style.opacity = '1';
-    });
-    
-    // Store combo state
-    window.comboSelection = { size: comboSize, items: [] };
-    
-    // Track event
-    gtag && gtag('event', 'view_combo', { combo_size: comboSize, combo_name: comboNames[comboSize] });
-}
-
-function closeComboModal() {
-    const modal = document.getElementById('comboModal');
-    if (modal) {
-        modal.style.opacity = '0';
-        setTimeout(() => modal.remove(), 300);
-    }
-}
-
-function toggleComboItem(el, productId) {
-    const product = PRODUCTS.find(p => p.id === productId);
-    const isSelected = el.classList.contains('selected');
-    const maxSize = window.comboSelection.size;
-    
-    if (isSelected) {
-        // Remove
-        el.classList.remove('selected');
-        el.style.background = 'rgba(184,151,106,0.05)';
-        el.style.borderColor = 'rgba(184,151,106,0.15)';
-        window.comboSelection.items = window.comboSelection.items.filter(id => id !== productId);
-    } else if (window.comboSelection.items.length < maxSize) {
-        // Add
-        el.classList.add('selected');
-        el.style.background = 'rgba(184,151,106,0.2)';
-        el.style.borderColor = 'var(--gold)';
-        window.comboSelection.items.push(productId);
-    }
-    
-    // Update UI
-    document.getElementById('comboCount').textContent = window.comboSelection.items.length;
-    document.getElementById('comboList').innerHTML = window.comboSelection.items.map(id => {
-        const p = PRODUCTS.find(x => x.id === id);
-        return `<span style="background:var(--gold);color:var(--dark);padding:0.3rem 0.8rem;border-radius:4px;font-size:0.75rem;">${p.name}</span>`;
-    }).join('');
-    
-    // Enable/disable button
-    const btn = document.getElementById('comboAddBtn');
-    if (window.comboSelection.items.length === maxSize) {
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        btn.style.cursor = 'pointer';
-    } else {
-        btn.disabled = true;
-        btn.style.opacity = '0.5';
-        btn.style.cursor = 'not-allowed';
-    }
-}
-
-function addComboToCart(size, price) {
-    const items = window.comboSelection.items.map(id => PRODUCTS.find(p => p.id === id));
-    
-    // Add combo as special item
-    cart.push({
-        name: `Combo ${size}×30ml`,
-        size: '30ml (combo)',
-        price: price / size,
-        combo: true,
-        comboSize: size,
-        comboItems: items.map(i => i.name)
-    });
-    
-    // Add individual tracking items
-    items.forEach(product => {
-        cart.push({
-            name: product.name,
-            size: '30ml',
-            price: 0, // Included in combo
-            comboItem: true,
-            parentCombo: `${size}×30ml`
-        });
-    });
-    
-    updateCart();
-    closeComboModal();
-    
-    // Show toast
-    showToast(`✅ Combo ${size}×30ml agregado al carrito`);
-    
-    // Track
-    gtag && gtag('event', 'add_to_cart', {
-        currency: 'COP',
-        value: price,
-        items: [{
-            item_name: `Combo ${size}×30ml`,
-            item_variant: '30ml combo',
-            price: price,
-            quantity: 1
-        }]
-    });
-}
-
-// Simple toast notification
-function showToast(message) {
-    const toast = document.createElement('div');
-    toast.innerHTML = message;
-    toast.style.cssText = `
-        position: fixed;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%) translateY(100px);
-        background: var(--gold);
-        color: var(--dark);
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        z-index: 10000;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        transition: transform 0.3s ease;
-        font-weight: 500;
-    `;
-    document.body.appendChild(toast);
-    
-    requestAnimationFrame(() => {
-        toast.style.transform = 'translateX(-50%) translateY(0)';
-    });
-    
-    setTimeout(() => {
-        toast.style.transform = 'translateX(-50%) translateY(100px)';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-// Override addToCart to support Elite products
-const _originalAddToCart = addToCart;
-addToCart = function(productData) {
-    if (productData.linea === 'elite') {
-        // Elite products have special handling
-        cart.push({
-            name: productData.name,
-            size: productData.size,
-            price: productData.price,
-            linea: 'elite'
-        });
-        updateCart();
-        showToast(`✨ ${productData.name} agregado · Línea Elite`);
-        
-        gtag && gtag('event', 'add_to_cart', {
-            currency: 'COP',
-            value: productData.price,
-            items: [{
-                item_name: productData.name,
-                item_category: 'Línea Elite',
-                item_variant: productData.size,
-                price: productData.price,
-                quantity: 1
-            }]
-        });
-    } else {
-        // Regular flow - will be handled by existing addToCart
-        // Call existing modal flow
-        openModal(productData);
-    }
-};
-
-// Track page views
-gtag && gtag('event', 'page_view', {
-    page_title: document.title,
-    page_location: window.location.href,
-    page_path: window.location.pathname
-});
-
-// v3.8 complete: Performance optimizations, PWA, Cart Recovery, Analytics
+setTimeout(showSocialPulse, 15000);
 </script>
+<!-- Chatbot Alex: descomenta y pon la URL del túnel activo para activar -->
+<!-- <script>window.EE_CHAT_WEBHOOK="https://TU-TUNEL.trycloudflare.com/webhook/chat";</script> -->
+<script src="chat-widget.js"></script>
 </body>
 </html>
